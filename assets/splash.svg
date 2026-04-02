@@ -1,0 +1,65 @@
+<svg width="1284" height="2778" viewBox="0 0 1284 2778" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="splashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E63946"/>
+      <stop offset="50%" style="stop-color:#F77F00"/>
+      <stop offset="100%" style="stop-color:#FCBF49"/>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1284" height="2778" fill="url(#splashGrad)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="642" cy="1389" r="300" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
+  <circle cx="642" cy="1389" r="350" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <circle cx="642" cy="1389" r="400" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  
+  <!-- Calendar Icon Container -->
+  <rect x="492" y="1189" width="300" height="300" rx="60" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Calendar Icon -->
+  <rect x="522" y="1239" width="240" height="200" rx="20" fill="#F5F5F5"/>
+  
+  <!-- Calendar Header -->
+  <rect x="522" y="1239" width="240" height="60" rx="20" fill="#E63946"/>
+  <rect x="522" y="1279" width="240" height="20" fill="#E63946"/>
+  
+  <!-- Calendar Grid -->
+  <g fill="#666">
+    <rect x="542" y="1320" width="30" height="30" rx="5"/>
+    <rect x="582" y="1320" width="30" height="30" rx="5"/>
+    <rect x="622" y="1320" width="30" height="30" rx="5"/>
+    <rect x="662" y="1320" width="30" height="30" rx="5"/>
+    <rect x="702" y="1320" width="30" height="30" rx="5"/>
+    
+    <rect x="542" y="1360" width="30" height="30" rx="5"/>
+    <rect x="582" y="1360" width="30" height="30" rx="5"/>
+    <rect x="622" y="1360" width="30" height="30" rx="5" fill="#E63946"/>
+    <rect x="662" y="1360" width="30" height="30" rx="5"/>
+    <rect x="702" y="1360" width="30" height="30" rx="5"/>
+    
+    <rect x="542" y="1400" width="30" height="30" rx="5"/>
+    <rect x="582" y="1400" width="30" height="30" rx="5"/>
+    <rect x="622" y="1400" width="30" height="30" rx="5"/>
+    <rect x="662" y="1400" width="30" height="30" rx="5"/>
+    <rect x="702" y="1400" width="30" height="30" rx="5"/>
+  </g>
+  
+  <!-- App Title -->
+  <text x="642" y="1650" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">বাংলা ক্যালেন্ডার</text>
+  
+  <!-- Subtitle -->
+  <text x="642" y="1720" font-family="Arial, sans-serif" font-size="36" fill="rgba(255,255,255,0.9)" text-anchor="middle">Bengali English Calendar</text>
+  
+  <!-- Decorative dots -->
+  <circle cx="592" cy="1800" r="10" fill="#C1121F"/>
+  <circle cx="642" cy="1800" r="10" fill="#D62828"/>
+  <circle cx="692" cy="1800" r="10" fill="#F77F00"/>
+  
+  <!-- Version -->
+  <text x="642" y="2600" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.7)" text-anchor="middle">Version 1.0.0</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E63946"/>
+      <stop offset="50%" style="stop-color:#F77F00"/>
+      <stop offset="100%" style="stop-color:#FCBF49"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="512" cy="512" r="480" fill="url(#bgGrad)"/>
+  
+  <!-- Inner decorative circle -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="8"/>
+  
+  <!-- Calendar Icon -->
+  <rect x="280" y="200" width="464" height="520" rx="40" fill="white"/>
+  
+  <!-- Calendar Header -->
+  <rect x="280" y="200" width="464" height="120" rx="40" fill="#E63946"/>
+  <rect x="280" y="280" width="464" height="40" fill="#E63946"/>
+  
+  <!-- Calendar Binding -->
+  <rect x="280" y="280" width="464" height="20" fill="#C1121F"/>
+  
+  <!-- Calendar Grid -->
+  <g fill="#333">
+    <!-- Row 1 -->
+    <circle cx="360" cy="400" r="20"/>
+    <circle cx="460" cy="400" r="20"/>
+    <circle cx="560" cy="400" r="20"/>
+    <circle cx="660" cy="400" r="20"/>
+    
+    <!-- Row 2 -->
+    <circle cx="360" cy="480" r="20"/>
+    <circle cx="460" cy="480" r="20"/>
+    <circle cx="560" cy="480" r="20" fill="#E63946"/>
+    <circle cx="660" cy="480" r="20"/>
+    
+    <!-- Row 3 -->
+    <circle cx="360" cy="560" r="20"/>
+    <circle cx="460" cy="560" r="20"/>
+    <circle cx="560" cy="560" r="20"/>
+    <circle cx="660" cy="560" r="20"/>
+    
+    <!-- Row 4 -->
+    <circle cx="360" cy="640" r="20"/>
+    <circle cx="460" cy="640" r="20"/>
+    <circle cx="560" cy="640" r="20"/>
+    <circle cx="660" cy="640" r="20"/>
+  </g>
+  
+  <!-- Bengali Text -->
+  <text x="512" y="820" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">বাংলা</text>
+</svg>

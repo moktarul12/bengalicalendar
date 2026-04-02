@@ -39,3 +39,12 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Keystore and credentials (IMPORTANT: Never commit these!)
+*.keystore
+credentials.json
+google-service-account.json
+google-services.json
+
+# EAS
+.easignore
