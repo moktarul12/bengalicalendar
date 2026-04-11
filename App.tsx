@@ -29,8 +29,8 @@ export default function App() {
         await Font.loadAsync({
           // Add any custom fonts here
         });
-        // Artificially delay for splash screen effect
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Minimal delay for app initialization
+        await new Promise(resolve => setTimeout(resolve, 100));
       } catch (e) {
         console.warn(e);
       } finally {

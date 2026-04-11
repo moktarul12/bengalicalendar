@@ -66,14 +66,14 @@
           "color": "#E63946",
           "sounds": []
         }
-      ]
+      ],
     ],
     "extra": {
       "eas": {
-        "projectId": "bengali-english-calendar"
+        "projectId": "ca870a0a-cbd9-48ca-a9cf-0622a2c01240"
       }
     },
-    "owner": "bengalicalendar",
+    "owner": "moktarul",
     "runtimeVersion": {
       "policy": "appVersion"
     },
