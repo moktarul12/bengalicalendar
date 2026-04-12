@@ -11,6 +11,14 @@
         "buildType": "apk"
       }
     },
+    "production": {
+      "developmentClient": false,
+      "distribution": "store",
+      "node": "20.19.4",
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "node": "20.19.4",
@@ -18,7 +26,7 @@
         "buildType": "apk"
       }
     },
-    "production": {
+    "release": {
       "node": "20.19.4",
       "android": {
         "buildType": "app-bundle"
