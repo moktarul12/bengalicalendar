@@ -38,7 +38,7 @@ yarn-error.*
 
 # generated native folders
 /ios
-/android
+#/android
 
 # Keystore and credentials (IMPORTANT: Never commit these!)
 *.keystore
