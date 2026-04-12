@@ -4,7 +4,7 @@
   },
   "build": {
     "development": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "node": "20.19.4",
       "android": {

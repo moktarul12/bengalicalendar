@@ -102,57 +102,39 @@ eas build -p android --profile production
 ```
 
 ### iOS (requires macOS)
-
-```bash
-# Build for iOS
-eas build -p ios --profile production
 ```
 
-## Generating Signed APK with Keystore 🔐
+### 7. Important Notes
 
-### Step 1: Generate Keystore
+#### Keystore Security
+- **Never commit keystore files** to git
+- **Never share keystore passwords**
+- **Back up your keystore file** securely
+- **Same keystore must be used** for all app updates
 
-```bash
-# Generate a new keystore
-keytool -genkeypair -v -storetype PKCS12 -keystore bengali-calendar.keystore -alias bengali-calendar -keyalg RSA -keysize 2048 -validity 10000
+#### APK vs AAB
+- **APK**: Can be installed directly on devices
+- **AAB**: Cannot be installed directly, only for Google Play Store
+- **AAB benefits**: Smaller size, dynamic delivery, better optimization
 
-# You will be prompted for:
-# - Keystore password
-# - Key password
-# - First and Last name
-# - Organization unit
-# - Organization
-# - City
-# - State
-# - Country code
-```
+#### Troubleshooting
+- If build fails, check GitHub Secrets are correctly set
+- Ensure keystore passwords match exactly
+- Verify base64 encoding doesn't have extra characters
+- Check build logs in GitHub Actions for specific errors
 
-### Step 2: Configure EAS Build
+### 8. Build Configuration Files
 
-Create or update `eas.json`:
+#### `android/app/build.gradle`
+- Configured to use environment variables for keystore
+- Same keystore used for both debug and release builds
+- Falls back to default signing if no keystore provided
 
-```json
-{
-  "build": {
-    "production": {
-      "android": {
-        "buildType": "app-bundle",
-        "credentialsSource": "local"
-      }
-    }
-  }
-}
-```
-
-### Step 3: Build with EAS
-
-```bash
-# Build AAB with local credentials
-eas build -p android --profile production --local
-
-# Or let EAS manage credentials
-eas build -p android --profile production
-```
+#### `.github/workflows/android-build.yml`
+- Automated CI/CD pipeline
+- Supports both debug and release builds
+- Handles keystore setup securely
+- Generates appropriate artifacts
 
 ## Project Structure 📁
 
