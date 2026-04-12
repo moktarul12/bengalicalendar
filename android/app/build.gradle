@@ -99,18 +99,18 @@ android {
     }
     buildTypes {
         debug {
-            // Use default debug signing - no custom keystore needed
+            applicationIdSuffix ".debug"
+            debuggable true
+            minifyEnabled false
+            // Use default debug signing
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            // For now using debug signing for CI builds
-            def enableShrinkResources = findProperty('android.enableShrinkResourcesInReleaseBuilds') ?: 'false'
-            shrinkResources enableShrinkResources.toBoolean()
-            minifyEnabled enableMinifyInReleaseBuilds
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            def enablePngCrunchInRelease = findProperty('android.enablePngCrunchInReleaseBuilds') ?: 'true'
-            crunchPngs enablePngCrunchInRelease.toBoolean()
+            debuggable false
+            // Production build - different from debug
+            signingConfig signingConfigs.debug
         }
     }
     packagingOptions {
