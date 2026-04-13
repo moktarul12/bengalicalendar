@@ -88,6 +88,17 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace 'com.bengalienglishcalendar'
+    
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     defaultConfig {
         applicationId 'com.bengalienglishcalendar'
         minSdkVersion rootProject.ext.minSdkVersion
@@ -109,8 +120,8 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             debuggable false
-            // Production build - different from debug
-            signingConfig signingConfigs.debug
+            // Production build - use release signing if available, otherwise debug
+            signingConfig signingConfigs.release
         }
     }
     packagingOptions {
