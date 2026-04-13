@@ -35,12 +35,13 @@ jobs:
 
       - name: Create Keystore
         run: |
-          cd android
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/keystore.jks
+          cd android/app
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
 
       - name: Set Signing Config
         run: |
           cd android
+          echo "MYAPP_RELEASE_STORE_FILE=app/keystore.jks" >> gradle.properties
           echo "MYAPP_RELEASE_STORE_PASSWORD=${{ secrets.STORE_PASSWORD }}" >> gradle.properties
           echo "MYAPP_RELEASE_KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> gradle.properties
           echo "MYAPP_RELEASE_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> gradle.properties
