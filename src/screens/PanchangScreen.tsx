@@ -30,6 +30,44 @@ export default function PanchangScreen() {
     abhijit: '11:45 AM - 12:30 PM',
   };
 
+  const panchangItems = [
+    {
+      icon: 'sunny',
+      label: 'Tithi',
+      value: panchangData.tithi.name,
+      valueEn: panchangData.tithi.nameEn,
+      color: '#FF6B6B',
+    },
+    {
+      icon: 'star',
+      label: 'Nakshatra',
+      value: panchangData.nakshatra.name,
+      valueEn: panchangData.nakshatra.nameEn,
+      color: '#4ECDC4',
+    },
+    {
+      icon: 'infinite',
+      label: 'Yoga',
+      value: panchangData.yoga.name,
+      valueEn: panchangData.yoga.nameEn,
+      color: '#95E1D3',
+    },
+    {
+      icon: 'time',
+      label: 'Karana',
+      value: panchangData.karana.name,
+      valueEn: panchangData.karana.nameEn,
+      color: '#F38181',
+    },
+  ];
+
+  const sunMoonTimes = [
+    { icon: 'sunny-outline', label: 'Sunrise', value: panchangData.sunrise, color: '#FFA726' },
+    { icon: 'partly-sunny-outline', label: 'Sunset', value: panchangData.sunset, color: '#FF7043' },
+    { icon: 'moon-outline', label: 'Moonrise', value: panchangData.moonrise, color: '#7986CB' },
+    { icon: 'cloudy-night-outline', label: 'Moonset', value: panchangData.moonset, color: '#5C6BC0' },
+  ];
+
   const auspiciousTimes = [
     { name: 'Abhijit Muhurta', nameBn: 'অভিজিৎ মুহূর্ত', time: panchangData.abhijit },
     { name: 'Amrit Kalam', nameBn: 'অমৃত কালম', time: '02:00 PM - 03:30 PM' },
@@ -37,150 +75,116 @@ export default function PanchangScreen() {
   ];
 
   const inauspiciousTimes = [
-    { name: 'Rahu Kaal', nameBn: 'রাহু কাল', time: panchangData.rahuKaal, color: '#F44336' },
-    { name: 'Yamaganda', nameBn: 'যমগন্ধ', time: panchangData.yamaganda, color: '#FF9800' },
-    { name: 'Gulika', nameBn: 'গুলিকা', time: panchangData.gulika, color: '#9C27B0' },
+    { name: 'Rahu Kaal', nameBn: 'রাহু কাল', time: panchangData.rahuKaal, color: '#EF5350' },
+    { name: 'Yamaganda', nameBn: 'যমগন্ধ', time: panchangData.yamaganda, color: '#FFA726' },
+    { name: 'Gulika', nameBn: 'গুলিকা', time: panchangData.gulika, color: '#AB47BC' },
   ];
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
       {/* Header */}
       <LinearGradient
-        colors={['#1A237E', '#311B92']}
+        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.header}
       >
-        <View style={styles.headerContent}>
-          <Ionicons name="moon" size={40} color="#FFD700" />
-          <Text style={styles.headerTitle}>Panchang</Text>
-          <Text style={styles.headerSubtitle}>পঞ্জিকা</Text>
-        </View>
-        <View style={styles.dateDisplay}>
+        <Ionicons name="moon" size={48} color="#FFD700" />
+        <Text style={styles.headerTitle}>Panchang</Text>
+        <Text style={styles.headerSubtitle}>পঞ্জিকা</Text>
+        <View style={styles.dateBadge}>
+          <Ionicons name="calendar" size={16} color="#FFFFFF" />
           <Text style={styles.dateText}>
             {selectedDate.toLocaleDateString('en-US', {
-              weekday: 'long',
+              weekday: 'short',
               day: 'numeric',
-              month: 'long',
+              month: 'short',
               year: 'numeric',
             })}
           </Text>
         </View>
       </LinearGradient>
 
-      {/* Main Panchang Info */}
+      {/* Panchang Elements */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Today's Panchang / আজকের পঞ্জিকা</Text>
-        
-        <View style={styles.panchangCard}>
-          <LinearGradient
-            colors={['#FFD700', '#FFA000']}
-            style={styles.panchangGradient}
-          >
-            {/* Tithi */}
-            <View style={styles.panchangRow}>
-              <View style={styles.panchangItem}>
-                <Ionicons name="sunny" size={24} color="#FFFFFF" />
-                <Text style={styles.panchangLabel}>Tithi</Text>
-                <Text style={styles.panchangValue}>{panchangData.tithi.name}</Text>
-                <Text style={styles.panchangValueEn}>{panchangData.tithi.nameEn}</Text>
-              </View>
-              
-              <View style={styles.divider} />
-              
-              {/* Nakshatra */}
-              <View style={styles.panchangItem}>
-                <Ionicons name="star" size={24} color="#FFFFFF" />
-                <Text style={styles.panchangLabel}>Nakshatra</Text>
-                <Text style={styles.panchangValue}>{panchangData.nakshatra.name}</Text>
-                <Text style={styles.panchangValueEn}>{panchangData.nakshatra.nameEn}</Text>
+        <Text style={styles.sectionTitle}>Panchang Elements</Text>
+        <View style={styles.panchangList}>
+          {panchangItems.map((item, index) => (
+            <View key={index} style={styles.panchangCard}>
+              <LinearGradient
+                colors={[item.color, item.color + 'CC']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.panchangIcon}
+              >
+                <Ionicons name={item.icon as any} size={28} color="#FFFFFF" />
+              </LinearGradient>
+              <View style={styles.panchangInfo}>
+                <Text style={styles.panchangLabel}>{item.label}</Text>
+                <Text style={styles.panchangValue}>{item.value}</Text>
+                <Text style={styles.panchangValueEn}>{item.valueEn}</Text>
               </View>
             </View>
-
-            <View style={styles.horizontalDivider} />
-
-            <View style={styles.panchangRow}>
-              {/* Yoga */}
-              <View style={styles.panchangItem}>
-                <Ionicons name="infinite" size={24} color="#FFFFFF" />
-                <Text style={styles.panchangLabel}>Yoga</Text>
-                <Text style={styles.panchangValue}>{panchangData.yoga.name}</Text>
-                <Text style={styles.panchangValueEn}>{panchangData.yoga.nameEn}</Text>
-              </View>
-              
-              <View style={styles.divider} />
-              
-              {/* Karana */}
-              <View style={styles.panchangItem}>
-                <Ionicons name="time" size={24} color="#FFFFFF" />
-                <Text style={styles.panchangLabel}>Karana</Text>
-                <Text style={styles.panchangValue}>{panchangData.karana.name}</Text>
-                <Text style={styles.panchangValueEn}>{panchangData.karana.nameEn}</Text>
-              </View>
-            </View>
-          </LinearGradient>
+          ))}
         </View>
       </View>
 
       {/* Sun & Moon Times */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Sun & Moon Times</Text>
-        <View style={styles.timesGrid}>
-          <View style={styles.timeCard}>
-            <Ionicons name="sunny-outline" size={28} color="#FF9800" />
-            <Text style={styles.timeLabel}>Sunrise</Text>
-            <Text style={styles.timeValue}>{panchangData.sunrise}</Text>
-          </View>
-          <View style={styles.timeCard}>
-            <Ionicons name="moon-outline" size={28} color="#3F51B5" />
-            <Text style={styles.timeLabel}>Moonrise</Text>
-            <Text style={styles.timeValue}>{panchangData.moonrise}</Text>
-          </View>
-          <View style={styles.timeCard}>
-            <Ionicons name="partly-sunny-outline" size={28} color="#FF5722" />
-            <Text style={styles.timeLabel}>Sunset</Text>
-            <Text style={styles.timeValue}>{panchangData.sunset}</Text>
-          </View>
-          <View style={styles.timeCard}>
-            <Ionicons name="cloudy-night-outline" size={28} color="#673AB7" />
-            <Text style={styles.timeLabel}>Moonset</Text>
-            <Text style={styles.timeValue}>{panchangData.moonset}</Text>
-          </View>
+        <Text style={styles.sectionTitle}>Sun & Moon</Text>
+        <View style={styles.sunMoonList}>
+          {sunMoonTimes.map((item, index) => (
+            <View key={index} style={styles.sunMoonCard}>
+              <Ionicons name={item.icon as any} size={32} color={item.color} />
+              <View style={styles.sunMoonInfo}>
+                <Text style={styles.sunMoonLabel}>{item.label}</Text>
+                <Text style={styles.sunMoonValue}>{item.value}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       </View>
 
       {/* Auspicious Times */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Auspicious Times / শুভ সময়</Text>
-        {auspiciousTimes.map((time, index) => (
-          <View key={index} style={styles.timeRow}>
-            <View style={styles.timeRowLeft}>
-              <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
-              <View style={styles.timeRowText}>
-                <Text style={styles.timeRowName}>{time.name}</Text>
-                <Text style={styles.timeRowNameBn}>{time.nameBn}</Text>
+        <Text style={styles.sectionTitle}>Auspicious Times</Text>
+        <View style={styles.timesContainer}>
+          {auspiciousTimes.map((time, index) => (
+            <View key={index} style={styles.timeCard}>
+              <View style={styles.timeCardLeft}>
+                <View style={[styles.timeIcon, { backgroundColor: '#4CAF50' }]}>
+                  <Ionicons name="checkmark" size={20} color="#FFFFFF" />
+                </View>
+                <View style={styles.timeTextContainer}>
+                  <Text style={styles.timeName}>{time.name}</Text>
+                  <Text style={styles.timeNameBn}>{time.nameBn}</Text>
+                </View>
               </View>
+              <Text style={styles.timeValue}>{time.time}</Text>
             </View>
-            <Text style={styles.timeRowTime}>{time.time}</Text>
-          </View>
-        ))}
+          ))}
+        </View>
       </View>
 
       {/* Inauspicious Times */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Inauspicious Times / অশুভ সময়</Text>
-        {inauspiciousTimes.map((time, index) => (
-          <View key={index} style={styles.timeRow}>
-            <View style={styles.timeRowLeft}>
-              <Ionicons name="warning" size={20} color={time.color} />
-              <View style={styles.timeRowText}>
-                <Text style={styles.timeRowName}>{time.name}</Text>
-                <Text style={styles.timeRowNameBn}>{time.nameBn}</Text>
+        <Text style={styles.sectionTitle}>Inauspicious Times</Text>
+        <View style={styles.timesContainer}>
+          {inauspiciousTimes.map((time, index) => (
+            <View key={index} style={styles.timeCard}>
+              <View style={styles.timeCardLeft}>
+                <View style={[styles.timeIcon, { backgroundColor: time.color }]}>
+                  <Ionicons name="warning" size={20} color="#FFFFFF" />
+                </View>
+                <View style={styles.timeTextContainer}>
+                  <Text style={styles.timeName}>{time.name}</Text>
+                  <Text style={styles.timeNameBn}>{time.nameBn}</Text>
+                </View>
               </View>
+              <Text style={[styles.timeValue, { color: time.color }]}>{time.time}</Text>
             </View>
-            <Text style={[styles.timeRowTime, { color: time.color }]}>{time.time}</Text>
-          </View>
-        ))}
+          ))}
+        </View>
       </View>
 
       {/* Tithis Reference */}
@@ -195,8 +199,6 @@ export default function PanchangScreen() {
           ))}
         </View>
       </View>
-
-      <View style={{ height: 100 }} />
     </ScrollView>
   );
 }
@@ -214,133 +216,141 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     alignItems: 'center',
   },
-  headerContent: {
-    alignItems: 'center',
-  },
   headerTitle: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginTop: 10,
+    marginTop: 12,
   },
   headerSubtitle: {
     fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.9)',
     marginTop: 4,
   },
-  dateDisplay: {
-    marginTop: SPACING.md,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+  dateBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     borderRadius: BORDER_RADIUS.round,
+    marginTop: 16,
   },
   dateText: {
     fontSize: 14,
     color: '#FFFFFF',
+    marginLeft: 8,
   },
   section: {
     padding: SPACING.md,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: COLORS.text,
-    marginBottom: SPACING.sm,
+    marginBottom: SPACING.md,
+  },
+  panchangList: {
+    gap: SPACING.sm,
   },
   panchangCard: {
-    borderRadius: BORDER_RADIUS.lg,
-    overflow: 'hidden',
-    ...SHADOWS.lg,
-  },
-  panchangGradient: {
-    padding: SPACING.md,
-  },
-  panchangRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  panchangItem: {
+    backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
     alignItems: 'center',
+    ...SHADOWS.md,
+  },
+  panchangIcon: {
+    width: 56,
+    height: 56,
+    borderRadius: BORDER_RADIUS.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
+  },
+  panchangInfo: {
     flex: 1,
   },
   panchangLabel: {
-    fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 4,
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
   },
   panchangValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: COLORS.text,
     marginTop: 4,
   },
   panchangValueEn: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: COLORS.textMuted,
     marginTop: 2,
   },
-  divider: {
-    width: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  sunMoonList: {
+    gap: SPACING.sm,
   },
-  horizontalDivider: {
-    height: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    marginVertical: SPACING.md,
-  },
-  timesGrid: {
+  sunMoonCard: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  timeCard: {
-    width: '48%',
     backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.md,
-    borderRadius: BORDER_RADIUS.md,
     alignItems: 'center',
-    marginBottom: SPACING.sm,
-    ...SHADOWS.sm,
+    ...SHADOWS.md,
   },
-  timeLabel: {
-    fontSize: 12,
+  sunMoonInfo: {
+    flex: 1,
+  },
+  sunMoonLabel: {
+    fontSize: 14,
+    fontWeight: '600',
     color: COLORS.textSecondary,
-    marginTop: 4,
   },
-  timeValue: {
-    fontSize: 16,
+  sunMoonValue: {
+    fontSize: 18,
     fontWeight: 'bold',
     color: COLORS.text,
-    marginTop: 2,
+    marginTop: 4,
   },
-  timeRow: {
+  timesContainer: {
+    gap: SPACING.sm,
+  },
+  timeCard: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: COLORS.surface,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
-    marginBottom: SPACING.sm,
     ...SHADOWS.sm,
   },
-  timeRowLeft: {
+  timeCardLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
-  timeRowText: {
-    marginLeft: SPACING.sm,
+  timeIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
   },
-  timeRowName: {
-    fontSize: 14,
+  timeTextContainer: {
+    flex: 1,
+  },
+  timeName: {
+    fontSize: 15,
     fontWeight: '600',
     color: COLORS.text,
   },
-  timeRowNameBn: {
-    fontSize: 12,
+  timeNameBn: {
+    fontSize: 13,
     color: COLORS.textSecondary,
   },
-  timeRowTime: {
+  timeValue: {
     fontSize: 14,
     fontWeight: '600',
     color: COLORS.text,
@@ -348,21 +358,24 @@ const styles = StyleSheet.create({
   referenceGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginHorizontal: -SPACING.xs,
   },
   referenceItem: {
-    width: '25%',
-    alignItems: 'center',
-    padding: SPACING.xs,
+    width: '23%',
     backgroundColor: COLORS.surface,
-    margin: 2,
-    borderRadius: BORDER_RADIUS.sm,
+    borderRadius: BORDER_RADIUS.md,
+    padding: SPACING.sm,
+    marginHorizontal: SPACING.xs,
+    marginVertical: SPACING.xs,
+    alignItems: 'center',
   },
   referenceBn: {
-    fontSize: 12,
+    fontSize: 13,
+    fontWeight: '600',
     color: COLORS.text,
   },
   referenceEn: {
-    fontSize: 10,
+    fontSize: 11,
     color: COLORS.textSecondary,
   },
 });

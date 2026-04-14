@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 import { FESTIVALS, getFestivalsByType, Festival } from '../constants/festivals';
-import FestivalCard from '../components/FestivalCard';
 
 type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 
@@ -29,66 +28,92 @@ export default function FestivalsScreen() {
     return getFestivalsByType(filter);
   };
 
-  const filters: { id: FilterType; label: string; labelBn: string }[] = [
-    { id: 'all', label: 'All', labelBn: 'সব' },
-    { id: 'religious', label: 'Religious', labelBn: 'ধর্মীয়' },
-    { id: 'cultural', label: 'Cultural', labelBn: 'সাংস্কৃতিক' },
-    { id: 'national', label: 'National', labelBn: 'জাতীয়' },
-    { id: 'seasonal', label: 'Seasonal', labelBn: 'ঋতু' },
+  const filters: { id: FilterType; label: string; labelBn: string; icon: string }[] = [
+    { id: 'all', label: 'All', labelBn: 'সব', icon: 'grid' },
+    { id: 'religious', label: 'Religious', labelBn: 'ধর্মীয়', icon: 'ribbon' },
+    { id: 'cultural', label: 'Cultural', labelBn: 'সাংস্কৃতিক', icon: 'musical-notes' },
+    { id: 'national', label: 'National', labelBn: 'জাতীয়', icon: 'flag' },
+    { id: 'seasonal', label: 'Seasonal', labelBn: 'ঋতু', icon: 'leaf' },
   ];
+
+  const renderFestivalItem = ({ item }: { item: Festival }) => (
+    <TouchableOpacity style={styles.festivalItem} activeOpacity={0.7}>
+      <LinearGradient
+        colors={[item.color, item.color + 'CC']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.festivalIconContainer}
+      >
+        <Text style={styles.festivalIcon}>{item.icon}</Text>
+      </LinearGradient>
+      <View style={styles.festivalInfo}>
+        <Text style={styles.festivalNameEn} numberOfLines={1}>{item.nameEn}</Text>
+        <Text style={styles.festivalNameBn} numberOfLines={1}>{item.nameBn}</Text>
+        <View style={styles.dateBadge}>
+          <Ionicons name="calendar" size={12} color={COLORS.textSecondary} />
+          <Text style={styles.dateText}>{item.day} {item.month}</Text>
+        </View>
+      </View>
+      <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary]}
+        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={styles.header}
       >
+        <Ionicons name="ribbon" size={32} color="#FFFFFF" />
         <Text style={styles.headerTitle}>Festivals</Text>
         <Text style={styles.headerSubtitle}>উৎসব ও ছুটির দিন</Text>
       </LinearGradient>
 
       {/* Filter Tabs */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.filterContainer}
-        contentContainerStyle={styles.filterContent}
-      >
-        {filters.map((f) => (
-          <TouchableOpacity
-            key={f.id}
-            style={[styles.filterTab, filter === f.id && styles.activeFilterTab]}
-            onPress={() => setFilter(f.id)}
-            activeOpacity={0.7}
-          >
-            <Text
-              style={[styles.filterLabel, filter === f.id && styles.activeFilterLabel]}
+      <View style={styles.filterContainer}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.filterContent}
+        >
+          {filters.map((f) => (
+            <TouchableOpacity
+              key={f.id}
+              style={[styles.filterTab, filter === f.id && styles.activeFilterTab]}
+              onPress={() => setFilter(f.id)}
+              activeOpacity={0.7}
             >
-              {f.label}
-            </Text>
-            <Text
-              style={[styles.filterLabelBn, filter === f.id && styles.activeFilterLabelBn]}
-            >
-              {f.labelBn}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+              <Ionicons
+                name={f.icon as any}
+                size={18}
+                color={filter === f.id ? '#FFFFFF' : COLORS.textSecondary}
+              />
+              <Text
+                style={[styles.filterLabel, filter === f.id && styles.activeFilterLabel]}
+              >
+                {f.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
 
       {/* Festivals List */}
       <FlatList
         data={getFilteredFestivals()}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <FestivalCard festival={item} />}
+        renderItem={renderFestivalItem}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color={COLORS.textMuted} />
             <Text style={styles.emptyText}>No festivals found</Text>
+            <Text style={styles.emptyTextBn}>কোন উৎসব পাওয়া যায়নি</Text>
           </View>
         }
       />
@@ -110,27 +135,32 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    marginTop: 8,
   },
   headerSubtitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgba(255, 255, 255, 0.9)',
-    marginTop: 4,
+    marginTop: 2,
   },
   filterContainer: {
-    maxHeight: 70,
     backgroundColor: COLORS.surface,
-  },
-  filterContent: {
-    paddingHorizontal: SPACING.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
     paddingVertical: SPACING.sm,
   },
+  filterContent: {
+    paddingHorizontal: SPACING.md,
+    gap: SPACING.sm,
+  },
   filterTab: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginHorizontal: 4,
-    borderRadius: BORDER_RADIUS.round,
-    backgroundColor: COLORS.background,
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginRight: SPACING.sm,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: COLORS.background,
+    gap: 6,
   },
   activeFilterTab: {
     backgroundColor: COLORS.primary,
@@ -140,16 +170,62 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.textSecondary,
   },
-  filterLabelBn: {
-    fontSize: 12,
-    color: COLORS.textMuted,
-    marginTop: 2,
-  },
   activeFilterLabel: {
     color: '#FFFFFF',
   },
-  activeFilterLabelBn: {
-    color: 'rgba(255, 255, 255, 0.9)',
+  festivalItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    padding: SPACING.md,
+    marginHorizontal: SPACING.md,
+    marginVertical: SPACING.xs,
+    borderRadius: BORDER_RADIUS.md,
+    ...SHADOWS.sm,
+  },
+  festivalIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: BORDER_RADIUS.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: SPACING.md,
+  },
+  festivalIcon: {
+    fontSize: 28,
+  },
+  festivalInfo: {
+    flex: 1,
+  },
+  festivalNameEn: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  festivalNameBn: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    marginTop: 2,
+  },
+  dateBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+    backgroundColor: COLORS.background,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BORDER_RADIUS.sm,
+    alignSelf: 'flex-start',
+  },
+  dateText: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    marginLeft: 4,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+    marginHorizontal: SPACING.md,
   },
   listContent: {
     paddingVertical: SPACING.sm,
@@ -164,5 +240,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.textSecondary,
     marginTop: SPACING.md,
+  },
+  emptyTextBn: {
+    fontSize: 14,
+    color: COLORS.textMuted,
+    marginTop: 4,
   },
 });

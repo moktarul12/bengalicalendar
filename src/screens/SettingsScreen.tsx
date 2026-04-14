@@ -85,7 +85,7 @@ export default function SettingsScreen() {
   const handleRateApp = () => {
     Alert.alert('Rate App', 'Enjoying Bengali Calendar? Please rate us on Play Store!', [
       { text: 'Later', style: 'cancel' },
-      { text: 'Rate Now', onPress: () => Linking.openURL('market://details?id=com.bengalienglishcalendar') },
+      { text: 'Rate Now', onPress: () => Linking.openURL('market://details?id=com.dromominds.bengalienglishcalendar') },
     ]);
   };
 

@@ -1,4 +1,4 @@
-package com.bengalienglishcalendar
+package com.dromominds.bengalienglishcalendar
 
 import android.app.Application
 import android.content.res.Configuration

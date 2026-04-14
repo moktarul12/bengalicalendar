@@ -16,6 +16,7 @@ interface CalendarHeaderProps {
   onNextMonth: () => void;
   onToday: () => void;
   isCurrentMonth: boolean;
+  onMonthYearPress: () => void;
 }
 
 export default function CalendarHeader({
@@ -29,6 +30,7 @@ export default function CalendarHeader({
   onNextMonth,
   onToday,
   isCurrentMonth,
+  onMonthYearPress,
 }: CalendarHeaderProps) {
   const bengaliMonthData = BENGALI_MONTHS[bengaliMonth];
   const bengaliWeekDaysShort = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহ', 'শুক্র', 'শনি'];
@@ -51,7 +53,7 @@ export default function CalendarHeader({
             <Ionicons name="arrow-back-circle-outline" size={32} color="#FFFFFF" />
           </TouchableOpacity>
 
-          <View style={styles.dateContainer}>
+          <TouchableOpacity style={styles.dateContainer} onPress={onMonthYearPress} activeOpacity={0.7}>
             {calendarType === 'gregorian' ? (
               <>
                 <Text style={styles.monthText}>{monthName}</Text>
@@ -64,7 +66,7 @@ export default function CalendarHeader({
                 <Text style={styles.secondaryDateText}>{monthName} {year}</Text>
               </>
             )}
-          </View>
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.navButton}

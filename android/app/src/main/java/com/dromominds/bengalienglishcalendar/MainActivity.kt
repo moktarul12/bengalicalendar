@@ -1,4 +1,4 @@
-package com.bengalienglishcalendar
+package com.dromominds.bengalienglishcalendar
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

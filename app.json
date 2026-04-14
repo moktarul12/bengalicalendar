@@ -9,19 +9,19 @@
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#E63946"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bengalicalendar.app",
+      "bundleIdentifier": "com.dromominds.bengalicalendar",
       "buildNumber": "1",
       "infoPlist": {
         "CFBundleDisplayName": "Bengali Calendar"
       }
     },
     "android": {
-      "package": "com.bengalienglishcalendar",
+      "package": "com.dromominds.bengalicalendar",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -47,7 +47,8 @@
         {
           "backgroundColor": "#E63946",
           "image": "./assets/splash-icon.png",
-          "imageWidth": 200,
+          "imageWidth": 300,
+          "imageHeight": 300,
           "resizeMode": "contain"
         }
       ],

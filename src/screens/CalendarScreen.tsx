@@ -17,6 +17,7 @@ import CalendarGrid from '../components/Calendar/CalendarGrid';
 import CalendarTypeToggle from '../components/CalendarTypeToggle';
 import UpcomingFestivals from '../components/UpcomingFestivals';
 import DayDetailModal from '../components/DayDetailModal';
+import MonthYearPickerModal from '../components/MonthYearPickerModal';
 import { CalendarDay } from '../types';
 
 interface CalendarScreenProps {
@@ -27,11 +28,12 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('gregorian');
+  const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('bengali');
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isMonthYearPickerVisible, setIsMonthYearPickerVisible] = useState(false);
 
   // Get Bengali date for current month
   const bengaliDate = gregorianToBengali(today.getDate(), currentMonth, currentYear);
@@ -87,6 +89,20 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
 
   const handleCalendarTypeChange = useCallback((type: 'gregorian' | 'bengali') => {
     setCalendarType(type);
+  }, []);
+
+  const handleMonthYearPress = useCallback(() => {
+    setIsMonthYearPickerVisible(true);
+  }, []);
+
+  const handleMonthYearSelect = useCallback((month: number, year: number) => {
+    setCurrentMonth(month);
+    setCurrentYear(year);
+    setIsMonthYearPickerVisible(false);
+  }, []);
+
+  const handleMonthYearPickerClose = useCallback(() => {
+    setIsMonthYearPickerVisible(false);
   }, []);
 
   return (
@@ -164,6 +180,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
             onNextMonth={goToNextMonth}
             onToday={goToToday}
             isCurrentMonth={isCurrentMonth}
+            onMonthYearPress={handleMonthYearPress}
           />
 
           <CalendarGrid
@@ -187,6 +204,15 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
         visible={isModalVisible}
         day={selectedDay}
         onClose={handleCloseModal}
+      />
+
+      {/* Month Year Picker Modal */}
+      <MonthYearPickerModal
+        visible={isMonthYearPickerVisible}
+        currentMonth={currentMonth}
+        currentYear={currentYear}
+        onSelect={handleMonthYearSelect}
+        onClose={handleMonthYearPickerClose}
       />
     </SafeAreaView>
   );
