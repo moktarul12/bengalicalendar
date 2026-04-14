@@ -102,7 +102,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
       {/* Header */}
       <LinearGradient
         colors={[COLORS.primary, COLORS.secondary]}
@@ -271,6 +271,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+  scrollContent: {
+    paddingBottom: 140,
   },
   header: {
     padding: SPACING.lg,

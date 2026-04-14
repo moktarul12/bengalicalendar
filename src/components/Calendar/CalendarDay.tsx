@@ -40,7 +40,7 @@ export default function CalendarDayComponent({ day, isCurrentMonth, calendarType
         >
           {calendarType === 'bengali' ? toBengaliNumber(bengali.day) : gregorian.day}
         </Text>
-        
+
         {/* Bengali Day Number */}
         <Text
           style={[
@@ -110,12 +110,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   dayNumber: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     color: COLORS.text,
   },
   bengaliDay: {
-    fontSize: 10,
+    fontSize: 12,
     color: COLORS.textSecondary,
     marginTop: 1,
   },

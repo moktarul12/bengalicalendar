@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingVertical: SPACING.sm,
+    paddingBottom: 140,
   },
   emptyContainer: {
     alignItems: 'center',

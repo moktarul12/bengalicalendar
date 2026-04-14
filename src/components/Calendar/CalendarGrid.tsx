@@ -57,12 +57,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   grid: {
-    paddingHorizontal: SPACING.sm,
-    paddingTop: SPACING.sm,
+    paddingHorizontal: SPACING.xs,
+    paddingTop: SPACING.xs,
   },
   weekRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: SPACING.xs,
+    marginBottom: 2,
   },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS } from '../constants/theme';
 
@@ -17,33 +18,35 @@ const tabs = [
 
 export default function BottomNavBar({ activeTab, onTabChange }: BottomNavBarProps) {
   return (
-    <View style={styles.container}>
-      {tabs.map((tab) => {
-        const isActive = activeTab === tab.id;
-        return (
-          <TouchableOpacity
-            key={tab.id}
-            style={styles.tab}
-            onPress={() => onTabChange(tab.id)}
-            activeOpacity={0.7}
-          >
-            <View style={[styles.iconContainer, isActive && styles.activeIconContainer]}>
-              <Ionicons
-                name={tab.icon as any}
-                size={24}
-                color={isActive ? COLORS.primary : COLORS.textSecondary}
-              />
-            </View>
-            <Text style={[styles.label, isActive && styles.activeLabel]}>
-              {tab.label}
-            </Text>
-            <Text style={[styles.labelBn, isActive && styles.activeLabelBn]}>
-              {tab.labelBn}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
+    <SafeAreaView edges={['bottom']}>
+      <View style={styles.container}>
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <TouchableOpacity
+              key={tab.id}
+              style={styles.tab}
+              onPress={() => onTabChange(tab.id)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.iconContainer, isActive && styles.activeIconContainer]}>
+                <Ionicons
+                  name={tab.icon as any}
+                  size={24}
+                  color={isActive ? COLORS.primary : COLORS.textSecondary}
+                />
+              </View>
+              <Text style={[styles.label, isActive && styles.activeLabel]}>
+                {tab.label}
+              </Text>
+              <Text style={[styles.labelBn, isActive && styles.activeLabelBn]}>
+                {tab.labelBn}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#E0E0E0',
     paddingVertical: SPACING.sm,
     paddingBottom: SPACING.md,
+    marginBottom: 4,
   },
   tab: {
     flex: 1,
