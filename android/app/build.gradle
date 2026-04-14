@@ -91,10 +91,10 @@ android {
     
     signingConfigs {
         release {
-            storeFile file("keystore.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file(findProperty("MYAPP_RELEASE_STORE_FILE") ?: "keystore.jks")
+            storePassword findProperty("MYAPP_RELEASE_STORE_PASSWORD") ?: System.getenv("KEYSTORE_PASSWORD")
+            keyAlias findProperty("MYAPP_RELEASE_KEY_ALIAS") ?: System.getenv("KEY_ALIAS")
+            keyPassword findProperty("MYAPP_RELEASE_KEY_PASSWORD") ?: System.getenv("KEY_PASSWORD")
         }
     }
     defaultConfig {
