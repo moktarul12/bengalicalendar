@@ -1,0 +1,7 @@
+
+
+keytool -genkey -v -keystore keystore.jks   -keyalg RSA   -keysize 2048   -validity 10000   -alias my_app_key   -keypass dromominds123   -storepass dromominds123
+
+base64 -i keystore.jks -o keystore.b64
+
+cat keystore.b64 | pbcopy
