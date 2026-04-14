@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   yearText: {
-    fontSize: 15,
+    fontSize: 20,
     color: 'rgba(255, 255, 255, 0.95)',
     marginTop: 1,
     fontWeight: '500',

@@ -195,6 +195,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
           <UpcomingFestivals
             currentMonth={today.getMonth() + 1}
             currentDay={today.getDate()}
+            currentYear={today.getFullYear()}
           />
         </View>
       </ScrollView>

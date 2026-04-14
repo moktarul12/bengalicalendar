@@ -16,16 +16,22 @@ type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 
 export default function FestivalsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+  const years = Array.from({ length: 20 }, (_, i) => 2015 + i);
 
   const getFilteredFestivals = (): Festival[] => {
-    if (filter === 'all') {
-      return FESTIVALS.sort((a, b) => {
-        const dateA = a.month * 100 + a.day;
-        const dateB = b.month * 100 + b.day;
-        return dateA - dateB;
-      });
+    let filtered = FESTIVALS.filter((f) => f.year === selectedYear);
+    
+    if (filter !== 'all') {
+      filtered = filtered.filter((f) => f.type === filter);
     }
-    return getFestivalsByType(filter);
+
+    return filtered.sort((a, b) => {
+      const dateA = new Date(a.year, a.month - 1, a.day);
+      const dateB = new Date(b.year, b.month - 1, b.day);
+      return dateA.getTime() - dateB.getTime();
+    });
   };
 
   const filters: { id: FilterType; label: string; labelBn: string; icon: string }[] = [
@@ -51,7 +57,7 @@ export default function FestivalsScreen() {
         <Text style={styles.festivalNameBn} numberOfLines={1}>{item.nameBn}</Text>
         <View style={styles.dateBadge}>
           <Ionicons name="calendar" size={12} color={COLORS.textSecondary} />
-          <Text style={styles.dateText}>{item.day} {item.month}</Text>
+          <Text style={styles.dateText}>{item.day}/{item.month}/{item.year}</Text>
         </View>
       </View>
       <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
@@ -70,6 +76,23 @@ export default function FestivalsScreen() {
         <Ionicons name="ribbon" size={32} color="#FFFFFF" />
         <Text style={styles.headerTitle}>Festivals</Text>
         <Text style={styles.headerSubtitle}>উৎসব ও ছুটির দিন</Text>
+        <View style={styles.yearSelector}>
+          <TouchableOpacity
+            style={styles.yearButton}
+            onPress={() => setSelectedYear(Math.max(2015, selectedYear - 1))}
+            disabled={selectedYear === 2015}
+          >
+            <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+          <Text style={styles.yearText}>{selectedYear}</Text>
+          <TouchableOpacity
+            style={styles.yearButton}
+            onPress={() => setSelectedYear(Math.min(2034, selectedYear + 1))}
+            disabled={selectedYear === 2034}
+          >
+            <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
 
       {/* Filter Tabs */}
@@ -104,7 +127,7 @@ export default function FestivalsScreen() {
       {/* Festivals List */}
       <FlatList
         data={getFilteredFestivals()}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => `${item.id}-${item.year}`}
         renderItem={renderFestivalItem}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
@@ -141,6 +164,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'rgba(255, 255, 255, 0.9)',
     marginTop: 2,
+  },
+  yearSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SPACING.md,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: BORDER_RADIUS.md,
+    paddingHorizontal: SPACING.sm,
+  },
+  yearButton: {
+    padding: SPACING.sm,
+  },
+  yearText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginHorizontal: SPACING.md,
   },
   filterContainer: {
     backgroundColor: COLORS.surface,
