@@ -15,6 +15,8 @@ interface CalendarHeaderProps {
   onPrevMonth: () => void;
   onNextMonth: () => void;
   onToday: () => void;
+  isCurrentMonth: boolean;
+  onMonthYearPress: () => void;
 }
 
 export default function CalendarHeader({
@@ -27,6 +29,8 @@ export default function CalendarHeader({
   onPrevMonth,
   onNextMonth,
   onToday,
+  isCurrentMonth,
+  onMonthYearPress,
 }: CalendarHeaderProps) {
   const bengaliMonthData = BENGALI_MONTHS[bengaliMonth];
   const bengaliWeekDaysShort = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহ', 'শুক্র', 'শনি'];
@@ -34,9 +38,9 @@ export default function CalendarHeader({
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary]}
+        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
         {/* Navigation Controls */}
@@ -44,12 +48,12 @@ export default function CalendarHeader({
           <TouchableOpacity
             style={styles.navButton}
             onPress={onPrevMonth}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
           >
-            <Ionicons name="chevron-back" size={28} color="#FFFFFF" />
+            <Ionicons name="arrow-back-circle-outline" size={32} color="#FFFFFF" />
           </TouchableOpacity>
 
-          <View style={styles.dateContainer}>
+          <TouchableOpacity style={styles.dateContainer} onPress={onMonthYearPress} activeOpacity={0.7}>
             {calendarType === 'gregorian' ? (
               <>
                 <Text style={styles.monthText}>{monthName}</Text>
@@ -62,16 +66,28 @@ export default function CalendarHeader({
                 <Text style={styles.secondaryDateText}>{monthName} {year}</Text>
               </>
             )}
-          </View>
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.navButton}
             onPress={onNextMonth}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
           >
-            <Ionicons name="chevron-forward" size={28} color="#FFFFFF" />
+            <Ionicons name="arrow-forward-circle-outline" size={32} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
+
+        {/* Today Button - Only show when not in current month */}
+        {!isCurrentMonth && (
+          <TouchableOpacity
+            style={styles.todayButton}
+            onPress={onToday}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="today-outline" size={14} color={COLORS.primary} />
+            <Text style={styles.todayText}>Today</Text>
+          </TouchableOpacity>
+        )}
 
         {/* Bengali Date Display (when in Gregorian mode) */}
         {calendarType === 'gregorian' && (
@@ -81,16 +97,6 @@ export default function CalendarHeader({
             </Text>
           </View>
         )}
-
-        {/* Today Button */}
-        <TouchableOpacity
-          style={styles.todayButton}
-          onPress={onToday}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="today" size={16} color={COLORS.primary} />
-          <Text style={styles.todayText}>Today</Text>
-        </TouchableOpacity>
       </LinearGradient>
 
       {/* Week Day Headers */}
@@ -132,10 +138,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
   },
   gradient: {
-    paddingTop: 20,
-    paddingBottom: 15,
+    paddingTop: 16,
+    paddingBottom: 14,
     paddingHorizontal: SPACING.md,
     alignItems: 'center',
+    minHeight: 100,
   },
   navRow: {
     flexDirection: 'row',
@@ -144,60 +151,65 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   navButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },
   dateContainer: {
     alignItems: 'center',
+    flex: 1,
   },
   monthText: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    letterSpacing: 0.5,
   },
   yearText: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.9)',
-    marginTop: 2,
+    fontSize: 20,
+    color: 'rgba(255, 255, 255, 0.95)',
+    marginTop: 1,
+    fontWeight: '500',
   },
   secondaryDateText: {
-    fontSize: 12,
+    fontSize: 11,
     color: 'rgba(255, 255, 255, 0.85)',
-    marginTop: 4,
+    marginTop: 2,
+    fontWeight: '400',
   },
   bengaliDateContainer: {
     marginTop: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 14,
     paddingVertical: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: BORDER_RADIUS.round,
   },
   bengaliDateText: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 13,
+    color: 'rgba(255, 255, 255, 0.95)',
+    fontWeight: '500',
   },
   todayButton: {
     position: 'absolute',
-    right: 16,
-    bottom: 15,
+    bottom: 8,
+    right: 56,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     borderRadius: BORDER_RADIUS.round,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 2,
   },
   todayText: {
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: '600',
     color: COLORS.primary,
     marginLeft: 4,
@@ -205,7 +217,7 @@ const styles = StyleSheet.create({
   weekDaysRow: {
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
-    paddingVertical: 10,
+    paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },
@@ -214,9 +226,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   weekDayText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     color: COLORS.textSecondary,
+    letterSpacing: 0.3,
   },
   weekendText: {
     color: COLORS.weekend,

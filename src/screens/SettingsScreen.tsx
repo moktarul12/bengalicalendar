@@ -85,7 +85,7 @@ export default function SettingsScreen() {
   const handleRateApp = () => {
     Alert.alert('Rate App', 'Enjoying Bengali Calendar? Please rate us on Play Store!', [
       { text: 'Later', style: 'cancel' },
-      { text: 'Rate Now', onPress: () => Linking.openURL('market://details?id=com.bengalienglishcalendar') },
+      { text: 'Rate Now', onPress: () => Linking.openURL('market://details?id=com.dromominds.bengalienglishcalendar') },
     ]);
   };
 
@@ -95,14 +95,18 @@ export default function SettingsScreen() {
 
   const handleAbout = () => {
     Alert.alert(
-      'About',
-      'Bengali English Calendar v1.0.0\n\nA beautiful dual calendar app featuring Bengali Panjika and Gregorian calendar with festivals, holidays, and panchang.\n\nMade with ❤️ for Bengali community',
+      'About App',
+      'Bengali English Calendar v1.0.0\n\nA beautiful dual calendar app featuring Bengali Panjika and Gregorian calendar with festivals, holidays, and panchang.\n\nFeatures:\n• Dual Calendar View\n• Festival & Holiday Tracking\n• Panchang Information\n• Bengali & English Support\n\nDeveloped by DromoMinds\n\nMade with ❤️ for Bengali community',
       [{ text: 'OK' }]
     );
   };
 
+  const handleAboutUs = () => {
+    Linking.openURL('https://dromominds.in');
+  };
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
       {/* Header */}
       <LinearGradient
         colors={[COLORS.primary, COLORS.secondary]}
@@ -218,6 +222,13 @@ export default function SettingsScreen() {
             onPress={handleAbout}
           />
           <SettingItem
+            icon="business"
+            iconColor="#9C27B0"
+            title="About Us"
+            titleBn="আমাদের সম্পর্কে"
+            onPress={handleAboutUs}
+          />
+          <SettingItem
             icon="star"
             iconColor="#FFD700"
             title="Rate App"
@@ -236,7 +247,7 @@ export default function SettingsScreen() {
             iconColor="#F44336"
             title="Contact Us"
             titleBn="যোগাযোগ করুন"
-            onPress={() => Linking.openURL('mailto:support@bengalicalendar.app')}
+            onPress={() => Linking.openURL('mailto:admin@dromominds.com')}
           />
           <SettingItem
             icon="document-text"
@@ -271,6 +282,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+  scrollContent: {
+    paddingBottom: 140,
   },
   header: {
     padding: SPACING.lg,
