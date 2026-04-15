@@ -1,0 +1,154 @@
+{
+  "festivals": [
+    {
+      "id": "pohela-boishakh",
+      "nameBn": "পহেলা বৈশাখ",
+      "nameEn": "Pohela Boishakh",
+      "description": "Bengali New Year celebration",
+      "type": "cultural",
+      "icon": "calendar",
+      "color": "#FF6B6B",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 4, "day": 14},
+        "2025": {"month": 4, "day": 14},
+        "2026": {"month": 4, "day": 14}
+      }
+    },
+    {
+      "id": "eid-ul-fitr",
+      "nameBn": "ঈদুল ফিতর",
+      "nameEn": "Eid ul Fitr",
+      "description": "Festival of breaking the fast",
+      "type": "religious",
+      "icon": "moon",
+      "color": "#4ECDC4",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 4, "day": 10},
+        "2025": {"month": 3, "day": 30},
+        "2026": {"month": 3, "day": 20}
+      }
+    },
+    {
+      "id": "eid-ul-adha",
+      "nameBn": "ঈদুল আজহা",
+      "nameEn": "Eid ul Adha",
+      "description": "Festival of sacrifice",
+      "type": "religious",
+      "icon": "star",
+      "color": "#45B7D1",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 6, "day": 17},
+        "2025": {"month": 6, "day": 7},
+        "2026": {"month": 5, "day": 27}
+      }
+    },
+    {
+      "id": "durga-puja",
+      "nameBn": "দুর্গা পূজা",
+      "nameEn": "Durga Puja",
+      "description": "Hindu festival celebrating goddess Durga",
+      "type": "religious",
+      "icon": "flower",
+      "color": "#FF8C42",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 10, "day": 9},
+        "2025": {"month": 10, "day": 20},
+        "2026": {"month": 10, "day": 9}
+      }
+    },
+    {
+      "id": "independence-day",
+      "nameBn": "স্বাধীনতা দিবস",
+      "nameEn": "Independence Day",
+      "description": "Bangladesh Independence Day",
+      "type": "national",
+      "icon": "flag",
+      "color": "#2ECC71",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 3, "day": 26},
+        "2025": {"month": 3, "day": 26},
+        "2026": {"month": 3, "day": 26}
+      }
+    },
+    {
+      "id": "victory-day",
+      "nameBn": "বিজয় দিবস",
+      "nameEn": "Victory Day",
+      "description": "Bangladesh Victory Day",
+      "type": "national",
+      "icon": "trophy",
+      "color": "#9B59B6",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 12, "day": 16},
+        "2025": {"month": 12, "day": 16},
+        "2026": {"month": 12, "day": 16}
+      }
+    },
+    {
+      "id": "language-movement-day",
+      "nameBn": "ভাষা আন্দোলন দিবস",
+      "nameEn": "Language Movement Day",
+      "description": "International Mother Language Day",
+      "type": "national",
+      "icon": "book",
+      "color": "#E74C3C",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 2, "day": 21},
+        "2025": {"month": 2, "day": 21},
+        "2026": {"month": 2, "day": 21}
+      }
+    },
+    {
+      "id": "basant-panchami",
+      "nameBn": "বসন্ত পঞ্চমী",
+      "nameEn": "Basant Panchami",
+      "description": "Festival marking arrival of spring",
+      "type": "seasonal",
+      "icon": "sun",
+      "color": "#F39C12",
+      "isPublicHoliday": false,
+      "dates": {
+        "2024": {"month": 2, "day": 14},
+        "2025": {"month": 2, "day": 2},
+        "2026": {"month": 2, "day": 12}
+      }
+    },
+    {
+      "id": "holi",
+      "nameBn": "দোলযাত্রা",
+      "nameEn": "Holi",
+      "description": "Festival of colors",
+      "type": "religious",
+      "icon": "palette",
+      "color": "#FF6B6B",
+      "isPublicHoliday": false,
+      "dates": {
+        "2024": {"month": 3, "day": 25},
+        "2025": {"month": 3, "day": 14},
+        "2026": {"month": 3, "day": 4}
+      }
+    },
+    {
+      "id": "christmas",
+      "nameBn": "বড়দিন",
+      "nameEn": "Christmas",
+      "description": "Christmas celebration",
+      "type": "religious",
+      "icon": "gift",
+      "color": "#E74C3C",
+      "isPublicHoliday": true,
+      "dates": {
+        "2024": {"month": 12, "day": 25},
+        "2025": {"month": 12, "day": 25},
+        "2026": {"month": 12, "day": 25}
+      }
+    }
+  ]
+}
