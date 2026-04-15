@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dromominds.bengalicalendar",
+      "bundleIdentifier": "com.bengalicalendar",
       "buildNumber": "1",
       "infoPlist": {
         "CFBundleDisplayName": "Bengali Calendar"
       }
     },
     "android": {
-      "package": "com.dromominds.bengalicalendar",
+      "package": "com.bengalicalendar",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
