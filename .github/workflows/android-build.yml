@@ -46,12 +46,25 @@ jobs:
       - name: Build Signed APK
         run: |
           cd android
-          ./gradlew assembleRelease --warning-mode all
+          ./gradlew assembleRelease --warning-mode all --stacktrace 2>&1 | tee /tmp/gradle-apk.log
+          # Surface the real error if Gradle failed
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo ""
+            echo "=== GRADLE APK BUILD FAILED — last 60 lines ==="
+            tail -60 /tmp/gradle-apk.log
+            exit 1
+          fi
 
       - name: Build Signed AAB
         run: |
           cd android
-          ./gradlew bundleRelease --warning-mode all
+          ./gradlew bundleRelease --warning-mode all --stacktrace 2>&1 | tee /tmp/gradle-aab.log
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo ""
+            echo "=== GRADLE AAB BUILD FAILED — last 60 lines ==="
+            tail -60 /tmp/gradle-aab.log
+            exit 1
+          fi
 
       - name: Find Build Artifacts
         run: |
