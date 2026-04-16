@@ -44,7 +44,7 @@ export default function UpcomingFestivals({
             onPress={() => onFestivalPress?.(festival)}
             activeOpacity={0.7}
           >
-            <FestivalIcon iconName={festival.icon} color={festival.color} size={48} marginRight={SPACING.md} />
+            <FestivalIcon iconPath={festival.icon} color={festival.color} size={48} marginRight={SPACING.md} />
             <View style={styles.festivalInfo}>
               <Text style={styles.festivalName} numberOfLines={1}>{festival.nameEn}</Text>
               <Text style={styles.festivalNameBn} numberOfLines={1}>{festival.nameBn}</Text>

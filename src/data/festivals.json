@@ -6,7 +6,7 @@
       "nameEn": "Pohela Boishakh",
       "description": "Bengali New Year",
       "type": "cultural",
-      "icon": "ribbon",
+      "icon": "pohela-boishakh.svg",
       "color": "#FF6B6B",
       "isPublicHoliday": true,
       "dates": {
@@ -33,7 +33,7 @@
       "nameEn": "Durga Puja",
       "description": "Durga Puja festival",
       "type": "religious",
-      "icon": "prayer",
+      "icon": "durga-puja.svg",
       "color": "#E91E63",
       "isPublicHoliday": true,
       "dates": {
@@ -60,7 +60,7 @@
       "nameEn": "Kali Puja",
       "description": "Kali Puja festival",
       "type": "religious",
-      "icon": "flame",
+      "icon": "kali-puja.svg",
       "color": "#9C27B0",
       "isPublicHoliday": true,
       "dates": {
@@ -87,7 +87,7 @@
       "nameEn": "Diwali",
       "description": "Festival of Lights",
       "type": "religious",
-      "icon": "bulb",
+      "icon": "diwali.svg",
       "color": "#FF9800",
       "isPublicHoliday": true,
       "dates": {
@@ -114,7 +114,7 @@
       "nameEn": "Christmas",
       "description": "Christmas Day",
       "type": "religious",
-      "icon": "star",
+      "icon": "christmas.svg",
       "color": "#4CAF50",
       "isPublicHoliday": true,
       "dates": {
@@ -141,7 +141,7 @@
       "nameEn": "Independence Day",
       "description": "Independence Day",
       "type": "national",
-      "icon": "flag",
+      "icon": "independence-day.svg",
       "color": "#FF9933",
       "isPublicHoliday": true,
       "dates": {
@@ -168,7 +168,7 @@
       "nameEn": "Victory Day",
       "description": "Victory Day of Bangladesh",
       "type": "national",
-      "icon": "medal",
+      "icon": "victory-day.svg",
       "color": "#FF5722",
       "isPublicHoliday": true,
       "dates": {
@@ -195,7 +195,7 @@
       "nameEn": "Eid ul Fitr",
       "description": "Eid ul Fitr",
       "type": "religious",
-      "icon": "moon",
+      "icon": "eid-ul-fitr.svg",
       "color": "#00BCD4",
       "isPublicHoliday": true,
       "dates": {
@@ -222,7 +222,7 @@
       "nameEn": "Eid ul Adha",
       "description": "Eid ul Adha",
       "type": "religious",
-      "icon": "paw",
+      "icon": "eid-ul-adha.svg",
       "color": "#795548",
       "isPublicHoliday": true,
       "dates": {
@@ -249,7 +249,7 @@
       "nameEn": "Saraswati Puja",
       "description": "Saraswati Puja",
       "type": "religious",
-      "icon": "book",
+      "icon": "saraswati-puja.svg",
       "color": "#FFEB3B",
       "isPublicHoliday": false,
       "dates": {
@@ -276,7 +276,7 @@
       "nameEn": "Holi",
       "description": "Festival of Colors",
       "type": "cultural",
-      "icon": "color-palette",
+      "icon": "holi.svg",
       "color": "#FF4081",
       "isPublicHoliday": false,
       "dates": {
@@ -303,7 +303,7 @@
       "nameEn": "Raksha Bandhan",
       "description": "Raksha Bandhan",
       "type": "cultural",
-      "icon": "heart-outline",
+      "icon": "rakhi.svg",
       "color": "#9C27B0",
       "isPublicHoliday": false,
       "dates": {
@@ -330,7 +330,7 @@
       "nameEn": "Navratri",
       "description": "Navratri Festival",
       "type": "religious",
-      "icon": "sparkles",
+      "icon": "navratri.svg",
       "color": "#E91E63",
       "isPublicHoliday": false,
       "dates": {
@@ -357,7 +357,7 @@
       "nameEn": "Janmashtami",
       "description": "Krishna Janmashtami",
       "type": "religious",
-      "icon": "leaf",
+      "icon": "janmashtami.svg",
       "color": "#673AB7",
       "isPublicHoliday": false,
       "dates": {
@@ -384,7 +384,7 @@
       "nameEn": "Vasant Panchami",
       "description": "Vasant Panchami",
       "type": "seasonal",
-      "icon": "flower-outline",
+      "icon": "basant-panchami.svg",
       "color": "#FF9800",
       "isPublicHoliday": false,
       "dates": {
@@ -411,7 +411,7 @@
       "nameEn": "Makar Sankranti",
       "description": "Makar Sankranti",
       "type": "seasonal",
-      "icon": "airplane-outline",
+      "icon": "makar-sankranti.svg",
       "color": "#FFC107",
       "isPublicHoliday": false,
       "dates": {

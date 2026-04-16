@@ -27,12 +27,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#E63946"
       },
-      "splash": {
-        "image": "./assets/splash-icon.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#E63946"
-      },
-      "edgeToEdgeEnabled": true,
+      "edgeToEdgeEnabled": false,
       "permissions": [
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE",
@@ -52,8 +47,12 @@
         {
           "backgroundColor": "#E63946",
           "image": "./assets/splash-icon.png",
-          "imageWidth": 300,
-          "resizeMode": "contain"
+          "imageWidth": 400,
+          "resizeMode": "contain",
+          "statusBar": {
+            "backgroundColor": "#E63946",
+            "style": "light"
+          }
         }
       ],
       [

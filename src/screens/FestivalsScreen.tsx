@@ -46,7 +46,7 @@ export default function FestivalsScreen() {
 
   const renderFestivalItem = ({ item }: { item: Festival }) => (
     <TouchableOpacity style={styles.festivalItem} activeOpacity={0.7}>
-      <FestivalIcon iconName={item.icon} color={item.color} size={64} marginRight={SPACING.md} />
+      <FestivalIcon iconPath={item.icon} color={item.color} size={64} marginRight={SPACING.md} />
       <View style={styles.festivalInfo}>
         <Text style={styles.festivalNameEn} numberOfLines={1}>{item.nameEn}</Text>
         <Text style={styles.festivalNameBn} numberOfLines={1}>{item.nameBn}</Text>
