@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 import { getUpcomingFestivals } from '../constants/festivals';
 import { Festival } from '../types';
@@ -8,21 +9,25 @@ import { Festival } from '../types';
 interface UpcomingFestivalsProps {
   currentMonth: number;
   currentDay: number;
+  currentYear: number;
   onFestivalPress?: (festival: Festival) => void;
 }
 
 export default function UpcomingFestivals({
   currentMonth,
   currentDay,
+  currentYear,
   onFestivalPress,
 }: UpcomingFestivalsProps) {
-  const upcomingFestivals = getUpcomingFestivals(currentMonth, currentDay, 5);
+  const upcomingFestivals = getUpcomingFestivals(currentMonth, currentDay, currentYear, 10);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="calendar-outline" size={20} color={COLORS.primary} />
-        <Text style={styles.title}>Upcoming Festivals</Text>
+        <View style={styles.headerLeft}>
+          <Ionicons name="sparkles" size={22} color={COLORS.primary} />
+          <Text style={styles.title}>Upcoming Festivals</Text>
+        </View>
         <Text style={styles.subtitle}>আসন্ন উৎসব</Text>
       </View>
 
@@ -34,23 +39,27 @@ export default function UpcomingFestivals({
         {upcomingFestivals.map((festival, index) => (
           <TouchableOpacity
             key={festival.id}
-            style={[styles.festivalItem, { backgroundColor: festival.color }]}
+            style={styles.festivalItem}
             onPress={() => onFestivalPress?.(festival)}
-            activeOpacity={0.8}
+            activeOpacity={0.7}
           >
-            <Text style={styles.festivalIcon}>{festival.icon}</Text>
-            <Text style={styles.festivalName} numberOfLines={1}>
-              {festival.nameEn}
-            </Text>
-            <Text style={styles.festivalNameBn} numberOfLines={1}>
-              {festival.nameBn}
-            </Text>
-            <View style={styles.dateContainer}>
-              <Ionicons name="calendar" size={12} color="rgba(255,255,255,0.8)" />
-              <Text style={styles.dateText}>
-                {festival.day}/{festival.month}
-              </Text>
+            <LinearGradient
+              colors={[festival.color, festival.color + 'CC']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.festivalIconContainer}
+            >
+              <Text style={styles.festivalIcon}>{festival.icon}</Text>
+            </LinearGradient>
+            <View style={styles.festivalInfo}>
+              <Text style={styles.festivalName} numberOfLines={1}>{festival.nameEn}</Text>
+              <Text style={styles.festivalNameBn} numberOfLines={1}>{festival.nameBn}</Text>
+              <View style={styles.dateBadge}>
+                <Ionicons name="calendar" size={12} color={COLORS.textSecondary} />
+                <Text style={styles.dateText}>{festival.day}/{festival.month}</Text>
+              </View>
             </View>
+            <Ionicons name="chevron-forward" size={18} color={COLORS.textMuted} />
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -65,9 +74,14 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: SPACING.md,
     marginBottom: SPACING.sm,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
@@ -78,47 +92,58 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     color: COLORS.textSecondary,
-    marginLeft: SPACING.sm,
   },
   scrollContent: {
     paddingHorizontal: SPACING.md,
+    gap: SPACING.sm,
   },
   festivalItem: {
-    width: 130,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.lg,
     marginRight: SPACING.sm,
+    minWidth: 200,
+    ...SHADOWS.sm,
+  },
+  festivalIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: BORDER_RADIUS.md,
+    justifyContent: 'center',
     alignItems: 'center',
-    ...SHADOWS.md,
+    marginRight: SPACING.md,
   },
   festivalIcon: {
-    fontSize: 32,
-    marginBottom: SPACING.xs,
+    fontSize: 26,
+  },
+  festivalInfo: {
+    flex: 1,
   },
   festivalName: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#FFFFFF',
-    textAlign: 'center',
+    color: COLORS.text,
   },
   festivalNameBn: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
-    textAlign: 'center',
+    color: COLORS.textSecondary,
     marginTop: 2,
   },
-  dateContainer: {
+  dateBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: SPACING.sm,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    marginTop: 4,
+    backgroundColor: COLORS.surface,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
     borderRadius: BORDER_RADIUS.sm,
+    alignSelf: 'flex-start',
   },
   dateText: {
-    fontSize: 12,
-    color: '#FFFFFF',
+    fontSize: 11,
+    color: COLORS.textSecondary,
     marginLeft: 4,
   },
 });
