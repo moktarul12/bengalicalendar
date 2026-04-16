@@ -9,7 +9,7 @@
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#E63946"
     },
     "ios": {
@@ -47,8 +47,8 @@
         {
           "backgroundColor": "#E63946",
           "image": "./assets/splash-icon.png",
-          "imageWidth": 400,
-          "resizeMode": "contain",
+          "imageWidth": 600,
+          "resizeMode": "cover",
           "statusBar": {
             "backgroundColor": "#E63946",
             "style": "light"

@@ -11,6 +11,7 @@ import FestivalsScreen from './src/screens/FestivalsScreen';
 import PanchangScreen from './src/screens/PanchangScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import BottomNavBar from './src/components/BottomNavBar';
+import { LanguageProvider } from './src/contexts/LanguageContext';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -79,13 +80,15 @@ export default function App() {
   };
 
   return (
-    <SafeAreaProvider onLayout={onLayoutRootView}>
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
-        {renderScreen()}
-        <BottomNavBar activeTab={activeTab} onTabChange={handleTabChange} />
-      </View>
-    </SafeAreaProvider>
+    <LanguageProvider>
+      <SafeAreaProvider onLayout={onLayoutRootView}>
+        <View style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
+          {renderScreen()}
+          <BottomNavBar activeTab={activeTab} onTabChange={handleTabChange} />
+        </View>
+      </SafeAreaProvider>
+    </LanguageProvider>
   );
 }
 

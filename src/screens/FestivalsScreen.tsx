@@ -12,12 +12,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 import { FESTIVALS, getFestivalsByType, Festival } from '../constants/festivals';
 import FestivalIcon from '../components/FestivalIcon';
+import FestivalDetailModal from '../components/FestivalDetailModal';
 
 type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 
 export default function FestivalsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const currentYear = new Date().getFullYear();
 
   const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
@@ -44,8 +47,17 @@ export default function FestivalsScreen() {
     { id: 'seasonal', label: 'Seasonal', labelBn: 'ঋতু', icon: 'leaf' },
   ];
 
+  const handleFestivalPress = (festival: Festival) => {
+    setSelectedFestival(festival);
+    setModalVisible(true);
+  };
+
   const renderFestivalItem = ({ item }: { item: Festival }) => (
-    <TouchableOpacity style={styles.festivalItem} activeOpacity={0.7}>
+    <TouchableOpacity 
+      style={styles.festivalItem} 
+      activeOpacity={0.7}
+      onPress={() => handleFestivalPress(item)}
+    >
       <FestivalIcon iconPath={item.icon} color={item.color} size={64} marginRight={SPACING.md} />
       <View style={styles.festivalInfo}>
         <Text style={styles.festivalNameEn} numberOfLines={1}>{item.nameEn}</Text>
@@ -134,6 +146,13 @@ export default function FestivalsScreen() {
             <Text style={styles.emptyTextBn}>কোন উৎসব পাওয়া যায়নি</Text>
           </View>
         }
+      />
+
+      {/* Festival Detail Modal */}
+      <FestivalDetailModal
+        festival={selectedFestival}
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
       />
     </View>
   );

@@ -15,6 +15,19 @@ export interface Festival {
   icon: string;
   color: string;
   isPublicHoliday: boolean;
+  details?: {
+    longDescription: { bn: string; en: string };
+    significance: { bn: string; en: string };
+    traditions: { bn: string; en: string };
+    history?: { bn: string; en: string };
+    rituals?: { bn: string; en: string };
+    food?: { bn: string; en: string };
+    celebrations?: { bn: string; en: string };
+    regionalVariations?: { bn: string; en: string };
+    duration: string;
+    monthBn: string;
+    monthEn: string;
+  };
 }
 
 // Import festival data from JSON
@@ -34,6 +47,7 @@ export const FESTIVALS: Festival[] = festivalsData.festivals.flatMap((festival: 
     icon: festival.icon,
     color: festival.color,
     isPublicHoliday: festival.isPublicHoliday,
+    details: festival.details,
   }));
 });
 

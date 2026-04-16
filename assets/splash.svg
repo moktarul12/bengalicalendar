@@ -14,39 +14,39 @@
   <rect width="1284" height="2778" fill="url(#splashGrad)"/>
   
   <!-- Decorative circles -->
-  <circle cx="642" cy="1389" r="300" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
-  <circle cx="642" cy="1389" r="350" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
-  <circle cx="642" cy="1389" r="400" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  
-  <!-- Calendar Icon Container -->
-  <rect x="492" y="1189" width="300" height="300" rx="60" fill="white" filter="url(#shadow)"/>
-  
-  <!-- Calendar Icon -->
-  <rect x="522" y="1239" width="240" height="200" rx="20" fill="#F5F5F5"/>
-  
+  <circle cx="642" cy="1289" r="400" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
+  <circle cx="642" cy="1289" r="450" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <circle cx="642" cy="1289" r="500" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+  <!-- Calendar Icon Container - Larger -->
+  <rect x="392" y="989" width="500" height="500" rx="80" fill="white" filter="url(#shadow)"/>
+
+  <!-- Calendar Icon - Larger -->
+  <rect x="442" y="1064" width="400" height="350" rx="30" fill="#F5F5F5"/>
+
   <!-- Calendar Header -->
-  <rect x="522" y="1239" width="240" height="60" rx="20" fill="#E63946"/>
-  <rect x="522" y="1279" width="240" height="20" fill="#E63946"/>
-  
-  <!-- Calendar Grid -->
+  <rect x="442" y="1064" width="400" height="100" rx="30" fill="#E63946"/>
+  <rect x="442" y="1134" width="400" height="30" fill="#E63946"/>
+
+  <!-- Calendar Grid - Larger -->
   <g fill="#666">
-    <rect x="542" y="1320" width="30" height="30" rx="5"/>
-    <rect x="582" y="1320" width="30" height="30" rx="5"/>
-    <rect x="622" y="1320" width="30" height="30" rx="5"/>
-    <rect x="662" y="1320" width="30" height="30" rx="5"/>
-    <rect x="702" y="1320" width="30" height="30" rx="5"/>
-    
-    <rect x="542" y="1360" width="30" height="30" rx="5"/>
-    <rect x="582" y="1360" width="30" height="30" rx="5"/>
-    <rect x="622" y="1360" width="30" height="30" rx="5" fill="#E63946"/>
-    <rect x="662" y="1360" width="30" height="30" rx="5"/>
-    <rect x="702" y="1360" width="30" height="30" rx="5"/>
-    
-    <rect x="542" y="1400" width="30" height="30" rx="5"/>
-    <rect x="582" y="1400" width="30" height="30" rx="5"/>
-    <rect x="622" y="1400" width="30" height="30" rx="5"/>
-    <rect x="662" y="1400" width="30" height="30" rx="5"/>
-    <rect x="702" y="1400" width="30" height="30" rx="5"/>
+    <rect x="470" y="1180" width="50" height="50" rx="8"/>
+    <rect x="535" y="1180" width="50" height="50" rx="8"/>
+    <rect x="600" y="1180" width="50" height="50" rx="8"/>
+    <rect x="665" y="1180" width="50" height="50" rx="8"/>
+    <rect x="730" y="1180" width="50" height="50" rx="8"/>
+
+    <rect x="470" y="1245" width="50" height="50" rx="8"/>
+    <rect x="535" y="1245" width="50" height="50" rx="8"/>
+    <rect x="600" y="1245" width="50" height="50" rx="8" fill="#E63946"/>
+    <rect x="665" y="1245" width="50" height="50" rx="8"/>
+    <rect x="730" y="1245" width="50" height="50" rx="8"/>
+
+    <rect x="470" y="1310" width="50" height="50" rx="8"/>
+    <rect x="535" y="1310" width="50" height="50" rx="8"/>
+    <rect x="600" y="1310" width="50" height="50" rx="8"/>
+    <rect x="665" y="1310" width="50" height="50" rx="8"/>
+    <rect x="730" y="1310" width="50" height="50" rx="8"/>
   </g>
   
   <!-- App Title -->

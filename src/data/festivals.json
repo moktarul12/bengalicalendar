@@ -9,6 +9,43 @@
       "icon": "pohela-boishakh.svg",
       "color": "#FF6B6B",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "পহেলা বৈশাখ বাংলা সনের প্রথম দিন এবং বাংলা নববর্ষ হিসেবে উদযাপিত হয়। এটি বাংলা এবং বাংলাদেশের অন্যতম গুরুত্বপূর্ণ সাংস্কৃতিক উৎসব, যা কৃষিচক্রের শুরু চিহ্নিত করে।",
+          "en": "Pohela Boishakh is the first day of the Bengali calendar and is celebrated as the Bengali New Year. It is one of the most important cultural festivals in Bengal and Bangladesh, marking the beginning of the agricultural cycle."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি সৌর বর্ষপঞ্জির ভিত্তিতে বাংলা সনের নতুন বছর উদযাপন করে। এটি নতুন সূচনা, আশা এবং সমৃদ্ধির প্রতীক।",
+          "en": "The festival celebrates the new year according to the Bengali calendar, which is based on the solar calendar. It symbolizes new beginnings, hope, and prosperity."
+        },
+        "traditions": {
+          "bn": "মানুষ ভোরে উঠে, ঐতিহ্যবাহী পোশাক পরে, মেলা (বৈশাখী মেলা) দেখতে যায়, পান্তা ভাত এবং ইলিশ মাছের মতো ঐতিহ্যবাহী খাবার খায় এবং সাংস্কৃতিক অনুষ্ঠানে অংশ নেয়। ঢাকায় মঙ্গল শোভাযাত্রা অনুষ্ঠিত হয়।",
+          "en": "People wake up early, wear traditional clothes, visit fairs (Baishakhi Mela), eat traditional food like Panta Bhat and Hilsha fish, and participate in cultural programs. Processions (Mongol Shobhajatra) are held in Dhaka."
+        },
+        "history": {
+          "bn": "মোঘল সম্রাট আকবর ১৫৮৪ সালে বাংলা সন প্রবর্তন করেছিলেন। এটি কৃষি ক্যালেন্ডারের উপর ভিত্তি করে তৈরি করা হয়েছিল।",
+          "en": "Mughal Emperor Akbar introduced the Bengali calendar in 1584. It was based on the agricultural calendar."
+        },
+        "rituals": {
+          "bn": "ভোরে নদীতে স্নান, নতুন কাপড় পরা, বৈশাখী মেলায় যাওয়া, পান্তা ভাত এবং ইলিশ মাছ খাওয়া, মঙ্গল শোভাযাত্রায় অংশ নেওয়া।",
+          "en": "Bathing in rivers in the morning, wearing new clothes, visiting Baishakhi fairs, eating Panta Bhat and Hilsha fish, participating in Mongol Shobhajatra."
+        },
+        "food": {
+          "bn": "পান্তা ভাত, ইলিশ মাছ, পিঠা, পায়েস, মিষ্টি।",
+          "en": "Panta Bhat (fermented rice), Hilsha fish, Pitha (traditional cakes), Payesh, sweets."
+        },
+        "celebrations": {
+          "bn": "বৈশাখী মেলা, মঙ্গল শোভাযাত্রা, সাংস্কৃতিক অনুষ্ঠান, গান ও নাচ, আতশবাজি।",
+          "en": "Baishakhi Mela, Mongol Shobhajatra, cultural programs, songs and dance, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "ঢাকায় মঙ্গল শোভাযাত্রা, রাজশাহীতে বৈশাখী মেলা, সিলেটে বিশেষ ঐতিহ্যবাহী অনুষ্ঠান।",
+          "en": "Mongol Shobhajatra in Dhaka, Baishakhi Mela in Rajshahi, special traditional ceremonies in Sylhet."
+        },
+        "duration": "1 day",
+        "monthBn": "বৈশাখ",
+        "monthEn": "Boishakh"
+      },
       "dates": {
         "2020": { "month": 4, "day": 14 },
         "2021": { "month": 4, "day": 14 },
@@ -36,6 +73,43 @@
       "icon": "durga-puja.svg",
       "color": "#E91E63",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "দুর্গা পূজা বাংলা এবং বাংলাদেশে উদযাপিত সবচেয়ে বড় হিন্দু উৎসব, যা দেবী দুর্গার মহিষাসুর মহিষাসুরের বিরুদ্ধে বিজয় উদযাপন করে। এটি মঙ্গলের বিজয় প্রতীক।",
+          "en": "Durga Puja is the biggest Hindu festival celebrated in Bengal and Bangladesh, honoring Goddess Durga's victory over the buffalo demon Mahishasura. It represents the triumph of good over evil."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি দেবী দুর্গার বিজয় উদযাপন করে, যিনি সমস্ত দেবতার সম্মিলিত শক্তিতে মহিষাসুরকে পরাজিত করার জন্য সৃষ্টি হয়েছিলেন। এটি নারী শক্তি এবং ধার্মিকতার বিজয়ের প্রতীক।",
+          "en": "The festival celebrates the victory of Goddess Durga, who was created by the combined power of all gods to defeat the demon Mahishasura. It symbolizes feminine power and the victory of righteousness."
+        },
+        "traditions": {
+          "bn": "দেবী দুর্গার মাটির মূর্তি দিয়ে বিস্তৃত প্যান্ডেল তৈরি করা হয়। মানুষ প্যান্ডেল দেখতে যায়, প্রার্থনা (অঞ্জলি) করে, সাংস্কৃতিক অনুষ্ঠানে অংশ নেয়, ঐতিহ্যবাহী খাবার উপভোগ করে এবং শেষ দিনে মূর্তি বিসর্জনে (বিসর্জন) অংশ নেয়।",
+          "en": "Elaborate pandals are built with clay idols of Goddess Durga. People visit pandals, offer prayers (Anjali), participate in cultural programs, enjoy traditional food, and participate in idol immersion (Visarjan) on the last day."
+        },
+        "history": {
+          "bn": "দুর্গা পূজা প্রাচীন বাংলায় শতাব্দী ধরে উদযাপিত হয়ে আসছে। এটি শরতকালের প্রধান উৎসব এবং কৃষি চক্রের সমাপ্তি চিহ্নিত করে।",
+          "en": "Durga Puja has been celebrated in Bengal for centuries. It is the main autumn festival and marks the end of the agricultural cycle."
+        },
+        "rituals": {
+          "bn": "বোধন, অঞ্জলি, সন্ধ্যা আরতি, ভোগ প্রসাদ, দেবী বন্দনা, ধুনি নাচ, বিসর্জন যাত্রা।",
+          "en": "Bodhon, Anjali, Sandhya Aarti, Bhog Prasad, Devi Bandana, Dhunuchi Naach, Visarjan procession."
+        },
+        "food": {
+          "bn": "ভোগ, লুচি, পায়েস, মিষ্টি, ফল, মাছের পদ।",
+          "en": "Bhog, Luchi, Payesh, sweets, fruits, fish dishes."
+        },
+        "celebrations": {
+          "bn": "প্যান্ডেল হপিং, সাংস্কৃতিক অনুষ্ঠান, নৃত্য, গান, ধুনি নাচ, আতশবাজি।",
+          "en": "Pandal hopping, cultural programs, dance, music, Dhunuchi Naach, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "কলকাতায় ঐতিহ্যবাহী প্যান্ডেল, বর্ধমানে ঐতিহ্যবাহী সাজসজ্জা, পূর্ববঙ্গে বিশেষ রীতি।",
+          "en": "Traditional pandals in Kolkata, traditional decorations in Bardhaman, special rituals in East Bengal."
+        },
+        "duration": "5 days",
+        "monthBn": "আশ্বিন",
+        "monthEn": "Ashwin"
+      },
       "dates": {
         "2020": { "month": 10, "day": 22 },
         "2021": { "month": 10, "day": 11 },
@@ -63,6 +137,43 @@
       "icon": "kali-puja.svg",
       "color": "#9C27B0",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "কালী পূজা দেবী কালীকে উৎসর্গ করা হয়, যিনি দেবী দুর্গার ভয়ঙ্কর রূপ। এটি কার্তিক মাসের অমাবস্যায় উদযাপিত হয়, যা দীপাবলির সাথে মিলে যায়।",
+          "en": "Kali Puja is dedicated to Goddess Kali, the fierce form of Goddess Durga. It is celebrated on the new moon day of Kartik month, coinciding with Diwali."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি দেবী কালীকে সম্মান করে, যিনি মন্দ শক্তির ধ্বংসকারিণী। তিনি শক্তি, সুরক্ষা এবং অজ্ঞতা ও অন্ধকার থেকে মুক্তির জন্য পূজিত হন।",
+          "en": "The festival honors Goddess Kali, the destroyer of evil forces. She is worshipped for strength, protection, and liberation from ignorance and darkness."
+        },
+        "traditions": {
+          "bn": "মানুষ রাতে দেবী কালীকে পূজা করে, লাল জবা ফুল, মিষ্টি এবং কখনও কখনও পশু বলি দেয়। মন্দিরগুলি আলো দিয়ে সাজানো হয় এবং ভক্তরা প্রার্থনার জন্য সারারাত জেগে থাকে।",
+          "en": "People worship Goddess Kali at night, offer red hibiscus flowers, sweets, and sometimes animal sacrifice. Temples are decorated with lights, and devotees stay awake all night for prayers."
+        },
+        "history": {
+          "bn": "কালী পূজা প্রাচীন বাংলায় শতাব্দী ধরে উদযাপিত হয়ে আসছে।",
+          "en": "Kali Puja has been celebrated in Bengal for centuries."
+        },
+        "rituals": {
+          "bn": "কালী পূজা, জবা ফুল অর্পণ, মিষ্টি বিতরণ, রাত্রিজাগরণ।",
+          "en": "Kali Puja, offering hibiscus flowers, distributing sweets, night vigil."
+        },
+        "food": {
+          "bn": "মিষ্টি, ফল, লাল জবা ফুল।",
+          "en": "Sweets, fruits, red hibiscus flowers."
+        },
+        "celebrations": {
+          "bn": "মন্দির সাজানো, প্রার্থনা, রাত্রিজাগরণ, আতশবাজি।",
+          "en": "Decorating temples, prayers, night vigil, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "কলকাতায় বিশেষ কালী মন্দির, বিভিন্ন অঞ্চলে বিশেষ রীতি।",
+          "en": "Special Kali temples in Kolkata, special traditions in different regions."
+        },
+        "duration": "1 day",
+        "monthBn": "কার্তিক",
+        "monthEn": "Kartik"
+      },
       "dates": {
         "2020": { "month": 11, "day": 14 },
         "2021": { "month": 11, "day": 4 },
@@ -90,6 +201,43 @@
       "icon": "diwali.svg",
       "color": "#FF9800",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "দীপাবলি, আলোর উৎসব, সবচেয়ে গুরুত্বপূর্ণ হিন্দু উৎসবগুলির মধ্যে একটি। এটি রামের ১৪ বছরের নির্বাসনের পর অযোধ্যায় ফিরে আসা এবং রাবণের উপর তার বিজয় উদযাপন করে।",
+          "en": "Diwali, the Festival of Lights, is one of the most important Hindu festivals. It celebrates Lord Rama's return to Ayodhya after 14 years of exile and his victory over Ravana."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি অন্ধকারের উপর আলোর, মন্দের উপর মঙ্গলের এবং অজ্ঞতার উপর জ্ঞানের বিজয় প্রতীক। এটি ধন ও সমৃদ্ধির দেবী লক্ষ্মীকেও সম্মান করে।",
+          "en": "The festival symbolizes the victory of light over darkness, good over evil, and knowledge over ignorance. It also honors Goddess Lakshmi, the goddess of wealth and prosperity."
+        },
+        "traditions": {
+          "bn": "মানুষ দিয়া (তেলের প্রদীপ) জ্বালায়, রঙ্গোলি দিয়ে ঘর সাজায়, আতশবাজি ফাটায়, নতুন কাপড় পরে, মিষ্টি ভাগ করে এবং লক্ষ্মী পূজা করে। পরিবারগুলি ভোজের জন্য একত্রিত হয় এবং উপহার বিনিময় করে।",
+          "en": "People light diyas (oil lamps), decorate homes with rangoli, burst fireworks, wear new clothes, share sweets, and perform Lakshmi Puja. Families gather for feasts and exchange gifts."
+        },
+        "history": {
+          "bn": "দীপাবলি প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে। এটি রামায়ণের ঘটনা স্মরণ করে।",
+          "en": "Diwali has been celebrated since ancient India. It commemorates the events of the Ramayana."
+        },
+        "rituals": {
+          "bn": "লক্ষ্মী পূজা, দিয়া জ্বালানো, রঙ্গোলি তৈরি, আতশবাজি।",
+          "en": "Lakshmi Puja, lighting diyas, creating rangoli, fireworks."
+        },
+        "food": {
+          "bn": "মিষ্টি, লাড্ডু, গুজিয়া, সমোসা, কাঁচা পনির।",
+          "en": "Sweets, Laddu, Gujiya, Samosa, paneer dishes."
+        },
+        "celebrations": {
+          "bn": "দিয়া জ্বালানো, আতশবাজি, পরিবার সমাবেশ, উপহার বিনিময়।",
+          "en": "Lighting diyas, fireworks, family gatherings, exchanging gifts."
+        },
+        "regionalVariations": {
+          "bn": "উত্তর ভারতে বিশেষ রীতি, দক্ষিণ ভারতে বিভিন্ন সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Special traditions in North India, various cultural events in South India."
+        },
+        "duration": "5 days",
+        "monthBn": "কার্তিক",
+        "monthEn": "Kartik"
+      },
       "dates": {
         "2020": { "month": 11, "day": 14 },
         "2021": { "month": 11, "day": 4 },
@@ -117,6 +265,43 @@
       "icon": "christmas.svg",
       "color": "#4CAF50",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "বড়দিন যিশু খ্রিস্টের জন্ম উদযাপন করে এবং খ্রিস্টানদের দ্বারা বিশ্বব্যাপী পালিত হয়। এটি পরিবার সমাবেশ, উপহার দেওয়া এবং আনন্দ ছড়িয়ে দেওয়ার সময়।",
+          "en": "Christmas celebrates the birth of Jesus Christ and is observed worldwide by Christians. It is a time for family gatherings, gift-giving, and spreading joy."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি খ্রিস্টধর্মের কেন্দ্রীয় ব্যক্তি যিশু খ্রিস্টের জন্ম স্মরণ করে। এটি আশা, ভালোবাসা, শান্তি এবং দানের আত্মা প্রতিনিধিত্ব করে।",
+          "en": "The festival commemorates the birth of Jesus Christ, the central figure of Christianity. It represents hope, love, peace, and the spirit of giving."
+        },
+        "traditions": {
+          "bn": "মানুষ মধ্যরাতের গির্জার উপাসনায় অংশ নেয়, ক্রিসমাস গাছ সাজায়, উপহার বিনিময় করে, ক্যারল গায়, উৎসবের খাবার উপভোগ করে এবং পরিবারের সাথে সময় কাটায়। গির্জাগুলি আলো এবং তারা দিয়ে সুন্দরভাবে সাজানো হয়।",
+          "en": "People attend midnight mass, decorate Christmas trees, exchange gifts, sing carols, enjoy festive meals, and spend time with family. Churches are beautifully decorated with lights and stars."
+        },
+        "history": {
+          "bn": "বড়দিন খ্রিস্টানধর্মের প্রারম্ভ থেকে উদযাপিত হয়ে আসছে। এটি খ্রিস্টের জন্মের স্মরণে পালিত হয়।",
+          "en": "Christmas has been celebrated since the early days of Christianity. It is celebrated in remembrance of Christ's birth."
+        },
+        "rituals": {
+          "bn": "মধ্যরাতের গির্জার উপাসনা, ক্রিসমাস গাছ সাজানো, উপহার বিনিময়, ক্যারল গাওয়া।",
+          "en": "Midnight mass, decorating Christmas trees, exchanging gifts, singing carols."
+        },
+        "food": {
+          "bn": "কেক, পুডিং, রোস্ট, মিষ্টি, ওয়াইন।",
+          "en": "Cake, pudding, roast, sweets, wine."
+        },
+        "celebrations": {
+          "bn": "গির্জার উপাসনা, পরিবার সমাবেশ, উপহার বিনিময়, ক্যারল গাওয়া, আতশবাজি।",
+          "en": "Church services, family gatherings, exchanging gifts, singing carols, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "পার্ক স্ট্রিটে বিশেষ সাজসজ্জা, বিভিন্ন অঞ্চলে বিশেষ রীতি।",
+          "en": "Special decorations on Park Street, special traditions in different regions."
+        },
+        "duration": "1 day",
+        "monthBn": "ডিসেম্বর",
+        "monthEn": "December"
+      },
       "dates": {
         "2020": { "month": 12, "day": 25 },
         "2021": { "month": 12, "day": 25 },
@@ -144,6 +329,43 @@
       "icon": "independence-day.svg",
       "color": "#FF9933",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "স্বাধীনতা দিবস ১৯৪৭ সালের ১৫ আগস্ট ব্রিটিশ শাসন থেকে ভারতের স্বাধীনতা স্মরণ করে। এটি সারা দেশে দেশপ্রেমিক উত্সাহের সাথে উদযাপিত একটি জাতীয় ছুটির দিন।",
+          "en": "Independence Day commemorates India's independence from British rule on August 15, 1947. It is a national holiday celebrated with patriotic fervor across the country."
+        },
+        "significance": {
+          "bn": "এই দিনটি প্রায় ২০০ বছরের ব্রিটিশ ঔপনিবেশিক শাসনের অবসান এবং ভারতের একটি সার্বভৌম জাতি হিসাবে জন্ম চিহ্নিত করে। এটি স্বাধীনতা যোদ্ধাদের আত্মত্যাগ সম্মান করে।",
+          "en": "The day marks the end of nearly 200 years of British colonial rule and the birth of India as a sovereign nation. It honors the sacrifices of freedom fighters."
+        },
+        "traditions": {
+          "bn": "প্রধানমন্ত্রী লাল কেল্লায় জাতীয় পতাকা উত্তোলন করেন এবং জাতির উদ্দেশ্যে ভাষণ দেন। মানুষ ঘুড়ি ওড়ে, দেশপ্রেমিক চলচ্চিত্র দেখে, সাংস্কৃতিক অনুষ্ঠানে অংশ নেয় এবং জাতীয় সংগীত গায়। স্কুল এবং অফিসগুলি বিশেষ অনুষ্ঠান আযোজন করে।",
+          "en": "The Prime Minister hoists the national flag at Red Fort and addresses the nation. People fly kites, watch patriotic films, attend cultural programs, and sing the national anthem. Schools and offices organize special events."
+        },
+        "history": {
+          "bn": "ভারত ১৯৪৭ সালের ১৫ আগস্ট ব্রিটিশ শাসন থেকে স্বাধীন হয়।",
+          "en": "India gained independence from British rule on August 15, 1947."
+        },
+        "rituals": {
+          "bn": "পতাকা উত্তোলন, জাতীয় সংগীত, দেশপ্রেমিক অনুষ্ঠান।",
+          "en": "Flag hoisting, national anthem, patriotic events."
+        },
+        "food": {
+          "bn": "ঐতিহ্যবাহী ভারতীয় খাবার, মিষ্টি।",
+          "en": "Traditional Indian food, sweets."
+        },
+        "celebrations": {
+          "bn": "পতাকা উত্তোলন, ঘুড়ি ওড়া, সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Flag hoisting, kite flying, cultural programs."
+        },
+        "regionalVariations": {
+          "bn": "লাল কেল্লায় বিশেষ অনুষ্ঠান, বিভিন্ন রাজ্যে বিশেষ রীতি।",
+          "en": "Special events at Red Fort, special traditions in different states."
+        },
+        "duration": "1 day",
+        "monthBn": "আগস্ট",
+        "monthEn": "August"
+      },
       "dates": {
         "2020": { "month": 3, "day": 26 },
         "2021": { "month": 3, "day": 26 },
@@ -171,6 +393,43 @@
       "icon": "victory-day.svg",
       "color": "#FF5722",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "বিজয় দিবস ১৯৭১ সালের মুক্তিযুদ্ধে পাকিস্তানের বিরুদ্ধে বাংলাদেশের বিজয় স্মরণ করে, যা বাংলাদেশের একটি সার্বভৌম জাতি হিসাবে স্বাধীনতার দিকে নিয়ে যায়।",
+          "en": "Victory Day commemorates Bangladesh's victory over Pakistan in the 1971 Liberation War, leading to the independence of Bangladesh as a sovereign nation."
+        },
+        "significance": {
+          "bn": "এই দিনটি নয় মাসের সংগ্রামের সমাপ্তি এবং বাংলাদেশের জন্ম চিহ্নিত করে। এটি স্বাধীনতা যোদ্ধা এবং শহীদদের আত্মত্যাগ সম্মান করে যারা স্বাধীনতার জন্য তাদের জীবন দিয়েছেন।",
+          "en": "The day marks the end of nine months of struggle and the birth of Bangladesh. It honors the sacrifices of freedom fighters and martyrs who gave their lives for independence."
+        },
+        "traditions": {
+          "bn": "জাতীয় পতাকা অর্ধনমিতে উত্তোলিত হয়, মানুষ জাতীয় শহীদ স্মৃতিসৌধে শ্রদ্ধা জানায়, কুচকাওয়াজ অনুষ্ঠিত হয় এবং সাংস্কৃতিক অনুষ্ঠান আযোজিত হয়। স্কুল এবং অফিসগুলি বিশেষ অনুষ্ঠান পালন করে।",
+          "en": "The national flag is hoisted at half-mast, people pay tribute at the National Martyrs' Memorial, parades are held, and cultural programs are organized. Schools and offices observe special ceremonies."
+        },
+        "history": {
+          "bn": "বাংলাদেশ ১৯৭১ সালের ১৬ ডিসেম্বর স্বাধীনতা অর্জন করে।",
+          "en": "Bangladesh gained independence on December 16, 1971."
+        },
+        "rituals": {
+          "bn": "পতাকা উত্তোলন, শ্রদ্ধা জানানো, কুচকাওয়াজ।",
+          "en": "Flag hoisting, paying tributes, parades."
+        },
+        "food": {
+          "bn": "ঐতিহ্যবাহী বাংলাদেশি খাবার।",
+          "en": "Traditional Bangladeshi food."
+        },
+        "celebrations": {
+          "bn": "সাংস্কৃতিক অনুষ্ঠান, কুচকাওয়াজ, সঙ্গীত।",
+          "en": "Cultural programs, parades, music."
+        },
+        "regionalVariations": {
+          "bn": "জাতীয় শহীদ স্মৃতিসৌধে বিশেষ অনুষ্ঠান, বিভিন্ন জেলায় বিশেষ রীতি।",
+          "en": "Special events at National Martyrs' Memorial, special traditions in different districts."
+        },
+        "duration": "1 day",
+        "monthBn": "ডিসেম্বর",
+        "monthEn": "December"
+      },
       "dates": {
         "2020": { "month": 12, "day": 16 },
         "2021": { "month": 12, "day": 16 },
@@ -198,6 +457,43 @@
       "icon": "eid-ul-fitr.svg",
       "color": "#00BCD4",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "ঈদুল ফিতর, 'রোজা ভাঙার উৎসব' নামেও পরিচিত, রমজানের সমাপ্তি চিহ্নিত করে, যা ইসলামের পবিত্র রোজার মাস। এটি কৃতজ্ঞতা এবং সম্প্রদায়ের একটি আনন্দময় উদযাপন।",
+          "en": "Eid ul Fitr, also known as the 'Festival of Breaking the Fast', marks the end of Ramadan, the Islamic holy month of fasting. It is a joyous celebration of gratitude and community."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি রমজানের সমাপ্তি এবং রোজা, প্রার্থনা এবং দানের মাধ্যমে মুসলমানদের আধ্যাত্মিক উন্নতি উদযাপন করে। এটি কৃতজ্ঞতা, ক্ষমা এবং সম্প্রদায়ের বন্ধনের উপর জোর দেয়।",
+          "en": "The festival celebrates the completion of Ramadan and Muslims' spiritual growth through fasting, prayer, and charity. It emphasizes gratitude, forgiveness, and community bonds."
+        },
+        "traditions": {
+          "bn": "মানুষ নতুন কাপড় পরে, মসজিদে বিশেষ ঈদের নামাজে অংশ নেয়, জাকাত (দান) দেয়, পরিবার এবং বন্ধুদের সাথে দেখা করে, এবং সেওয়াইয়ান এবং বিরিয়ানির মতো বিশেষ খাবার ভাগ করে। শিশুরা ঈদি (উপহার) পায়।",
+          "en": "People wear new clothes, attend special Eid prayers at mosques, give Zakat (charity), visit family and friends, and share special dishes like Sewaiyan and Biryani. Children receive Eidi (gifts)."
+        },
+        "history": {
+          "bn": "ঈদুল ফিতর ইসলামের প্রথম দিন থেকে উদযাপিত হয়ে আসছে। এটি রমজানের সফল সমাপ্তি উদযাপন করে।",
+          "en": "Eid ul Fitr has been celebrated since the early days of Islam. It marks the successful completion of Ramadan."
+        },
+        "rituals": {
+          "bn": "ঈদের নামাজ, জাকাত, ঈদগাহে নামাজ, পরিবার ও বন্ধুদের সাথে দেখা করা, মিষ্টি বিতরণ।",
+          "en": "Eid prayers, Zakat, prayers at Eidgah, visiting family and friends, distributing sweets."
+        },
+        "food": {
+          "bn": "সেওয়াইয়ান, বিরিয়ানি, কাবাব, মিষ্টি, ফল।",
+          "en": "Sewaiyan, Biryani, Kebabs, sweets, fruits."
+        },
+        "celebrations": {
+          "bn": "ঈদগাহে নামাজ, পরিবার সমাবেশ, নতুন কাপড়, উপহার বিনিময়, মিষ্টি বিতরণ।",
+          "en": "Prayers at Eidgah, family gatherings, new clothes, exchanging gifts, distributing sweets."
+        },
+        "regionalVariations": {
+          "bn": "বাংলাদেশে বিশেষ ঐতিহ্যবাহী খাবার, ভারতে বিভিন্ন সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Special traditional foods in Bangladesh, various cultural events in India."
+        },
+        "duration": "1-3 days",
+        "monthBn": "শাওয়াল/রমজান",
+        "monthEn": "Shawwal/Ramadan"
+      },
       "dates": {
         "2020": { "month": 5, "day": 24 },
         "2021": { "month": 5, "day": 13 },
@@ -225,6 +521,43 @@
       "icon": "eid-ul-adha.svg",
       "color": "#795548",
       "isPublicHoliday": true,
+      "details": {
+        "longDescription": {
+          "bn": "ঈদুল আজহা, 'কুরবানির উৎসব', নবী ইব্রাহিমের আল্লাহর আনুগত্যে তার পুত্রকে কুরবানি করার ইচ্ছা স্মরণ করে। এটি সবচেয়ে গুরুত্বপূর্ণ ইসলামিক উৎসব।",
+          "en": "Eid ul Adha, the 'Festival of Sacrifice', commemorates Prophet Ibrahim's willingness to sacrifice his son as an act of obedience to Allah. It is the most important Islamic festival."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি নবী ইব্রাহিমের ভক্তি এবং বিশ্বাস সম্মান করে। এটি কুরবানি, দান এবং দরিদ্রদের সাথে ভাগ করে নেওয়ার উপর জোর দেয়। এটি হজ্ব তীর্থযাত্রার সমাপ্তি চিহ্নিত করে।",
+          "en": "The festival honors the devotion and faith of Prophet Ibrahim. It emphasizes sacrifice, charity, and sharing with the less fortunate. It marks the culmination of Hajj pilgrimage."
+        },
+        "traditions": {
+          "bn": "মুসলমানরা পশু কুরবানি (কুরবানি) করে, মাংস তিন ভাগে ভাগ করে (পরিবার, বন্ধু, দরিদ্র), বিশেষ প্রার্থনায় অংশ নেয়, নতুন কাপড় পরে এবং পরিবার দেখতে যায়। বিশেষ খাবার প্রস্তুত করা হয়।",
+          "en": "Muslims perform animal sacrifice (Qurbani), divide the meat into three parts (family, friends, poor), attend special prayers, wear new clothes, and visit family. Special dishes are prepared."
+        },
+        "history": {
+          "bn": "ঈদুল আজহা ইসলামের প্রথম দিন থেকে উদযাপিত হয়ে আসছে। এটি হজ্বের সাথে সম্পর্কিত।",
+          "en": "Eid ul Adha has been celebrated since the early days of Islam. It is associated with the Hajj pilgrimage."
+        },
+        "rituals": {
+          "bn": "কুরবানি, ঈদের নামাজ, পরিবার ও বন্ধুদের সাথে দেখা করা, মাংস বিতরণ।",
+          "en": "Qurbani (sacrifice), Eid prayers, visiting family and friends, distributing meat."
+        },
+        "food": {
+          "bn": "গরুর মাংস, ভুনা খাবার, কাবাব, বিরিয়ানি, মিষ্টি।",
+          "en": "Beef, roasted dishes, Kebabs, Biryani, sweets."
+        },
+        "celebrations": {
+          "bn": "ঈদের নামাজ, পরিবার সমাবেশ, নতুন কাপড়, উপহার বিনিময়।",
+          "en": "Eid prayers, family gatherings, new clothes, exchanging gifts."
+        },
+        "regionalVariations": {
+          "bn": "বাংলাদেশে বিশেষ কুরবানি রীতি, ভারতে বিভিন্ন সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Special Qurbani rituals in Bangladesh, various cultural events in India."
+        },
+        "duration": "2-4 days",
+        "monthBn": "জিলহজ",
+        "monthEn": "Dhul Hijjah"
+      },
       "dates": {
         "2020": { "month": 7, "day": 31 },
         "2021": { "month": 7, "day": 20 },
@@ -252,6 +585,43 @@
       "icon": "saraswati-puja.svg",
       "color": "#FFEB3B",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "সরস্বতী পূজা দেবী সরস্বতীকে উৎসর্গ করা হয়, যিনি হিন্দু দেবী জ্ঞান, সঙ্গীত, শিল্প, জ্ঞান এবং শিক্ষার দেবী। এটি বসন্ত পঞ্চমীতে উদযাপিত হয়, যা বসন্তের আগমন চিহ্নিত করে।",
+          "en": "Saraswati Puja is dedicated to Goddess Saraswati, the Hindu goddess of knowledge, music, art, wisdom, and learning. It is celebrated on Vasant Panchami, marking the arrival of spring."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি দেবী সরস্বতীকে সম্মান করে, যিনি জ্ঞান, শিক্ষা এবং শিল্পকলা প্রতিনিধিত্ব করেন। শিক্ষার্থীরা শিক্ষাগত সাফল্যের জন্য প্রার্থনা করে এবং শিল্পীরা সৃজনশীল কাজের জন্য আশীর্বাদ চান।",
+          "en": "The festival honors Goddess Saraswati, who represents wisdom, learning, and the arts. Students pray for academic success, and artists seek blessings for creative endeavors."
+        },
+        "traditions": {
+          "bn": "মানুষ হলুদ কাপড় পরে, বই এবং যন্ত্রপাতি পূজা করে, মন্দিরে যায় এবং সাংস্কৃতিক অনুষ্ঠানে অংশ নেয়। স্কুল এবং শিক্ষা প্রতিষ্ঠানগুলি বিশেষ প্রার্থনা এবং প্রতিযোগিতা আযোজন করে।",
+          "en": "People wear yellow clothes, worship books and instruments, visit temples, and participate in cultural programs. Schools and educational institutions organize special prayers and competitions."
+        },
+        "history": {
+          "bn": "সরস্বতী পূজা প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Saraswati Puja has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "পুষ্প অর্পণ, পূজা, হলুদ কাপড় পরা।",
+          "en": "Flower offerings, puja, wearing yellow clothes."
+        },
+        "food": {
+          "bn": "হলুদ মিষ্টি, খিচুড়ি, পায়েস।",
+          "en": "Yellow sweets, khichuri, payesh."
+        },
+        "celebrations": {
+          "bn": "সাংস্কৃতিক অনুষ্ঠান, সঙ্গীত, নৃত্য।",
+          "en": "Cultural programs, music, dance."
+        },
+        "regionalVariations": {
+          "bn": "স্কুল ও কলেজে বিশেষ পূজা, বিভিন্ন অঞ্চলে বিশেষ রীতি।",
+          "en": "Special puja in schools and colleges, special traditions in different regions."
+        },
+        "duration": "1 day",
+        "monthBn": "মাঘ",
+        "monthEn": "Magh"
+      },
       "dates": {
         "2020": { "month": 1, "day": 29 },
         "2021": { "month": 2, "day": 16 },
@@ -279,6 +649,43 @@
       "icon": "holi.svg",
       "color": "#FF4081",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "হোলি, 'রঙের উৎসব', বসন্তের আগমন এবং মঙ্গলের উপর মন্দের বিজয় উদযাপন করে। এটি রঙিন গুঁড় এবং পানি দিয়ে আনন্দময় উদযাপনের জন্য পরিচিত।",
+          "en": "Holi, the 'Festival of Colors', celebrates the arrival of spring and the victory of good over evil. It is known for joyous celebrations with colored powders and water."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি বসন্তের শুরু চিহ্নিত করে এবং রাধা এবং কৃষ্ণের ঐশ্বরিক ভালোবাসা উদযাপন করে। এটি ক্ষমা, নতুন সূচনা এবং সামাজিক বাধা ভাঙার প্রতীক।",
+          "en": "The festival marks the beginning of spring and celebrates the divine love of Radha and Krishna. It symbolizes forgiveness, new beginnings, and the breaking down of social barriers."
+        },
+        "traditions": {
+          "bn": "মানুষ রঙিন গুঁড় (গুলাল) এবং পানি দিয়ে খেলে, সঙ্গীতে নাচে, গুজিয়ার মতো মিষ্টি খায় এবং পরিবার ও বন্ধুদের সাথে দেখা করে। আগের রাতে অগ্নি জ্বালানো হয় (হোলিকা দহন)।",
+          "en": "People play with colored powder (gulal) and water, dance to music, eat sweets like Gujiya, and visit family and friends. Bonfires are lit the night before (Holika Dahan)."
+        },
+        "history": {
+          "bn": "হোলি প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে। এটি হোলিকা ও প্রহ্লাদের কিংবদন্তি স্মরণ করে।",
+          "en": "Holi has been celebrated since ancient India. It commemorates the legend of Holika and Prahlad."
+        },
+        "rituals": {
+          "bn": "হোলিকা দহন, রঙের খেলা, মিষ্টি বিতরণ।",
+          "en": "Holika Dahan, playing with colors, distributing sweets."
+        },
+        "food": {
+          "bn": "গুজিয়া, মিষ্টি, ঠান্ডাই।",
+          "en": "Gujiya, sweets, thandai."
+        },
+        "celebrations": {
+          "bn": "রঙের খেলা, নাচ, গান, আতশবাজি।",
+          "en": "Playing with colors, dance, music, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "উত্তর ভারতে লাঠি হোলি, দক্ষিণ ভারতে বিভিন্ন রীতি।",
+          "en": "Lathmar Holi in North India, various traditions in South India."
+        },
+        "duration": "2 days",
+        "monthBn": "ফাল্গুন",
+        "monthEn": "Phalguna"
+      },
       "dates": {
         "2020": { "month": 3, "day": 10 },
         "2021": { "month": 3, "day": 29 },
@@ -306,6 +713,43 @@
       "icon": "rakhi.svg",
       "color": "#9C27B0",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "রাখি ভাই-বোনের বন্ধন উদযাপন করে। বোনেরা তাদের ভাইদের কব্জিতে একটি পবিত্র সুতা (রাখি) বাঁধে, যারা বিনিময়ে তাদের রক্ষা করার প্রতিশ্রুতি দেয়।",
+          "en": "Raksha Bandhan celebrates the bond between brothers and sisters. Sisters tie a sacred thread (rakhi) on their brothers' wrists, who in turn promise to protect them."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি ভাই-বোনের ভালোবাসা এবং সুরক্ষার অনন্ত বন্ধনের প্রতীক। এটি ভাইদের তাদের বোনদের রক্ষা করার প্রতিশ্রুতি এবং বোনদের তাদের ভাইদের কল্যাণের জন্য প্রার্থনার প্রতিনিধিত্ব করে।",
+          "en": "The festival symbolizes the eternal bond of love and protection between siblings. It represents the commitment of brothers to protect their sisters and the sisters' prayers for their brothers' well-being."
+        },
+        "traditions": {
+          "bn": "বোনেরা রাখি, মিষ্টি এবং দিয়া দিয়ে থালি প্রস্তুত করে। তারা আরতি করে, ভাইদের কব্জিতে রাখি বাঁধে এবং তাদের মিষ্টি খাওয়ায়। ভাইরা উপহার দেয় এবং সুরক্ষার প্রতিশ্রুতি দেয়। পরিবারগুলি উদযাপনের জন্য একত্রিত হয়।",
+          "en": "Sisters prepare thalis with rakhi, sweets, and diya. They perform aarti, tie rakhi on brothers' wrists, and feed them sweets. Brothers give gifts and promise protection. Families gather for celebrations."
+        },
+        "history": {
+          "bn": "রাখি প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Raksha Bandhan has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "রাখি বাঁধা, আরতি, মিষ্টি বিতরণ, উপহার বিনিময়।",
+          "en": "Tying rakhi, aarti, distributing sweets, exchanging gifts."
+        },
+        "food": {
+          "bn": "মিষ্টি, ফল, দই।",
+          "en": "Sweets, fruits, curd."
+        },
+        "celebrations": {
+          "bn": "পরিবার সমাবেশ, উপহার বিনিময়, মিষ্টি খাওয়া।",
+          "en": "Family gatherings, exchanging gifts, eating sweets."
+        },
+        "regionalVariations": {
+          "bn": "উত্তর ভারতে বিশেষ রীতি, দক্ষিণ ভারতে বিভিন্ন সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Special traditions in North India, various cultural events in South India."
+        },
+        "duration": "1 day",
+        "monthBn": "শ্রাবণ",
+        "monthEn": "Shravana"
+      },
       "dates": {
         "2020": { "month": 8, "day": 3 },
         "2021": { "month": 8, "day": 22 },
@@ -333,6 +777,43 @@
       "icon": "navratri.svg",
       "color": "#E91E63",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "নবরাত্রি একটি নয়-রাতের হিন্দু উৎসব যা দেবী দুর্গার নয় রূপকে উৎসর্গ করা হয়। এটি উপবাস, প্রার্থনা এবং নৃত্য পরিবেশনের সাথে উদযাপিত হয়।",
+          "en": "Navratri is a nine-night Hindu festival dedicated to Goddess Durga in her nine forms. It is celebrated with fasting, prayers, and dance performances."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি দেবী দুর্গার নয় রূপ (নবদুর্গা) পূজা করে। এটি মঙ্গলের উপর মন্দের বিজয় এবং ঐশ্বরিক নারী শক্তির ক্ষমতা প্রতিনিধিত্ব করে। প্রতিটি দিন দেবীর একটি ভিন্ন রূপের জন্য উৎসর্গ করা হয়।",
+          "en": "The festival worships the nine forms of Goddess Durga (Navadurga). It represents the victory of good over evil and the power of divine feminine energy. Each day is dedicated to a different form of the Goddess."
+        },
+        "traditions": {
+          "bn": "মানুষ উপবাস পালন করে, পূজা করে এবং গরবা এবং দান্ডিয় রাস নাচে অংশ নেয়। মন্দিরগুলি সাজানো হয় এবং ভক্তরা দুর্গা সপ্তশতী পাঠ করে। উৎসবটি দশেরা দিয়ে শেষ হয়।",
+          "en": "People observe fasts, perform puja, and participate in Garba and Dandiya Raas dances. Temples are decorated, and devotees read the Durga Saptashati. The festival ends with Dussehra."
+        },
+        "history": {
+          "bn": "নবরাত্রি প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Navratri has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "উপবাস, পূজা, গরবা নাচ, দান্ডিয় নাচ।",
+          "en": "Fasting, puja, Garba dance, Dandiya dance."
+        },
+        "food": {
+          "bn": "ফল, দুধ, সাবুদানা খাবার।",
+          "en": "Fruits, milk, sattvic food."
+        },
+        "celebrations": {
+          "bn": "গরবা, দান্ডিয় রাস, পূজা, আতশবাজি।",
+          "en": "Garba, Dandiya Raas, puja, fireworks."
+        },
+        "regionalVariations": {
+          "bn": "গুজরাটে বিশেষ গরবা, পশ্চিম ভারতে বিভিন্ন রীতি।",
+          "en": "Special Garba in Gujarat, various traditions in West India."
+        },
+        "duration": "9 days",
+        "monthBn": "আশ্বিন",
+        "monthEn": "Ashwin"
+      },
       "dates": {
         "2020": { "month": 10, "day": 17 },
         "2021": { "month": 10, "day": 7 },
@@ -360,6 +841,43 @@
       "icon": "janmashtami.svg",
       "color": "#673AB7",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "জন্মাষ্টমী ভগবান কৃষ্ণের জন্ম উদযাপন করে, যিনি ভগবান বিষ্ণুর অষ্টম অবতার। এটি সবচেয়ে গুরুত্বপূর্ণ হিন্দু উৎসবগুলির মধ্যে একটি, যা মহান ভক্তি এবং উত্সাহের সাথে উদযাপিত হয়।",
+          "en": "Janmashtami celebrates the birth of Lord Krishna, the eighth avatar of Lord Vishnu. It is one of the most important Hindu festivals, celebrated with great devotion and enthusiasm."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি ভগবান কৃষ্ণের জন্ম চিহ্নিত করে, যিনি ভগবদ গীতায় তাঁর শিক্ষার জন্য শ্রদ্ধেয়। এটি মঙ্গলের উপর মন্দের বিজয় এবং কৃষ্ণ এবং তাঁর ভক্তদের মধ্যে ঐশ্বরিক ভালোবাসার প্রতীক।",
+          "en": "The festival marks the birth of Lord Krishna, who is revered for his teachings in the Bhagavad Gita. It symbolizes the victory of good over evil and the divine love between Krishna and his devotees."
+        },
+        "traditions": {
+          "bn": "মানুষ মধ্যরাত পর্যন্ত উপবাস করে (কৃষ্ণের জন্মের সময়), মন্দিরে যায়, ভক্তিমূলক গান গায় এবং কৃষ্ণের জীবনের দৃশ্যাবলী প্রদর্শন করে (রাস লীলা)। দহি হান্ডি প্রতিযোগিতা অনুষ্ঠিত হয় যেখানে দলগুলি মাটির পিরামিড তৈরি করে পাত্র ভাঙে।",
+          "en": "People fast until midnight (Krishna's birth time), visit temples, sing devotional songs, and enact scenes from Krishna's life (Raas Leela). Dahi Handi competitions are held where teams form pyramids to break pots."
+        },
+        "history": {
+          "bn": "জন্মাষ্টমী প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Janmashtami has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "উপবাস, মন্দির পূজা, ভজন, দহি হান্ডি।",
+          "en": "Fasting, temple puja, worship, Dahi Handi."
+        },
+        "food": {
+          "bn": "দই, মাখন, মিষ্টি, ফল।",
+          "en": "Curd, butter, sweets, fruits."
+        },
+        "celebrations": {
+          "bn": "মন্দির সাজানো, ভজন, রাস লীলা, দহি হান্ডি।",
+          "en": "Decorating temples, worship, Raas Leela, Dahi Handi."
+        },
+        "regionalVariations": {
+          "bn": "মথুরা ও বৃন্দাবনে বিশেষ উদযাপন, দক্ষিণ ভারতে বিভিন্ন রীতি।",
+          "en": "Special celebrations in Mathura and Vrindavan, various traditions in South India."
+        },
+        "duration": "1-2 days",
+        "monthBn": "ভাদ্র",
+        "monthEn": "Bhadrapada"
+      },
       "dates": {
         "2020": { "month": 8, "day": 11 },
         "2021": { "month": 8, "day": 30 },
@@ -387,6 +905,43 @@
       "icon": "basant-panchami.svg",
       "color": "#FF9800",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "বসন্ত পঞ্চমী বসন্তের আগমন চিহ্নিত করে এবং দেবী সরস্বতীকে উৎসর্গ করা হয়। এটি হলুদ রঙের সাথে উদযাপিত হয়, যা এই মৌসুমে ফোটা সরিষা ফুলের প্রতীক।",
+          "en": "Vasant Panchami marks the arrival of spring and is dedicated to Goddess Saraswati. It is celebrated with yellow colors, symbolizing the mustard flowers that bloom during this season."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি বসন্তের সূচনা উদযাপন করে এবং জ্ঞান ও জ্ঞানের দেবী দেবী সরস্বতীকে সম্মান করে। হলুদ সমৃদ্ধি, সুখ এবং নতুন সূচনা প্রতিনিধিত্ব করে।",
+          "en": "The festival celebrates the onset of spring and honors Goddess Saraswati, the goddess of knowledge and wisdom. Yellow represents prosperity, happiness, and new beginnings."
+        },
+        "traditions": {
+          "bn": "মানুষ হলুদ কাপড় পরে, দেবী সরস্বতীকে পূজা করে, ঘুড়ি ওড়ে এবং ঐতিহ্যবাহী খাবার উপভোগ করে। শিক্ষা প্রতিষ্ঠানগুলি বিশেষ প্রার্থনা এবং সাংস্কৃতিক অনুষ্ঠান আয়োজন করে।",
+          "en": "People wear yellow clothes, worship Goddess Saraswati, fly kites, and enjoy traditional food. Educational institutions organize special prayers and cultural programs."
+        },
+        "history": {
+          "bn": "বসন্ত পঞ্চমী প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Basant Panchami has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "সরস্বতী পূজা, হলুদ কাপড় পরা, ঘুড়ি ওড়া।",
+          "en": "Saraswati puja, wearing yellow clothes, flying kites."
+        },
+        "food": {
+          "bn": "হলুদ মিষ্টি, খিচুড়ি, সরিষা ভাত।",
+          "en": "Yellow sweets, khichuri, mustard rice."
+        },
+        "celebrations": {
+          "bn": "ঘুড়ি ওড়া, সাংস্কৃতিক অনুষ্ঠান, গান।",
+          "en": "Flying kites, cultural programs, music."
+        },
+        "regionalVariations": {
+          "bn": "পূর্ব ভারতে বিশেষ রীতি, পশ্চিম ভারতে বিভিন্ন সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Special traditions in East India, various cultural events in West India."
+        },
+        "duration": "1 day",
+        "monthBn": "মাঘ",
+        "monthEn": "Magh"
+      },
       "dates": {
         "2020": { "month": 1, "day": 30 },
         "2021": { "month": 2, "day": 16 },
@@ -414,6 +969,43 @@
       "icon": "makar-sankranti.svg",
       "color": "#FFC107",
       "isPublicHoliday": false,
+      "details": {
+        "longDescription": {
+          "bn": "মকর সংক্রান্তি সূর্যের মকর রাশিতে রূপান্তর চিহ্নিত করে। এটি একটি ফসল উৎসব যা ভারত জুড়ে বিভিন্ন নাম এবং ঐতিহ্যের সাথে উদযাপিত হয়।",
+          "en": "Makar Sankranti marks the transition of the Sun into Capricorn (Makar Rashi). It is a harvest festival celebrated across India with different names and traditions."
+        },
+        "significance": {
+          "bn": "এই উৎসবটি শীতের সমাপ্তি এবং দীর্ঘ দিনের শুরু উদযাপন করে। এটি সূর্য দেবতাকে উৎসর্গ করা হয় এবং ফসল মৌসুমের শুরু চিহ্নিত করে। এটি সমৃদ্ধি এবং নতুন সূচনার প্রতীক।",
+          "en": "The festival celebrates the end of winter and the beginning of longer days. It is dedicated to the Sun God and marks the beginning of the harvest season. It symbolizes prosperity and new beginnings."
+        },
+        "traditions": {
+          "bn": "মানুষ ঘুড়ি ওড়ে, নদীতে পবিত্র স্নান করে, তিল গুড় লাড্ডুর মতো ঐতিহ্যবাহী মিষ্টি প্রস্তুত করে এবং উপহার বিনিময় করে। বাংলায়, এটি পৌষ সংক্রান্তি হিসাবে বিশেষ খাবার এবং মেলার সাথে উদযাপিত হয়।",
+          "en": "People fly kites, take holy dips in rivers, prepare traditional sweets like til gud laddoo, and exchange gifts. In Bengal, it is celebrated as Poush Sankranti with special food and fairs."
+        },
+        "history": {
+          "bn": "মকর সংক্রান্তি প্রাচীন ভারত থেকে উদযাপিত হয়ে আসছে।",
+          "en": "Makar Sankranti has been celebrated since ancient India."
+        },
+        "rituals": {
+          "bn": "স্নান, ঘুড়ি ওড়া, তিল মিষ্টি তৈরি।",
+          "en": "Bathing, flying kites, making til sweets."
+        },
+        "food": {
+          "bn": "পিঠে, পায়েস, তিল গুড় লাড্ডু।",
+          "en": "Pitha, payesh, til gud laddoo."
+        },
+        "celebrations": {
+          "bn": "ঘুড়ি ওড়া, মেলা, সাংস্কৃতিক অনুষ্ঠান।",
+          "en": "Flying kites, fairs, cultural programs."
+        },
+        "regionalVariations": {
+          "bn": "বাংলায় পৌষ সংক্রান্তি, গুজরাটে উত্তরায়ণ, তামিলনাড়ুতে পোঙ্গল।",
+          "en": "Poush Sankranti in Bengal, Uttarayan in Gujarat, Pongal in Tamil Nadu."
+        },
+        "duration": "1 day",
+        "monthBn": "পৌষ",
+        "monthEn": "Paush"
+      },
       "dates": {
         "2020": { "month": 1, "day": 15 },
         "2021": { "month": 1, "day": 15 },

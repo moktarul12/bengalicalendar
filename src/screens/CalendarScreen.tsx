@@ -18,7 +18,9 @@ import CalendarTypeToggle from '../components/CalendarTypeToggle';
 import UpcomingFestivals from '../components/UpcomingFestivals';
 import DayDetailModal from '../components/DayDetailModal';
 import MonthYearPickerModal from '../components/MonthYearPickerModal';
+import FestivalDetailModal from '../components/FestivalDetailModal';
 import { CalendarDay } from '../types';
+import { Festival } from '../constants/festivals';
 
 interface CalendarScreenProps {
   onDaySelect?: (day: CalendarDay) => void;
@@ -34,6 +36,8 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isMonthYearPickerVisible, setIsMonthYearPickerVisible] = useState(false);
+  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
+  const [festivalModalVisible, setFestivalModalVisible] = useState(false);
 
   // Get Bengali date for current month
   const bengaliDate = gregorianToBengali(today.getDate(), currentMonth, currentYear);
@@ -103,6 +107,11 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
 
   const handleMonthYearPickerClose = useCallback(() => {
     setIsMonthYearPickerVisible(false);
+  }, []);
+
+  const handleFestivalPress = useCallback((festival: Festival) => {
+    setSelectedFestival(festival);
+    setFestivalModalVisible(true);
   }, []);
 
   return (
@@ -196,6 +205,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
             currentMonth={today.getMonth() + 1}
             currentDay={today.getDate()}
             currentYear={today.getFullYear()}
+            onFestivalPress={handleFestivalPress}
           />
         </View>
       </ScrollView>
@@ -214,6 +224,13 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
         currentYear={currentYear}
         onSelect={handleMonthYearSelect}
         onClose={handleMonthYearPickerClose}
+      />
+
+      {/* Festival Detail Modal */}
+      <FestivalDetailModal
+        festival={selectedFestival}
+        visible={festivalModalVisible}
+        onClose={() => setFestivalModalVisible(false)}
       />
     </SafeAreaView>
   );

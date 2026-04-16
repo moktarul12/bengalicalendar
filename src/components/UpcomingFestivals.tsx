@@ -3,8 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
-import { getUpcomingFestivals } from '../constants/festivals';
-import { Festival } from '../types';
+import { getUpcomingFestivals, Festival } from '../constants/festivals';
 import FestivalIcon from './FestivalIcon';
 
 interface UpcomingFestivalsProps {
