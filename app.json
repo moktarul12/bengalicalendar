@@ -47,7 +47,7 @@
         {
           "backgroundColor": "#E63946",
           "image": "./assets/splash-icon.png",
-          "imageWidth": 600,
+          "imageWidth": 800,
           "resizeMode": "cover",
           "statusBar": {
             "backgroundColor": "#E63946",
