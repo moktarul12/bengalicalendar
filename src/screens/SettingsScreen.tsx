@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: SPACING.lg,
-    paddingTop: 60,
+    paddingTop: 20,
     alignItems: 'center',
   },
   headerTitle: {

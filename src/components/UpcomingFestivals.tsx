@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 import { getUpcomingFestivals } from '../constants/festivals';
 import { Festival } from '../types';
+import FestivalIcon from './FestivalIcon';
 
 interface UpcomingFestivalsProps {
   currentMonth: number;
@@ -43,14 +44,7 @@ export default function UpcomingFestivals({
             onPress={() => onFestivalPress?.(festival)}
             activeOpacity={0.7}
           >
-            <LinearGradient
-              colors={[festival.color, festival.color + 'CC']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.festivalIconContainer}
-            >
-              <Text style={styles.festivalIcon}>{festival.icon}</Text>
-            </LinearGradient>
+            <FestivalIcon iconName={festival.icon} color={festival.color} size={48} marginRight={SPACING.md} />
             <View style={styles.festivalInfo}>
               <Text style={styles.festivalName} numberOfLines={1}>{festival.nameEn}</Text>
               <Text style={styles.festivalNameBn} numberOfLines={1}>{festival.nameBn}</Text>
@@ -106,17 +100,6 @@ const styles = StyleSheet.create({
     marginRight: SPACING.sm,
     minWidth: 200,
     ...SHADOWS.sm,
-  },
-  festivalIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: BORDER_RADIUS.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: SPACING.md,
-  },
-  festivalIcon: {
-    fontSize: 26,
   },
   festivalInfo: {
     flex: 1,

@@ -11,14 +11,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 import { FESTIVALS, getFestivalsByType, Festival } from '../constants/festivals';
+import FestivalIcon from '../components/FestivalIcon';
 
 type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 
 export default function FestivalsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const currentYear = new Date().getFullYear();
 
-  const years = Array.from({ length: 20 }, (_, i) => 2015 + i);
+  const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
 
   const getFilteredFestivals = (): Festival[] => {
     let filtered = FESTIVALS.filter((f) => f.year === selectedYear);
@@ -44,14 +46,7 @@ export default function FestivalsScreen() {
 
   const renderFestivalItem = ({ item }: { item: Festival }) => (
     <TouchableOpacity style={styles.festivalItem} activeOpacity={0.7}>
-      <LinearGradient
-        colors={[item.color, item.color + 'CC']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.festivalIconContainer}
-      >
-        <Text style={styles.festivalIcon}>{item.icon}</Text>
-      </LinearGradient>
+      <FestivalIcon iconName={item.icon} color={item.color} size={64} marginRight={SPACING.md} />
       <View style={styles.festivalInfo}>
         <Text style={styles.festivalNameEn} numberOfLines={1}>{item.nameEn}</Text>
         <Text style={styles.festivalNameBn} numberOfLines={1}>{item.nameBn}</Text>
@@ -79,16 +74,16 @@ export default function FestivalsScreen() {
         <View style={styles.yearSelector}>
           <TouchableOpacity
             style={styles.yearButton}
-            onPress={() => setSelectedYear(Math.max(2015, selectedYear - 1))}
-            disabled={selectedYear === 2015}
+            onPress={() => setSelectedYear(Math.max(currentYear - 5, selectedYear - 1))}
+            disabled={selectedYear === currentYear - 5}
           >
             <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
           </TouchableOpacity>
           <Text style={styles.yearText}>{selectedYear}</Text>
           <TouchableOpacity
             style={styles.yearButton}
-            onPress={() => setSelectedYear(Math.min(2034, selectedYear + 1))}
-            disabled={selectedYear === 2034}
+            onPress={() => setSelectedYear(Math.min(currentYear + 5, selectedYear + 1))}
+            disabled={selectedYear === currentYear + 5}
           >
             <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
           </TouchableOpacity>
@@ -151,7 +146,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: SPACING.lg,
-    paddingTop: 60,
+    paddingTop: 20,
     alignItems: 'center',
   },
   headerTitle: {
@@ -222,17 +217,6 @@ const styles = StyleSheet.create({
     marginVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.md,
     ...SHADOWS.sm,
-  },
-  festivalIconContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: BORDER_RADIUS.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: SPACING.md,
-  },
-  festivalIcon: {
-    fontSize: 28,
   },
   festivalInfo: {
     flex: 1,

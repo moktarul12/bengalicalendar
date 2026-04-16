@@ -12,7 +12,9 @@ import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/the
 import { TITHIS, NAKSHATRAS, toBengaliNumber } from '../constants/bengaliCalendar';
 
 export default function PanchangScreen() {
-  const [selectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const currentYear = new Date().getFullYear();
+  const selectedYear = selectedDate.getFullYear();
 
   // Simulated Panchang data
   const panchangData = {
@@ -92,6 +94,31 @@ export default function PanchangScreen() {
         <Ionicons name="moon" size={48} color="#FFD700" />
         <Text style={styles.headerTitle}>Panchang</Text>
         <Text style={styles.headerSubtitle}>পঞ্জিকা</Text>
+        <View style={styles.yearSelector}>
+          <TouchableOpacity
+            style={styles.yearButton}
+            onPress={() => {
+              const newDate = new Date(selectedDate);
+              newDate.setFullYear(Math.max(currentYear - 5, selectedYear - 1));
+              setSelectedDate(newDate);
+            }}
+            disabled={selectedYear === currentYear - 5}
+          >
+            <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+          <Text style={styles.yearText}>{selectedYear}</Text>
+          <TouchableOpacity
+            style={styles.yearButton}
+            onPress={() => {
+              const newDate = new Date(selectedDate);
+              newDate.setFullYear(Math.min(currentYear + 5, selectedYear + 1));
+              setSelectedDate(newDate);
+            }}
+            disabled={selectedYear === currentYear + 5}
+          >
+            <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
         <View style={styles.dateBadge}>
           <Ionicons name="calendar" size={16} color="#FFFFFF" />
           <Text style={styles.dateText}>
@@ -213,7 +240,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: SPACING.lg,
-    paddingTop: 60,
+    paddingTop: 40,
     alignItems: 'center',
   },
   headerTitle: {
@@ -226,6 +253,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgba(255, 255, 255, 0.9)',
     marginTop: 4,
+  },
+  yearSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SPACING.md,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: BORDER_RADIUS.md,
+    paddingHorizontal: SPACING.sm,
+  },
+  yearButton: {
+    padding: SPACING.sm,
+  },
+  yearText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginHorizontal: SPACING.md,
   },
   dateBadge: {
     flexDirection: 'row',
