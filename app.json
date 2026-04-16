@@ -27,6 +27,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#E63946"
       },
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#E63946"
+      },
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.INTERNET",
@@ -48,7 +53,10 @@
           "backgroundColor": "#E63946",
           "image": "./assets/splash-icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain"
+          "resizeMode": "contain",
+          "android": {
+            "backgroundColor": "#E63946"
+          }
         }
       ],
       [
@@ -66,7 +74,7 @@
           "color": "#E63946",
           "sounds": []
         }
-      ],
+      ]
     ],
     "extra": {
       "eas": {
