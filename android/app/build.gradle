@@ -87,7 +87,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.bengalienglishcalendar'
+    namespace 'com.dromominds.bengalienglishcalendar'
     
     signingConfigs {
         release {
@@ -98,7 +98,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId 'com.bengalienglishcalendar'
+        applicationId 'com.dromominds.bengalienglishcalendar'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
