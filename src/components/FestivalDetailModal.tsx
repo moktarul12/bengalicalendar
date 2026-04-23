@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal, ScrollView, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, BORDER_RADIUS, SPACING, SHADOWS } from '../constants/theme';
+import { COLORS, BORDER_RADIUS, SPACING, SHADOWS, FONTS } from '../constants/theme';
 import { Festival } from '../constants/festivals';
 import FestivalIcon from './FestivalIcon';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -15,7 +14,7 @@ interface FestivalDetailModalProps {
 
 export default function FestivalDetailModal({ festival, visible, onClose }: FestivalDetailModalProps) {
   const { language, toggleLanguage } = useLanguage();
-  
+
   if (!festival) return null;
 
   const getText = (text: string | { bn: string; en: string } | undefined) => {
@@ -33,35 +32,29 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          {/* Header with gradient background */}
-          <LinearGradient
-            colors={[festival.color, festival.color + 'CC']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.header}
-          >
+          {/* Header - Flat design */}
+          <View style={[styles.header, { borderBottomColor: festival.color }]}>
             <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-              <Ionicons name="close" size={28} color="#FFFFFF" />
+              <Ionicons name="close" size={24} color={COLORS.text} />
             </TouchableOpacity>
 
-            {/* Language Toggle Button */}
             <TouchableOpacity style={styles.languageButton} onPress={toggleLanguage}>
-              <Ionicons name="language" size={24} color="#FFFFFF" />
-              <Text style={styles.languageButtonText}>{language === 'bn' ? 'BN' : 'EN'}</Text>
+              <Ionicons name="language" size={18} color={COLORS.primary} />
+              <Text style={styles.languageButtonText}>{language === 'bn' ? 'EN' : 'BN'}</Text>
             </TouchableOpacity>
-            
+
             <View style={styles.headerContent}>
-              <FestivalIcon iconPath={festival.icon} color={festival.color} size={80} marginRight={SPACING.md} />
+              <FestivalIcon iconPath={festival.icon} color={festival.color} size={56} marginRight={SPACING.md} />
               <View style={styles.headerText}>
-                <Text style={styles.festivalNameEn}>{language === 'bn' ? festival.nameBn : festival.nameEn}</Text>
-                <Text style={styles.festivalNameBn}>{language === 'bn' ? festival.nameEn : festival.nameBn}</Text>
+                <Text style={styles.festivalNameBn}>{festival.nameBn}</Text>
+                <Text style={styles.festivalNameEn}>{festival.nameEn}</Text>
                 <View style={styles.badgeContainer}>
-                  <View style={[styles.badge, { backgroundColor: 'rgba(255, 255, 255, 0.3)' }]}>
-                    <Text style={styles.badgeText}>{festival.type.toUpperCase()}</Text>
+                  <View style={[styles.badge, { backgroundColor: festival.color + '20' }]}>
+                    <Text style={[styles.badgeText, { color: festival.color }]}>{festival.type.toUpperCase()}</Text>
                   </View>
                   {festival.isPublicHoliday && (
-                    <View style={[styles.badge, { backgroundColor: '#FFD700' }]}>
-                      <Text style={[styles.badgeText, { color: COLORS.text }]}>
+                    <View style={[styles.badge, { backgroundColor: COLORS.secondarySoft }]}>
+                      <Text style={[styles.badgeText, { color: COLORS.secondaryDark }]}>
                         {language === 'bn' ? 'ছুটি' : 'HOLIDAY'}
                       </Text>
                     </View>
@@ -69,17 +62,17 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
                 </View>
               </View>
             </View>
-          </LinearGradient>
+          </View>
 
           {/* Scrollable content */}
           <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
             {/* Date Section */}
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="calendar" size={24} color={festival.color} />
+                <Ionicons name="calendar-outline" size={20} color={festival.color} />
                 <Text style={styles.sectionTitle}>{language === 'bn' ? 'তারিখ' : 'Date'}</Text>
               </View>
-              <View style={styles.sectionContent}>
+              <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                 <Text style={styles.dateText}>{festival.day}/{festival.month}/{festival.year}</Text>
                 <Text style={styles.subText}>
                   {language === 'bn' ? festival.details?.monthBn : festival.details?.monthEn}
@@ -93,10 +86,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {/* Description Section */}
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="document-text" size={24} color={festival.color} />
+                <Ionicons name="document-text-outline" size={20} color={festival.color} />
                 <Text style={styles.sectionTitle}>{language === 'bn' ? 'সম্পর্কে' : 'About'}</Text>
               </View>
-              <View style={styles.sectionContent}>
+              <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                 <Text style={styles.descriptionText}>{getText(festival.details?.longDescription || festival.description)}</Text>
               </View>
             </View>
@@ -105,10 +98,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {festival.details?.history && (
               <View style={styles.section}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="book" size={24} color={festival.color} />
+                  <Ionicons name="book-outline" size={20} color={festival.color} />
                   <Text style={styles.sectionTitle}>{language === 'bn' ? 'ইতিহাস' : 'History'}</Text>
                 </View>
-                <View style={styles.sectionContent}>
+                <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                   <Text style={styles.contentText}>{getText(festival.details.history)}</Text>
                 </View>
               </View>
@@ -117,10 +110,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {/* Significance Section */}
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="star" size={24} color={festival.color} />
+                <Ionicons name="star-outline" size={20} color={festival.color} />
                 <Text style={styles.sectionTitle}>{language === 'bn' ? 'তাৎপর্য' : 'Significance'}</Text>
               </View>
-              <View style={styles.sectionContent}>
+              <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                 <Text style={styles.contentText}>{getText(festival.details?.significance)}</Text>
               </View>
             </View>
@@ -129,10 +122,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {festival.details?.rituals && (
               <View style={styles.section}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="flame" size={24} color={festival.color} />
+                  <Ionicons name="flame-outline" size={20} color={festival.color} />
                   <Text style={styles.sectionTitle}>{language === 'bn' ? 'রীতি' : 'Rituals'}</Text>
                 </View>
-                <View style={styles.sectionContent}>
+                <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                   <Text style={styles.contentText}>{getText(festival.details.rituals)}</Text>
                 </View>
               </View>
@@ -141,10 +134,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {/* Traditions Section */}
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="people" size={24} color={festival.color} />
-                <Text style={styles.sectionTitle}>{language === 'bn' ? 'প্রথা ও রীতি' : 'Traditions & Customs'}</Text>
+                <Ionicons name="people-outline" size={20} color={festival.color} />
+                <Text style={styles.sectionTitle}>{language === 'bn' ? 'প্রথা ও রীতি' : 'Traditions'}</Text>
               </View>
-              <View style={styles.sectionContent}>
+              <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                 <Text style={styles.contentText}>{getText(festival.details?.traditions)}</Text>
               </View>
             </View>
@@ -153,10 +146,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {festival.details?.food && (
               <View style={styles.section}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="restaurant" size={24} color={festival.color} />
+                  <Ionicons name="restaurant-outline" size={20} color={festival.color} />
                   <Text style={styles.sectionTitle}>{language === 'bn' ? 'খাবার' : 'Food'}</Text>
                 </View>
-                <View style={styles.sectionContent}>
+                <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                   <Text style={styles.contentText}>{getText(festival.details.food)}</Text>
                 </View>
               </View>
@@ -166,10 +159,10 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {festival.details?.celebrations && (
               <View style={styles.section}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="musical-notes" size={24} color={festival.color} />
+                  <Ionicons name="musical-notes-outline" size={20} color={festival.color} />
                   <Text style={styles.sectionTitle}>{language === 'bn' ? 'উদযাপন' : 'Celebrations'}</Text>
                 </View>
-                <View style={styles.sectionContent}>
+                <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                   <Text style={styles.contentText}>{getText(festival.details.celebrations)}</Text>
                 </View>
               </View>
@@ -179,20 +172,22 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
             {festival.details?.regionalVariations && (
               <View style={styles.section}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="map" size={24} color={festival.color} />
-                  <Text style={styles.sectionTitle}>{language === 'bn' ? 'আঞ্চলিক পার্থক্য' : 'Regional Variations'}</Text>
+                  <Ionicons name="map-outline" size={20} color={festival.color} />
+                  <Text style={styles.sectionTitle}>{language === 'bn' ? 'আঞ্চলিক পার্থক্য' : 'Regional'}</Text>
                 </View>
-                <View style={styles.sectionContent}>
+                <View style={[styles.sectionContent, { borderLeftColor: festival.color }]}>
                   <Text style={styles.contentText}>{getText(festival.details.regionalVariations)}</Text>
                 </View>
               </View>
             )}
           </ScrollView>
 
-          {/* Close button at bottom */}
-          <TouchableOpacity style={styles.bottomCloseButton} onPress={onClose}>
-            <Text style={styles.bottomCloseButtonText}>{language === 'bn' ? 'বন্ধ করুন' : 'Close'}</Text>
-          </TouchableOpacity>
+          {/* Close button */}
+          <View style={styles.bottomSection}>
+            <TouchableOpacity style={styles.closeButtonBottom} onPress={onClose}>
+              <Text style={styles.closeButtonText}>{language === 'bn' ? 'বন্ধ করুন' : 'Close'}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -202,67 +197,68 @@ export default function FestivalDetailModal({ festival, visible, onClose }: Fest
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: COLORS.overlay,
+    justifyContent: 'flex-end',
   },
   modalContent: {
-    width: '90%',
-    maxHeight: '85%',
     backgroundColor: COLORS.background,
-    borderRadius: BORDER_RADIUS.xl,
-    overflow: 'hidden',
+    borderTopLeftRadius: BORDER_RADIUS.xl,
+    borderTopRightRadius: BORDER_RADIUS.xl,
+    maxHeight: '90%',
     ...SHADOWS.lg,
   },
   header: {
-    padding: SPACING.lg,
-    paddingTop: SPACING.xl,
+    padding: SPACING.md,
+    paddingTop: SPACING.lg,
+    borderBottomWidth: 3,
+    position: 'relative',
   },
   closeButton: {
     position: 'absolute',
-    top: SPACING.md,
-    right: SPACING.md,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    top: SPACING.sm,
+    right: SPACING.sm,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: COLORS.surface,
     justifyContent: 'center',
     alignItems: 'center',
+    ...SHADOWS.xs,
   },
   languageButton: {
     position: 'absolute',
-    top: SPACING.md,
-    left: SPACING.md,
+    top: SPACING.sm,
+    left: SPACING.sm,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: COLORS.primarySoft,
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
-    borderRadius: BORDER_RADIUS.md,
+    borderRadius: BORDER_RADIUS.sm,
     gap: 4,
   },
   languageButtonText: {
-    color: '#FFFFFF',
-    fontSize: 12,
+    fontSize: FONTS.sm,
     fontWeight: '600',
+    color: COLORS.primary,
   },
   headerContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: SPACING.sm,
+    marginTop: SPACING.md,
   },
   headerText: {
     flex: 1,
   },
-  festivalNameEn: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 4,
-  },
   festivalNameBn: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: FONTS.bengaliLarge,
+    fontWeight: 'bold',
+    color: COLORS.textBengali,
+    marginBottom: 2,
+  },
+  festivalNameEn: {
+    fontSize: FONTS.md,
+    color: COLORS.textSecondary,
     marginBottom: SPACING.sm,
   },
   badgeContainer: {
@@ -272,67 +268,73 @@ const styles = StyleSheet.create({
   },
   badge: {
     paddingHorizontal: SPACING.sm,
-    paddingVertical: 4,
-    borderRadius: BORDER_RADIUS.sm,
+    paddingVertical: 3,
+    borderRadius: BORDER_RADIUS.xs,
   },
   badgeText: {
-    fontSize: 10,
+    fontSize: FONTS.xs,
     fontWeight: '600',
-    color: '#FFFFFF',
+    letterSpacing: 0.5,
   },
   scrollContent: {
-    padding: SPACING.lg,
+    padding: SPACING.md,
+    maxHeight: 400,
   },
   section: {
-    marginBottom: SPACING.lg,
+    marginBottom: SPACING.md,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: SPACING.sm,
+    gap: SPACING.sm,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: FONTS.bengali,
     fontWeight: '600',
-    color: COLORS.text,
-    marginLeft: SPACING.sm,
+    color: COLORS.textBengali,
   },
   sectionContent: {
     backgroundColor: COLORS.surface,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderLeftWidth: 3,
   },
   dateText: {
-    fontSize: 20,
+    fontSize: FONTS.lg,
     fontWeight: 'bold',
     color: COLORS.text,
     marginBottom: SPACING.xs,
   },
   subText: {
-    fontSize: 14,
+    fontSize: FONTS.bengaliSmall,
     color: COLORS.textSecondary,
     marginBottom: 2,
   },
   descriptionText: {
-    fontSize: 15,
+    fontSize: FONTS.bengaliSmall,
     color: COLORS.text,
     lineHeight: 22,
   },
   contentText: {
-    fontSize: 14,
+    fontSize: FONTS.bengaliSmall,
     color: COLORS.textSecondary,
     lineHeight: 20,
   },
-  bottomCloseButton: {
-    backgroundColor: COLORS.primary,
+  bottomSection: {
     padding: SPACING.md,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
+  },
+  closeButtonBottom: {
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
     alignItems: 'center',
   },
-  bottomCloseButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+  closeButtonText: {
+    fontSize: FONTS.bengali,
     fontWeight: '600',
+    color: COLORS.textInverse,
   },
 });

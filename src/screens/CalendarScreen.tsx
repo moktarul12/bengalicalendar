@@ -3,24 +3,25 @@ import {
   View,
   StyleSheet,
   StatusBar,
-  ScrollView,
   Text,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS } from '../constants/theme';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, getGreeting, toBengaliNumeral } from '../constants/theme';
 import { generateCalendarGrid, getMonthName } from '../utils/calendarUtils';
-import { gregorianToBengali } from '../constants/bengaliCalendar';
+import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
 import CalendarHeader from '../components/Calendar/CalendarHeader';
 import CalendarGrid from '../components/Calendar/CalendarGrid';
 import CalendarTypeToggle from '../components/CalendarTypeToggle';
-import UpcomingFestivals from '../components/UpcomingFestivals';
-import DayDetailModal from '../components/DayDetailModal';
 import MonthYearPickerModal from '../components/MonthYearPickerModal';
 import FestivalDetailModal from '../components/FestivalDetailModal';
+import DayDetailScreen from './DayDetailScreen';
 import { CalendarDay } from '../types';
 import { Festival } from '../constants/festivals';
+import { DayEvent } from '../types/events';
+import { hasEventsOnDate, getEventsByDate } from '../utils/eventUtils';
 
 interface CalendarScreenProps {
   onDaySelect?: (day: CalendarDay) => void;
@@ -32,17 +33,17 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('bengali');
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isMonthYearPickerVisible, setIsMonthYearPickerVisible] = useState(false);
   const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
   const [festivalModalVisible, setFestivalModalVisible] = useState(false);
+  const [dayDetailVisible, setDayDetailVisible] = useState(false);
 
-  // Get Bengali date for current month
-  const bengaliDate = gregorianToBengali(today.getDate(), currentMonth, currentYear);
-
-  // Check if current month/year is being displayed
+  const bengaliDateToday = gregorianToBengali(today.getDate(), today.getMonth() + 1, today.getFullYear());
+  const bengaliMonthNameToday = BENGALI_MONTHS[bengaliDateToday.month]?.name || '';
+  const bengaliDateForDisplayedMonth = gregorianToBengali(15, currentMonth, currentYear);
+  const greeting = getGreeting(currentTime.getHours());
   const isCurrentMonth = currentMonth === today.getMonth() + 1 && currentYear === today.getFullYear();
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000);
+    }, 60000);
     return () => clearInterval(timer);
   }, []);
 
@@ -83,13 +84,9 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
 
   const handleDayPress = useCallback((day: CalendarDay) => {
     setSelectedDay(day);
-    setIsModalVisible(true);
+    setDayDetailVisible(true);
     onDaySelect?.(day);
   }, [onDaySelect]);
-
-  const handleCloseModal = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
 
   const handleCalendarTypeChange = useCallback((type: 'gregorian' | 'bengali') => {
     setCalendarType(type);
@@ -114,76 +111,61 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
     setFestivalModalVisible(true);
   }, []);
 
+  const handleEventPress = useCallback((event: DayEvent) => {
+    setDayDetailVisible(false);
+    if (event.type === 'festival') {
+      setSelectedFestival(event.data as Festival);
+      setFestivalModalVisible(true);
+    }
+  }, []);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
-      
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
-        {/* Decorative Header Section - Compact */}
-        <LinearGradient
-          colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.headerSection}
-        >
-          {/* Bengali Pattern Decoration */}
-          <View style={styles.patternDecoration}>
-            <View style={styles.patternLine} />
-            <View style={[styles.patternLine, { marginTop: 4 }]} />
-            <View style={[styles.patternLine, { marginTop: 4 }]} />
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
+
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {/* Header - Bengali Date Display */}
+        <View style={styles.header}>
+          <View style={styles.headerTopRow}>
+            <Text style={styles.greetingText}>{greeting.bn}</Text>
+            {!isCurrentMonth && (
+              <TouchableOpacity style={styles.todayButtonCenter} onPress={goToToday}>
+                <Ionicons name="today" size={16} color={COLORS.primary} />
+                <Text style={styles.todayButtonText}>Today</Text>
+              </TouchableOpacity>
+            )}
+            <CalendarTypeToggle
+              value={calendarType}
+              onChange={handleCalendarTypeChange}
+            />
           </View>
 
-          {/* Compact Greeting & Clock Row */}
-          <View style={styles.compactHeaderRow}>
-            <View style={styles.greetingContainer}>
-              <Text style={styles.greetingText}>
-                {currentTime.getHours() < 12 ? 'শুভ সকাল' : currentTime.getHours() < 17 ? 'শুভ দুপুর' : 'শুভ সন্ধ্যা'}
-              </Text>
-              <Text style={styles.greetingSubtext}>
-                {currentTime.toLocaleDateString('en-US', {
-                  weekday: 'short',
-                  month: 'short',
-                  day: 'numeric',
-                })}
+          <View style={styles.dateSection}>
+            <View style={styles.bengaliDateBlock}>
+              <Text style={styles.bengaliDay}>{toBengaliNumeral(bengaliDateToday.day)}</Text>
+              <View style={styles.monthYearSection}>
+                <Text style={styles.bengaliMonth}>{bengaliMonthNameToday}</Text>
+                <Text style={styles.bengaliYear}>{toBengaliNumeral(bengaliDateToday.year)} বসর</Text>
+              </View>
+            </View>
+            <View style={styles.gregorianDateBlock}>
+              <Text style={styles.gregorianDay}>{today.getDate()}</Text>
+              <Text style={styles.gregorianMonth}>
+                {today.toLocaleDateString('en-US', { month: 'short' })} {today.getFullYear()}
               </Text>
             </View>
-
-            {/* Compact Clock */}
-            <LinearGradient
-              colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0.1)']}
-              style={styles.compactClock}
-            >
-              <Ionicons name="time-outline" size={24} color="#FFFFFF" />
-              <Text style={styles.compactClockTime}>
-                {currentTime.toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: true,
-                })}
-              </Text>
-            </LinearGradient>
           </View>
-        </LinearGradient>
-
-        {/* Calendar Type Toggle - Compact */}
-        <View style={styles.toggleCard}>
-          <CalendarTypeToggle
-            value={calendarType}
-            onChange={handleCalendarTypeChange}
-          />
         </View>
 
-        {/* Calendar Card - Main Content */}
-        <View style={styles.calendarCard}>
+        {/* Calendar Section - Always Visible */}
+        <View style={styles.calendarSection}>
+          {/* Calendar Header */}
           <CalendarHeader
             year={currentYear}
             month={currentMonth}
             monthName={getMonthName(currentMonth)}
-            bengaliYear={bengaliDate.year}
-            bengaliMonth={bengaliDate.month}
+            bengaliYear={bengaliDateForDisplayedMonth.year}
+            bengaliMonth={bengaliDateForDisplayedMonth.month}
             calendarType={calendarType}
             onPrevMonth={goToPrevMonth}
             onNextMonth={goToNextMonth}
@@ -192,6 +174,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
             onMonthYearPress={handleMonthYearPress}
           />
 
+          {/* Calendar Grid */}
           <CalendarGrid
             days={calendarDays}
             calendarType={calendarType}
@@ -199,22 +182,46 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
           />
         </View>
 
-        {/* Upcoming Festivals Card */}
-        <View style={styles.festivalsCard}>
-          <UpcomingFestivals
-            currentMonth={today.getMonth() + 1}
-            currentDay={today.getDate()}
-            currentYear={today.getFullYear()}
-            onFestivalPress={handleFestivalPress}
-          />
+        {/* Today's Events Section */}
+        <View style={styles.eventsSection}>
+          <View style={styles.sectionHeader}>
+            <Ionicons name="sparkles" size={20} color={COLORS.primary} />
+            <Text style={styles.sectionTitle}>আজকের ইভেন্ট</Text>
+          </View>
+          {hasEventsOnDate(today.getDate(), today.getMonth() + 1, today.getFullYear()) ? (
+            getEventsByDate(today.getDate(), today.getMonth() + 1, today.getFullYear()).slice(0, 3).map((event) => (
+              <TouchableOpacity
+                key={event.id}
+                style={styles.eventCard}
+                onPress={() => handleEventPress(event)}
+                activeOpacity={0.7}
+              >
+                <View style={[styles.eventColorBar, { backgroundColor: event.color }]} />
+                <View style={styles.eventContent}>
+                  <Text style={styles.eventTitleBn}>{event.titleBn}</Text>
+                  <Text style={styles.eventTitleEn}>{event.titleEn}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={COLORS.textMuted} />
+              </TouchableOpacity>
+            ))
+          ) : (
+            <View style={styles.noEvents}>
+              <Text style={styles.noEventsText}>
+                আজ কোন বিশেষ ইভেন্ট নেই
+              </Text>
+            </View>
+          )}
         </View>
       </ScrollView>
 
-      {/* Day Detail Modal */}
-      <DayDetailModal
-        visible={isModalVisible}
-        day={selectedDay}
-        onClose={handleCloseModal}
+      {/* Day Detail Screen */}
+      <DayDetailScreen
+        visible={dayDetailVisible}
+        day={selectedDay?.gregorian.day || today.getDate()}
+        month={currentMonth}
+        year={currentYear}
+        onClose={() => setDayDetailVisible(false)}
+        onEventPress={handleEventPress}
       />
 
       {/* Month Year Picker Modal */}
@@ -241,84 +248,150 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  scrollContent: {
-    paddingBottom: 80,
+  scrollContainer: {
+    flex: 1,
   },
-  headerSection: {
-    paddingTop: SPACING.md,
-    paddingBottom: SPACING.lg,
+  header: {
+    backgroundColor: COLORS.surface,
     paddingHorizontal: SPACING.md,
-    borderBottomLeftRadius: BORDER_RADIUS.lg,
-    borderBottomRightRadius: BORDER_RADIUS.lg,
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
   },
-  patternDecoration: {
-    position: 'absolute',
-    top: SPACING.md,
-    right: SPACING.md,
-    opacity: 0.3,
-  },
-  patternLine: {
-    width: 40,
-    height: 2,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 1,
-  },
-  compactHeaderRow: {
+  headerTopRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: SPACING.xs,
+    marginBottom: SPACING.md,
   },
-  greetingContainer: {
-    flex: 1,
+  dateSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  greetingText: {
-    fontSize: FONTS.heading,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 2,
-  },
-  greetingSubtext: {
-    fontSize: FONTS.caption,
-    color: 'rgba(255, 255, 255, 0.9)',
-  },
-  compactClock: {
+  bengaliDateBlock: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.sm,
-    borderRadius: BORDER_RADIUS.lg,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
-  compactClockTime: {
-    fontSize: FONTS.body,
+  gregorianDateBlock: {
+    alignItems: 'flex-end',
+  },
+  bengaliDay: {
+    fontSize: 42,
     fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginLeft: SPACING.xs,
+    color: COLORS.primary,
   },
-  toggleCard: {
-    marginTop: -SPACING.md,
-    marginHorizontal: SPACING.md,
+  monthYearSection: {
+    marginLeft: SPACING.sm,
+  },
+  bengaliMonth: {
+    fontSize: FONTS.bengaliLarge,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+  },
+  bengaliYear: {
+    fontSize: FONTS.md,
+    color: COLORS.textSecondary,
+  },
+  gregorianSection: {
+    alignItems: 'flex-end',
+  },
+  gregorianDay: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: COLORS.textSecondary,
+  },
+  gregorianMonth: {
+    fontSize: FONTS.sm,
+    color: COLORS.textMuted,
+  },
+  greetingText: {
+    fontSize: FONTS.bengaliLarge,
+    color: COLORS.textBengali,
+    fontWeight: '600',
+  },
+  todayButtonCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primarySoft,
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
+    borderRadius: BORDER_RADIUS.sm,
+    gap: 4,
+  },
+  calendarSection: {
+    backgroundColor: COLORS.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  todayButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primarySoft,
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
+    borderRadius: BORDER_RADIUS.sm,
+    gap: 4,
+  },
+  todayButtonText: {
+    fontSize: FONTS.sm,
+    color: COLORS.primary,
+    fontWeight: '500',
+  },
+  eventsSection: {
+    padding: SPACING.md,
+    backgroundColor: COLORS.background,
+    paddingBottom: SPACING.xxl,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    marginBottom: SPACING.sm,
+  },
+  sectionTitle: {
+    fontSize: FONTS.bengaliLarge,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+  },
+  eventCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: COLORS.surface,
     borderRadius: BORDER_RADIUS.md,
-    padding: SPACING.xs,
-    ...SHADOWS.md,
+    marginBottom: SPACING.sm,
+    padding: SPACING.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.xs,
   },
-  calendarCard: {
-    marginHorizontal: 0,
-    marginTop: SPACING.sm,
-    backgroundColor: COLORS.surface,
-    borderRadius: 0,
-    overflow: 'hidden',
-    ...SHADOWS.sm,
+  eventColorBar: {
+    width: 4,
+    height: '100%',
+    minHeight: 50,
+    borderTopLeftRadius: BORDER_RADIUS.md,
+    borderBottomLeftRadius: BORDER_RADIUS.md,
+    marginRight: SPACING.sm,
   },
-  festivalsCard: {
-    marginHorizontal: SPACING.md,
-    marginTop: SPACING.sm,
-    backgroundColor: COLORS.surface,
-    borderRadius: BORDER_RADIUS.md,
-    overflow: 'hidden',
-    ...SHADOWS.sm,
+  eventContent: {
+    flex: 1,
+  },
+  eventTitleBn: {
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+  },
+  eventTitleEn: {
+    fontSize: FONTS.sm,
+    color: COLORS.textSecondary,
+    marginTop: 2,
+  },
+  noEvents: {
+    padding: SPACING.lg,
+    alignItems: 'center',
+  },
+  noEventsText: {
+    fontSize: FONTS.bengaliSmall,
+    color: COLORS.textMuted,
   },
 });

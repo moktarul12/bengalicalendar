@@ -8,9 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
-import { FESTIVALS, getFestivalsByType, Festival } from '../constants/festivals';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS } from '../constants/theme';
+import { Festival, FESTIVALS } from '../constants/festivals';
 import FestivalIcon from '../components/FestivalIcon';
 import FestivalDetailModal from '../components/FestivalDetailModal';
 
@@ -19,15 +18,14 @@ type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 export default function FestivalsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const currentYear = new Date().getFullYear();
+  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
 
-  const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
+  const currentYear = new Date().getFullYear();
 
   const getFilteredFestivals = (): Festival[] => {
     let filtered = FESTIVALS.filter((f) => f.year === selectedYear);
-    
+
     if (filter !== 'all') {
       filtered = filtered.filter((f) => f.type === filter);
     }
@@ -37,6 +35,16 @@ export default function FestivalsScreen() {
       const dateB = new Date(b.year, b.month - 1, b.day);
       return dateA.getTime() - dateB.getTime();
     });
+  };
+
+  const getTypeColor = (type: string): string => {
+    switch (type) {
+      case 'religious': return COLORS.festivalReligious;
+      case 'cultural': return COLORS.festivalCultural;
+      case 'national': return COLORS.festivalNational;
+      case 'seasonal': return COLORS.festivalSeasonal;
+      default: return COLORS.primary;
+    }
   };
 
   const filters: { id: FilterType; label: string; labelBn: string; icon: string }[] = [
@@ -53,12 +61,13 @@ export default function FestivalsScreen() {
   };
 
   const renderFestivalItem = ({ item }: { item: Festival }) => (
-    <TouchableOpacity 
-      style={styles.festivalItem} 
+    <TouchableOpacity
+      style={styles.festivalItem}
       activeOpacity={0.7}
       onPress={() => handleFestivalPress(item)}
     >
       <FestivalIcon iconPath={item.icon} color={item.color} size={64} marginRight={SPACING.md} />
+
       <View style={styles.festivalInfo}>
         <Text style={styles.festivalNameEn} numberOfLines={1}>{item.nameEn}</Text>
         <Text style={styles.festivalNameBn} numberOfLines={1}>{item.nameBn}</Text>
@@ -67,78 +76,62 @@ export default function FestivalsScreen() {
           <Text style={styles.dateText}>{item.day}/{item.month}/{item.year}</Text>
         </View>
       </View>
+
       <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
     </TouchableOpacity>
   );
 
-  return (
-    <View style={styles.container}>
-      {/* Header */}
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.header}
-      >
-        <Ionicons name="ribbon" size={32} color="#FFFFFF" />
+  const renderHeader = () => (
+    <View style={styles.header}>
+      <Ionicons name="ribbon" size={32} color={COLORS.primary} />
+      <View style={styles.headerText}>
         <Text style={styles.headerTitle}>Festivals</Text>
         <Text style={styles.headerSubtitle}>উৎসব ও ছুটির দিন</Text>
-        <View style={styles.yearSelector}>
-          <TouchableOpacity
-            style={styles.yearButton}
-            onPress={() => setSelectedYear(Math.max(currentYear - 5, selectedYear - 1))}
-            disabled={selectedYear === currentYear - 5}
-          >
-            <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-          <Text style={styles.yearText}>{selectedYear}</Text>
-          <TouchableOpacity
-            style={styles.yearButton}
-            onPress={() => setSelectedYear(Math.min(currentYear + 5, selectedYear + 1))}
-            disabled={selectedYear === currentYear + 5}
-          >
-            <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-
-      {/* Filter Tabs */}
-      <View style={styles.filterContainer}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filterContent}
-        >
-          {filters.map((f) => (
-            <TouchableOpacity
-              key={f.id}
-              style={[styles.filterTab, filter === f.id && styles.activeFilterTab]}
-              onPress={() => setFilter(f.id)}
-              activeOpacity={0.7}
-            >
-              <Ionicons
-                name={f.icon as any}
-                size={18}
-                color={filter === f.id ? '#FFFFFF' : COLORS.textSecondary}
-              />
-              <Text
-                style={[styles.filterLabel, filter === f.id && styles.activeFilterLabel]}
-              >
-                {f.label}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
       </View>
+    </View>
+  );
 
-      {/* Festivals List */}
+  const renderFilterTabs = () => (
+    <View style={styles.filterContainer}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.filterContent}
+      >
+        {filters.map((f) => (
+          <TouchableOpacity
+            key={f.id}
+            style={[styles.filterTab, filter === f.id && styles.activeFilterTab]}
+            onPress={() => setFilter(f.id)}
+            activeOpacity={0.7}
+          >
+            <Ionicons
+              name={f.icon as any}
+              size={18}
+              color={filter === f.id ? '#FFFFFF' : COLORS.textSecondary}
+            />
+            <Text
+              style={[styles.filterLabel, filter === f.id && styles.activeFilterLabel]}
+            >
+              {f.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      {renderHeader()}
+      {renderFilterTabs()}
+
       <FlatList
         data={getFilteredFestivals()}
-        keyExtractor={(item) => `${item.id}-${item.year}`}
         renderItem={renderFestivalItem}
-        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="calendar-outline" size={64} color={COLORS.textMuted} />
@@ -148,7 +141,6 @@ export default function FestivalsScreen() {
         }
       />
 
-      {/* Festival Detail Modal */}
       <FestivalDetailModal
         festival={selectedFestival}
         visible={modalVisible}
@@ -166,41 +158,30 @@ const styles = StyleSheet.create({
   header: {
     padding: SPACING.lg,
     paddingTop: 20,
+    flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  headerText: {
+    marginLeft: SPACING.md,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginTop: 8,
+    color: COLORS.text,
   },
   headerSubtitle: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: COLORS.textSecondary,
     marginTop: 2,
-  },
-  yearSelector: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: SPACING.md,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: BORDER_RADIUS.md,
-    paddingHorizontal: SPACING.sm,
-  },
-  yearButton: {
-    padding: SPACING.sm,
-  },
-  yearText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginHorizontal: SPACING.md,
   },
   filterContainer: {
     backgroundColor: COLORS.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
     paddingVertical: SPACING.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
   },
   filterContent: {
     paddingHorizontal: SPACING.md,
@@ -226,6 +207,10 @@ const styles = StyleSheet.create({
   },
   activeFilterLabel: {
     color: '#FFFFFF',
+  },
+  listContent: {
+    paddingVertical: SPACING.sm,
+    paddingBottom: 140,
   },
   festivalItem: {
     flexDirection: 'row',
@@ -264,15 +249,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: COLORS.textSecondary,
     marginLeft: 4,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#E0E0E0',
-    marginHorizontal: SPACING.md,
-  },
-  listContent: {
-    paddingVertical: SPACING.sm,
-    paddingBottom: 140,
   },
   emptyContainer: {
     alignItems: 'center',

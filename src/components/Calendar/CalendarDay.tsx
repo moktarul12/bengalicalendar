@@ -57,7 +57,7 @@ export default function CalendarDayComponent({ day, isCurrentMonth, calendarType
         <View style={styles.festivalIndicators}>
           {festivals.slice(0, 2).map((festival, index) => (
             <View
-              key={festival.id}
+              key={`${festival.id}-${index}`}
               style={[
                 styles.festivalDot,
                 { backgroundColor: festival.color },

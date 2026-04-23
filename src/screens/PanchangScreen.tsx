@@ -4,187 +4,167 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
-import { TITHIS, NAKSHATRAS, toBengaliNumber } from '../constants/bengaliCalendar';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS } from '../constants/theme';
+import { BENGALI_MONTHS, gregorianToBengali, toBengaliNumber } from '../constants/bengaliCalendar';
 
 export default function PanchangScreen() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const currentYear = new Date().getFullYear();
-  const selectedYear = selectedDate.getFullYear();
+  const today = new Date();
+  const bengaliDate = gregorianToBengali(today.getDate(), today.getMonth() + 1, today.getFullYear());
+  const bengaliMonthName = BENGALI_MONTHS[bengaliDate.month]?.name || '';
 
   // Simulated Panchang data
   const panchangData = {
-    tithi: { name: 'প্রতিপদ', nameEn: 'Pratipada', endTime: '10:30 AM' },
-    nakshatra: { name: 'অশ্বিনী', nameEn: 'Ashwini', endTime: '12:45 PM' },
-    yoga: { name: 'বিষ্ণু', nameEn: 'Vishkumbha', endTime: '02:15 PM' },
-    karana: { name: 'বব', nameEn: 'Bava', endTime: '11:15 AM' },
-    sunrise: '05:45 AM',
-    sunset: '06:15 PM',
-    moonrise: '07:30 AM',
-    moonset: '08:45 PM',
-    rahuKaal: '09:00 AM - 10:30 AM',
-    yamaganda: '12:30 PM - 02:00 PM',
-    gulika: '03:00 PM - 04:30 PM',
-    abhijit: '11:45 AM - 12:30 PM',
+    tithi: { name: 'প্রতিপদ', nameEn: 'Pratipada', endTime: '১০:৩০' },
+    nakshatra: { name: 'অশ্বিনী', nameEn: 'Ashwini', endTime: '১২:৪৫' },
+    yoga: { name: 'বিষ্ণু', nameEn: 'Vishkumbha', endTime: '০২:১৫' },
+    karana: { name: 'বব', nameEn: 'Bava', endTime: '১১:১৫' },
   };
 
-  const panchangItems = [
-    {
-      icon: 'sunny',
-      label: 'Tithi',
-      value: panchangData.tithi.name,
-      valueEn: panchangData.tithi.nameEn,
-      color: '#FF6B6B',
-    },
-    {
-      icon: 'star',
-      label: 'Nakshatra',
-      value: panchangData.nakshatra.name,
-      valueEn: panchangData.nakshatra.nameEn,
-      color: '#4ECDC4',
-    },
-    {
-      icon: 'infinite',
-      label: 'Yoga',
-      value: panchangData.yoga.name,
-      valueEn: panchangData.yoga.nameEn,
-      color: '#95E1D3',
-    },
-    {
-      icon: 'time',
-      label: 'Karana',
-      value: panchangData.karana.name,
-      valueEn: panchangData.karana.nameEn,
-      color: '#F38181',
-    },
-  ];
-
-  const sunMoonTimes = [
-    { icon: 'sunny-outline', label: 'Sunrise', value: panchangData.sunrise, color: '#FFA726' },
-    { icon: 'partly-sunny-outline', label: 'Sunset', value: panchangData.sunset, color: '#FF7043' },
-    { icon: 'moon-outline', label: 'Moonrise', value: panchangData.moonrise, color: '#7986CB' },
-    { icon: 'cloudy-night-outline', label: 'Moonset', value: panchangData.moonset, color: '#5C6BC0' },
-  ];
+  const sunMoonData = {
+    sunrise: '০৫:৪৫',
+    sunset: '০৬:১৫',
+    moonrise: '০৭:৩০',
+    moonset: '০৮:৪৫',
+  };
 
   const auspiciousTimes = [
-    { name: 'Abhijit Muhurta', nameBn: 'অভিজিৎ মুহূর্ত', time: panchangData.abhijit },
-    { name: 'Amrit Kalam', nameBn: 'অমৃত কালম', time: '02:00 PM - 03:30 PM' },
-    { name: 'Brahma Muhurta', nameBn: 'ব্রহ্ম মুহূর্ত', time: '04:30 AM - 05:15 AM' },
+    { name: 'অভিজিৎ মুহূর্ত', nameEn: 'Abhijit Muhurta', time: '১১:৪৫ - ১২:৩০', icon: 'sunny' },
+    { name: 'অমৃত কালম', nameEn: 'Amrit Kalam', time: '০২:০০ - ০৩:৩০', icon: 'time' },
+    { name: 'ব্রহ্ম মুহূর্ত', nameEn: 'Brahma Muhurta', time: '০৪:৩০ - ০৫:১৫', icon: 'sparkles' },
   ];
 
   const inauspiciousTimes = [
-    { name: 'Rahu Kaal', nameBn: 'রাহু কাল', time: panchangData.rahuKaal, color: '#EF5350' },
-    { name: 'Yamaganda', nameBn: 'যমগন্ধ', time: panchangData.yamaganda, color: '#FFA726' },
-    { name: 'Gulika', nameBn: 'গুলিকা', time: panchangData.gulika, color: '#AB47BC' },
+    { name: 'রাহু কাল', nameEn: 'Rahu Kaal', time: '০৯:০০ - ১০:৩০', icon: 'warning' },
+    { name: 'যমগন্ধ', nameEn: 'Yamaganda', time: '১২:৩০ - ০২:০০', icon: 'alert' },
+    { name: 'গুলিকা', nameEn: 'Gulika', time: '০৩:০০ - ০৪:৩০', icon: 'close-circle' },
   ];
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.header}
-      >
-        <Ionicons name="moon" size={48} color="#FFD700" />
-        <Text style={styles.headerTitle}>Panchang</Text>
-        <Text style={styles.headerSubtitle}>পঞ্জিকা</Text>
-        <View style={styles.yearSelector}>
-          <TouchableOpacity
-            style={styles.yearButton}
-            onPress={() => {
-              const newDate = new Date(selectedDate);
-              newDate.setFullYear(Math.max(currentYear - 5, selectedYear - 1));
-              setSelectedDate(newDate);
-            }}
-            disabled={selectedYear === currentYear - 5}
-          >
-            <Ionicons name="chevron-back" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-          <Text style={styles.yearText}>{selectedYear}</Text>
-          <TouchableOpacity
-            style={styles.yearButton}
-            onPress={() => {
-              const newDate = new Date(selectedDate);
-              newDate.setFullYear(Math.min(currentYear + 5, selectedYear + 1));
-              setSelectedDate(newDate);
-            }}
-            disabled={selectedYear === currentYear + 5}
-          >
-            <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
+      <View style={styles.header}>
+        <View style={styles.headerContent}>
+          <Ionicons name="moon" size={48} color={COLORS.primary} />
+          <View style={styles.headerText}>
+            <Text style={styles.headerTitle}>পঞ্জিকা</Text>
+            <Text style={styles.headerSubtitle}>Panchang</Text>
+          </View>
         </View>
         <View style={styles.dateBadge}>
-          <Ionicons name="calendar" size={16} color="#FFFFFF" />
-          <Text style={styles.dateText}>
-            {selectedDate.toLocaleDateString('en-US', {
-              weekday: 'short',
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-            })}
+          <Text style={styles.dateBengali}>
+            {toBengaliNumber(bengaliDate.day)} {bengaliMonthName}
           </Text>
-        </View>
-      </LinearGradient>
-
-      {/* Panchang Elements */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Panchang Elements</Text>
-        <View style={styles.panchangList}>
-          {panchangItems.map((item, index) => (
-            <View key={index} style={styles.panchangCard}>
-              <LinearGradient
-                colors={[item.color, item.color + 'CC']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.panchangIcon}
-              >
-                <Ionicons name={item.icon as any} size={28} color="#FFFFFF" />
-              </LinearGradient>
-              <View style={styles.panchangInfo}>
-                <Text style={styles.panchangLabel}>{item.label}</Text>
-                <Text style={styles.panchangValue}>{item.value}</Text>
-                <Text style={styles.panchangValueEn}>{item.valueEn}</Text>
-              </View>
-            </View>
-          ))}
+          <Text style={styles.dateEnglish}>
+            {today.getDate()} {today.toLocaleDateString('en-US', { month: 'short' })}
+          </Text>
         </View>
       </View>
 
-      {/* Sun & Moon Times */}
+      {/* Panchang Elements */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Sun & Moon</Text>
-        <View style={styles.sunMoonList}>
-          {sunMoonTimes.map((item, index) => (
-            <View key={index} style={styles.sunMoonCard}>
-              <Ionicons name={item.icon as any} size={32} color={item.color} />
-              <View style={styles.sunMoonInfo}>
-                <Text style={styles.sunMoonLabel}>{item.label}</Text>
-                <Text style={styles.sunMoonValue}>{item.value}</Text>
-              </View>
+        <View style={styles.sectionHeader}>
+          <Ionicons name="calendar-outline" size={20} color={COLORS.primary} />
+          <Text style={styles.sectionTitle}>পঞ্চাঙ্গ উপাদান</Text>
+        </View>
+        <View style={styles.panchangGrid2x2}>
+          <View style={styles.panchangCard}>
+            <View style={[styles.panchangIcon, { backgroundColor: COLORS.primarySoft }]}>
+              <Ionicons name="sunny" size={24} color={COLORS.primary} />
             </View>
-          ))}
+            <View style={styles.panchangInfo}>
+              <Text style={styles.panchangLabel}>তিথি</Text>
+              <Text style={styles.panchangValue}>{panchangData.tithi.name}</Text>
+              <Text style={styles.panchangValueEn}>{panchangData.tithi.nameEn}</Text>
+              <Text style={styles.endTime}>সমাপ্ত: {panchangData.tithi.endTime}</Text>
+            </View>
+          </View>
+
+          <View style={styles.panchangCard}>
+            <View style={[styles.panchangIcon, { backgroundColor: COLORS.secondarySoft }]}>
+              <Ionicons name="star" size={24} color={COLORS.secondaryDark} />
+            </View>
+            <View style={styles.panchangInfo}>
+              <Text style={styles.panchangLabel}>নক্ষত্র</Text>
+              <Text style={styles.panchangValue}>{panchangData.nakshatra.name}</Text>
+              <Text style={styles.panchangValueEn}>{panchangData.nakshatra.nameEn}</Text>
+              <Text style={styles.endTime}>সমাপ্ত: {panchangData.nakshatra.endTime}</Text>
+            </View>
+          </View>
+
+          <View style={styles.panchangCard}>
+            <View style={[styles.panchangIcon, { backgroundColor: COLORS.accentSoft }]}>
+              <Ionicons name="infinite" size={24} color={COLORS.accent} />
+            </View>
+            <View style={styles.panchangInfo}>
+              <Text style={styles.panchangLabel}>যোগ</Text>
+              <Text style={styles.panchangValue}>{panchangData.yoga.name}</Text>
+              <Text style={styles.panchangValueEn}>{panchangData.yoga.nameEn}</Text>
+              <Text style={styles.endTime}>সমাপ্ত: {panchangData.yoga.endTime}</Text>
+            </View>
+          </View>
+
+          <View style={styles.panchangCard}>
+            <View style={[styles.panchangIcon, { backgroundColor: COLORS.festivalNational + '20' }]}>
+              <Ionicons name="time" size={24} color={COLORS.festivalNational} />
+            </View>
+            <View style={styles.panchangInfo}>
+              <Text style={styles.panchangLabel}>করণ</Text>
+              <Text style={styles.panchangValue}>{panchangData.karana.name}</Text>
+              <Text style={styles.panchangValueEn}>{panchangData.karana.nameEn}</Text>
+              <Text style={styles.endTime}>সমাপ্ত: {panchangData.karana.endTime}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      {/* Sun & Moon */}
+      <View style={styles.section}>
+        <View style={styles.sectionHeader}>
+          <Ionicons name="partly-sunny-outline" size={20} color={COLORS.primary} />
+          <Text style={styles.sectionTitle}>সূর্য ও চাঁদ</Text>
+        </View>
+        <View style={styles.sunMoonGrid}>
+          <View style={styles.sunMoonCard}>
+            <Ionicons name="sunny-outline" size={32} color={COLORS.primary} />
+            <Text style={styles.sunMoonLabel}>সূর্যোদয়</Text>
+            <Text style={styles.sunMoonValue}>{sunMoonData.sunrise}</Text>
+          </View>
+          <View style={styles.sunMoonCard}>
+            <Ionicons name="partly-sunny-outline" size={32} color={COLORS.secondary} />
+            <Text style={styles.sunMoonLabel}>সূর্যাস্ত</Text>
+            <Text style={styles.sunMoonValue}>{sunMoonData.sunset}</Text>
+          </View>
+          <View style={styles.sunMoonCard}>
+            <Ionicons name="moon-outline" size={32} color={COLORS.textSecondary} />
+            <Text style={styles.sunMoonLabel}>চন্দ্রোদয়</Text>
+            <Text style={styles.sunMoonValue}>{sunMoonData.moonrise}</Text>
+          </View>
+          <View style={styles.sunMoonCard}>
+            <Ionicons name="cloudy-night-outline" size={32} color={COLORS.textMuted} />
+            <Text style={styles.sunMoonLabel}>চন্দ্রাস্ত</Text>
+            <Text style={styles.sunMoonValue}>{sunMoonData.moonset}</Text>
+          </View>
         </View>
       </View>
 
       {/* Auspicious Times */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Auspicious Times</Text>
+        <View style={styles.sectionHeader}>
+          <Ionicons name="sparkles" size={20} color={COLORS.festivalReligious} />
+          <Text style={styles.sectionTitle}>শুভ সময়</Text>
+        </View>
         <View style={styles.timesContainer}>
           {auspiciousTimes.map((time, index) => (
             <View key={index} style={styles.timeCard}>
-              <View style={styles.timeCardLeft}>
-                <View style={[styles.timeIcon, { backgroundColor: '#4CAF50' }]}>
-                  <Ionicons name="checkmark" size={20} color="#FFFFFF" />
+              <View style={styles.timeLeft}>
+                <View style={[styles.timeIcon, { backgroundColor: COLORS.festivalReligious + '20' }]}>
+                  <Ionicons name={time.icon as any} size={20} color={COLORS.festivalReligious} />
                 </View>
-                <View style={styles.timeTextContainer}>
-                  <Text style={styles.timeName}>{time.name}</Text>
-                  <Text style={styles.timeNameBn}>{time.nameBn}</Text>
+                <View style={styles.timeInfo}>
+                  <Text style={styles.timeNameBn}>{time.name}</Text>
+                  <Text style={styles.timeNameEn}>{time.nameEn}</Text>
                 </View>
               </View>
               <Text style={styles.timeValue}>{time.time}</Text>
@@ -195,36 +175,36 @@ export default function PanchangScreen() {
 
       {/* Inauspicious Times */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Inauspicious Times</Text>
+        <View style={styles.sectionHeader}>
+          <Ionicons name="warning" size={20} color={COLORS.festivalNational} />
+          <Text style={styles.sectionTitle}>অশুভ সময়</Text>
+        </View>
         <View style={styles.timesContainer}>
           {inauspiciousTimes.map((time, index) => (
             <View key={index} style={styles.timeCard}>
-              <View style={styles.timeCardLeft}>
-                <View style={[styles.timeIcon, { backgroundColor: time.color }]}>
-                  <Ionicons name="warning" size={20} color="#FFFFFF" />
+              <View style={styles.timeLeft}>
+                <View style={[styles.timeIcon, { backgroundColor: COLORS.festivalNational + '20' }]}>
+                  <Ionicons name={time.icon as any} size={20} color={COLORS.festivalNational} />
                 </View>
-                <View style={styles.timeTextContainer}>
-                  <Text style={styles.timeName}>{time.name}</Text>
-                  <Text style={styles.timeNameBn}>{time.nameBn}</Text>
+                <View style={styles.timeInfo}>
+                  <Text style={styles.timeNameBn}>{time.name}</Text>
+                  <Text style={styles.timeNameEn}>{time.nameEn}</Text>
                 </View>
               </View>
-              <Text style={[styles.timeValue, { color: time.color }]}>{time.time}</Text>
+              <Text style={[styles.timeValue, { color: COLORS.festivalNational }]}>{time.time}</Text>
             </View>
           ))}
         </View>
       </View>
 
-      {/* Tithis Reference */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Tithis Reference</Text>
-        <View style={styles.referenceGrid}>
-          {TITHIS.slice(0, 8).map((tithi, index) => (
-            <View key={index} style={styles.referenceItem}>
-              <Text style={styles.referenceBn}>{tithi.name}</Text>
-              <Text style={styles.referenceEn}>{tithi.nameEn}</Text>
-            </View>
-          ))}
-        </View>
+      {/* Footer Note */}
+      <View style={styles.footerNote}>
+        <Text style={styles.footerText}>
+          সময় স্থানীয় সময় অনুযায়ী পরিবর্তিত হতে পারে।
+        </Text>
+        <Text style={styles.footerTextEn}>
+          Times may vary based on local location.
+        </Text>
       </View>
     </ScrollView>
   );
@@ -235,79 +215,82 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  scrollContent: {
-    paddingBottom: 140,
-  },
   header: {
+    backgroundColor: COLORS.surface,
     padding: SPACING.lg,
-    paddingTop: 40,
+    paddingTop: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  headerContent: {
+    flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  headerText: {
+    marginLeft: SPACING.md,
   },
   headerTitle: {
-    fontSize: 32,
+    fontSize: FONTS.bengaliLarge,
     fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginTop: 12,
+    color: COLORS.textBengali,
   },
   headerSubtitle: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.9)',
-    marginTop: 4,
-  },
-  yearSelector: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: SPACING.md,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: BORDER_RADIUS.md,
-    paddingHorizontal: SPACING.sm,
-  },
-  yearButton: {
-    padding: SPACING.sm,
-  },
-  yearText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginHorizontal: SPACING.md,
+    fontSize: FONTS.md,
+    color: COLORS.textSecondary,
   },
   dateBadge: {
-    flexDirection: 'row',
+    backgroundColor: COLORS.primarySoft,
+    padding: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: BORDER_RADIUS.round,
-    marginTop: 16,
   },
-  dateText: {
-    fontSize: 14,
-    color: '#FFFFFF',
-    marginLeft: 8,
+  dateBengali: {
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.primary,
+  },
+  dateEnglish: {
+    fontSize: FONTS.sm,
+    color: COLORS.textSecondary,
+    marginTop: 2,
   },
   section: {
     padding: SPACING.md,
+    paddingBottom: SPACING.lg,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: COLORS.text,
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
     marginBottom: SPACING.md,
   },
-  panchangList: {
-    gap: SPACING.sm,
+  sectionTitle: {
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+  },
+  panchangGrid2x2: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginHorizontal: -SPACING.xs,
   },
   panchangCard: {
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
-    borderRadius: BORDER_RADIUS.lg,
+    borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     alignItems: 'center',
-    ...SHADOWS.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.xs,
+    width: '45%',
+    marginHorizontal: SPACING.xs,
+    marginVertical: SPACING.xs,
   },
   panchangIcon: {
-    width: 56,
-    height: 56,
+    width: 48,
+    height: 48,
     borderRadius: BORDER_RADIUS.md,
     justifyContent: 'center',
     alignItems: 'center',
@@ -317,45 +300,53 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   panchangLabel: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: FONTS.sm,
     color: COLORS.textSecondary,
   },
   panchangValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: COLORS.text,
-    marginTop: 4,
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+    marginTop: 2,
   },
   panchangValueEn: {
-    fontSize: 12,
+    fontSize: FONTS.sm,
+    color: COLORS.textMuted,
+    marginTop: 1,
+  },
+  endTime: {
+    fontSize: FONTS.xs,
     color: COLORS.textMuted,
     marginTop: 2,
   },
-  sunMoonList: {
-    gap: SPACING.sm,
+  sunMoonGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginHorizontal: -SPACING.xs,
   },
   sunMoonCard: {
-    flexDirection: 'row',
+    width: '45%',
     backgroundColor: COLORS.surface,
-    borderRadius: BORDER_RADIUS.lg,
+    borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
+    marginHorizontal: SPACING.xs,
+    marginVertical: SPACING.xs,
     alignItems: 'center',
-    ...SHADOWS.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.xs,
   },
-  sunMoonInfo: {
-    flex: 1,
-  },
+  
   sunMoonLabel: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: FONTS.bengaliSmall,
     color: COLORS.textSecondary,
+    marginTop: SPACING.xs,
   },
   sunMoonValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: COLORS.text,
-    marginTop: 4,
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+    marginTop: 2,
   },
   timesContainer: {
     gap: SPACING.sm,
@@ -367,9 +358,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
-    ...SHADOWS.sm,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.xs,
   },
-  timeCardLeft: {
+  timeLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
@@ -377,49 +370,44 @@ const styles = StyleSheet.create({
   timeIcon: {
     width: 36,
     height: 36,
-    borderRadius: 18,
+    borderRadius: BORDER_RADIUS.sm,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: SPACING.md,
   },
-  timeTextContainer: {
+  timeInfo: {
     flex: 1,
   },
-  timeName: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: COLORS.text,
-  },
   timeNameBn: {
-    fontSize: 13,
+    fontSize: FONTS.bengali,
+    fontWeight: '600',
+    color: COLORS.textBengali,
+  },
+  timeNameEn: {
+    fontSize: FONTS.sm,
     color: COLORS.textSecondary,
   },
   timeValue: {
-    fontSize: 14,
+    fontSize: FONTS.bengali,
     fontWeight: '600',
     color: COLORS.text,
   },
-  referenceGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginHorizontal: -SPACING.xs,
-  },
-  referenceItem: {
-    width: '23%',
-    backgroundColor: COLORS.surface,
-    borderRadius: BORDER_RADIUS.md,
-    padding: SPACING.sm,
-    marginHorizontal: SPACING.xs,
-    marginVertical: SPACING.xs,
+  footerNote: {
+    padding: SPACING.lg,
     alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    marginTop: SPACING.sm,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
   },
-  referenceBn: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: COLORS.text,
-  },
-  referenceEn: {
-    fontSize: 11,
+  footerText: {
+    fontSize: FONTS.bengaliSmall,
     color: COLORS.textSecondary,
+    textAlign: 'center',
+  },
+  footerTextEn: {
+    fontSize: FONTS.xs,
+    color: COLORS.textMuted,
+    marginTop: 2,
   },
 });

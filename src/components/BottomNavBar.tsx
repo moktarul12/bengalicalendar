@@ -1,52 +1,49 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SPACING, BORDER_RADIUS } from '../constants/theme';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS } from '../constants/theme';
+
+type TabType = 'calendar' | 'festivals' | 'panchang' | 'settings';
+
+const tabs: { id: TabType; icon: string; label: string; labelBn: string }[] = [
+  { id: 'calendar', icon: 'calendar', label: 'Calendar', labelBn: 'বর্ষপঞ্জি' },
+  { id: 'festivals', icon: 'ribbon', label: 'Festivals', labelBn: 'উৎসব' },
+  { id: 'panchang', icon: 'book', label: 'Panchang', labelBn: 'পঞ্চাঙ্গ' },
+  { id: 'settings', icon: 'settings', label: 'Settings', labelBn: 'সেটিং' },
+];
 
 interface BottomNavBarProps {
-  activeTab: 'calendar' | 'festivals' | 'panchang' | 'settings';
-  onTabChange: (tab: 'calendar' | 'festivals' | 'panchang' | 'settings') => void;
+  activeTab: TabType;
+  onTabChange: (tabId: TabType) => void;
 }
-
-const tabs = [
-  { id: 'calendar', icon: 'calendar', label: 'Calendar', labelBn: 'ক্যালেন্ডার' },
-  { id: 'festivals', icon: 'ribbon', label: 'Festivals', labelBn: 'উৎসব' },
-  { id: 'panchang', icon: 'moon', label: 'Panchang', labelBn: 'পঞ্জিকা' },
-  { id: 'settings', icon: 'settings', label: 'Settings', labelBn: 'সেটিংস' },
-] as const;
 
 export default function BottomNavBar({ activeTab, onTabChange }: BottomNavBarProps) {
   return (
-    <SafeAreaView edges={['bottom']}>
-      <View style={styles.container}>
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <TouchableOpacity
-              key={tab.id}
-              style={styles.tab}
-              onPress={() => onTabChange(tab.id)}
-              activeOpacity={0.7}
-            >
-              <View style={[styles.iconContainer, isActive && styles.activeIconContainer]}>
-                <Ionicons
-                  name={tab.icon as any}
-                  size={24}
-                  color={isActive ? COLORS.primary : COLORS.textSecondary}
-                />
-              </View>
-              <Text style={[styles.label, isActive && styles.activeLabel]}>
-                {tab.label}
-              </Text>
-              <Text style={[styles.labelBn, isActive && styles.activeLabelBn]}>
-                {tab.labelBn}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab.id;
+        return (
+          <TouchableOpacity
+            key={tab.id}
+            style={[styles.tab, isActive && styles.activeTab]}
+            onPress={() => onTabChange(tab.id as TabType)}
+            activeOpacity={0.7}
+          >
+            <Ionicons
+              name={tab.icon as any}
+              size={24}
+              color={isActive ? COLORS.primary : COLORS.textMuted}
+            />
+            <Text style={[styles.tabLabel, isActive && styles.activeTabLabel]}>
+              {tab.label}
+            </Text>
+            <Text style={[styles.tabLabelBn, isActive && styles.activeTabLabelBn]}>
+              {tab.labelBn}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
   );
 }
 
@@ -55,40 +52,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
-    paddingVertical: SPACING.sm,
-    paddingBottom: SPACING.md,
-    marginBottom: 4,
+    borderTopColor: COLORS.border,
+    paddingBottom: 0,
+    ...SHADOWS.md,
   },
   tab: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.xs,
   },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+  activeTab: {
+    backgroundColor: COLORS.primarySoft,
   },
-  activeIconContainer: {
-    backgroundColor: `${COLORS.primary}15`,
-  },
-  label: {
-    fontSize: 11,
-    color: COLORS.textSecondary,
-    marginTop: 2,
-  },
-  labelBn: {
-    fontSize: 10,
+  tabLabel: {
+    fontSize: FONTS.xs,
     color: COLORS.textMuted,
+    marginTop: 2,
+    fontWeight: '500',
   },
-  activeLabel: {
+  activeTabLabel: {
     color: COLORS.primary,
     fontWeight: '600',
   },
-  activeLabelBn: {
+  tabLabelBn: {
+    fontSize: FONTS.bengaliSmall,
+    color: COLORS.textMuted,
+    marginTop: 1,
+  },
+  activeTabLabelBn: {
     color: COLORS.primary,
   },
 });

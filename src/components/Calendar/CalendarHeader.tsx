@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, SPACING, BORDER_RADIUS } from '../../constants/theme';
+import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../../constants/theme';
 import { BENGALI_MONTHS, toBengaliNumber } from '../../constants/bengaliCalendar';
 
 interface CalendarHeaderProps {
@@ -37,67 +36,42 @@ export default function CalendarHeader({
   
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary, COLORS.primaryDark]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.gradient}
-      >
-        {/* Navigation Controls */}
-        <View style={styles.navRow}>
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={onPrevMonth}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
-          >
-            <Ionicons name="arrow-back-circle-outline" size={32} color="#FFFFFF" />
-          </TouchableOpacity>
+      {/* Navigation Controls */}
+      <View style={styles.navRow}>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={onPrevMonth}
+          hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+        >
+          <Ionicons name="chevron-back" size={28} color={COLORS.primary} />
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.dateContainer} onPress={onMonthYearPress} activeOpacity={0.7}>
-            {calendarType === 'gregorian' ? (
-              <>
-                <Text style={styles.monthText}>{monthName}</Text>
-                <Text style={styles.yearText}>{year}</Text>
-              </>
-            ) : (
-              <>
-                <Text style={styles.monthText}>{bengaliMonthData?.name}</Text>
-                <Text style={styles.yearText}>{toBengaliNumber(bengaliYear)}</Text>
-                <Text style={styles.secondaryDateText}>{monthName} {year}</Text>
-              </>
-            )}
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.dateContainer} onPress={onMonthYearPress} activeOpacity={0.7}>
+          {calendarType === 'gregorian' ? (
+            <>
+              <Text style={styles.monthText}>{monthName}</Text>
+              <Text style={styles.yearText}>{year}</Text>
+              <Text style={styles.bengaliDateText}>
+                {bengaliMonthData?.name} {toBengaliNumber(bengaliYear)}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={styles.monthText}>{bengaliMonthData?.name}</Text>
+              <Text style={styles.yearText}>{toBengaliNumber(bengaliYear)}</Text>
+              <Text style={styles.secondaryDateText}>{monthName} {year}</Text>
+            </>
+          )}
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={onNextMonth}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
-          >
-            <Ionicons name="arrow-forward-circle-outline" size={32} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-
-        {/* Today Button - Only show when not in current month */}
-        {!isCurrentMonth && (
-          <TouchableOpacity
-            style={styles.todayButton}
-            onPress={onToday}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="today-outline" size={14} color={COLORS.primary} />
-            <Text style={styles.todayText}>Today</Text>
-          </TouchableOpacity>
-        )}
-
-        {/* Bengali Date Display (when in Gregorian mode) */}
-        {calendarType === 'gregorian' && (
-          <View style={styles.bengaliDateContainer}>
-            <Text style={styles.bengaliDateText}>
-              {bengaliMonthData?.name} {toBengaliNumber(bengaliYear)}
-            </Text>
-          </View>
-        )}
-      </LinearGradient>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={onNextMonth}
+          hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+        >
+          <Ionicons name="chevron-forward" size={28} color={COLORS.primary} />
+        </TouchableOpacity>
+      </View>
 
       {/* Week Day Headers */}
       <View style={styles.weekDaysRow}>
@@ -136,25 +110,20 @@ export default function CalendarHeader({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.surface,
-  },
-  gradient: {
-    paddingTop: 16,
-    paddingBottom: 14,
-    paddingHorizontal: SPACING.md,
-    alignItems: 'center',
-    minHeight: 100,
+    paddingVertical: SPACING.sm,
   },
   navRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%',
+    paddingHorizontal: SPACING.md,
+    marginBottom: SPACING.sm,
   },
   navButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'transparent',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.primarySoft,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -163,75 +132,41 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   monthText: {
-    fontSize: 24,
+    fontSize: FONTS.xl,
     fontWeight: 'bold',
-    color: '#FFFFFF',
-    letterSpacing: 0.5,
+    color: COLORS.text,
   },
   yearText: {
-    fontSize: 20,
-    color: 'rgba(255, 255, 255, 0.95)',
-    marginTop: 1,
-    fontWeight: '500',
-  },
-  secondaryDateText: {
-    fontSize: 11,
-    color: 'rgba(255, 255, 255, 0.85)',
+    fontSize: FONTS.md,
+    color: COLORS.textSecondary,
     marginTop: 2,
-    fontWeight: '400',
-  },
-  bengaliDateContainer: {
-    marginTop: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: BORDER_RADIUS.round,
   },
   bengaliDateText: {
-    fontSize: 13,
-    color: 'rgba(255, 255, 255, 0.95)',
-    fontWeight: '500',
+    fontSize: FONTS.bengaliSmall,
+    color: COLORS.textMuted,
+    marginTop: 2,
   },
-  todayButton: {
-    position: 'absolute',
-    bottom: 8,
-    right: 56,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: BORDER_RADIUS.round,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  todayText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: COLORS.primary,
-    marginLeft: 4,
+  secondaryDateText: {
+    fontSize: FONTS.sm,
+    color: COLORS.textMuted,
+    marginTop: 2,
   },
   weekDaysRow: {
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    paddingVertical: SPACING.xs,
+    paddingHorizontal: SPACING.xs,
   },
   weekDayCell: {
     flex: 1,
     alignItems: 'center',
   },
   weekDayText: {
-    fontSize: 12,
+    fontSize: FONTS.sm,
     fontWeight: '600',
     color: COLORS.textSecondary,
-    letterSpacing: 0.3,
   },
   weekendText: {
-    color: COLORS.weekend,
+    color: COLORS.festivalNational,
   },
 });

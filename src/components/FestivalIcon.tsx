@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, BORDER_RADIUS } from '../constants/theme';
 
 interface FestivalIconProps {
@@ -9,33 +10,38 @@ interface FestivalIconProps {
   marginRight?: number;
 }
 
-// Creative emoji mapping for festivals
-const iconMapping: { [key: string]: string } = {
-  'pohela-boishakh.svg': '🥁',     // Dhak - iconic Bengali New Year sound
-  'durga-puja.svg': '🪔',          // Pujo vibe (or use 🐅 if you want Durga-specific)
-  'kali-puja.svg': '🕯️',          // Night पूजा + deep devotion
-  'diwali.svg': '✨',              // Lights (less overlap with Kali Puja)
-  'christmas.svg': '🎄',           // Park Street Christmas vibe
-  'independence-day.svg': '🇮🇳',   // Indian flag
-  'victory-day.svg': '🎖️',         // Bangladesh Victory Day feel
-  'eid-ul-fitr.svg': '🕌',         // Mosque (more community-centric)
-  'eid-ul-adha.svg': '🐐',         // Qurbani (goat more common locally)
-  'saraswati-puja.svg': '🪶',      // White/youth vibe (alt: 📖 for studies)
-  'holi.svg': '🌸',                // Dol Jatra (flower + softer aesthetic)
-  'rakhi.svg': '🧵',               // Rakhi thread
-  'navratri.svg': '🔱',            // Shakti symbol (closer to Durga roots)
-  'janmashtami.svg': '🪈',         // Krishna’s flute (much clearer than 🎭)
-  'basant-panchami.svg': '🌼',     // Yellow spring (very Bengali)
-  'makar-sankranti.svg': '🍚',     // Pithe-puli (food = strong Bengal identity)
+// Icon mapping for festivals using Ionicons
+const getIconName = (iconPath: string): keyof typeof Ionicons.glyphMap => {
+  const iconMap: { [key: string]: keyof typeof Ionicons.glyphMap } = {
+    'pohela-boishakh.svg': 'musical-notes',
+    'durga-puja.svg': 'flame',
+    'kali-puja.svg': 'moon',
+    'diwali.svg': 'sunny',
+    'christmas.svg': 'star',
+    'independence-day.svg': 'flag',
+    'victory-day.svg': 'medal',
+    'eid-ul-fitr.svg': 'moon-outline',
+    'eid-ul-adha.svg': 'paw',
+    'saraswati-puja.svg': 'book',
+    'holi.svg': 'color-palette',
+    'rakhi.svg': 'heart',
+    'navratri.svg': 'flower',
+    'janmashtami.svg': 'musical-note',
+    'basant-panchami.svg': 'flower-outline',
+    'makar-sankranti.svg': 'airplane',
+  };
+  
+  return iconMap[iconPath] || 'star';
 };
 
 export default function FestivalIcon({ iconPath, color, size = 64, marginRight = 0 }: FestivalIconProps) {
-  const emoji = iconMapping[iconPath] || '🎊';
+  const iconName = getIconName(iconPath);
+  const iconSize = size * 0.5;
   
   return (
     <View style={[styles.iconContainer, { width: size, height: size, marginRight }]}>
-      <View style={[styles.iconBackground, { backgroundColor: color + '20' }]}>
-        <Text style={[styles.emoji, { fontSize: size * 0.5 }]}>{emoji}</Text>
+      <View style={[styles.iconBackground, { backgroundColor: color + '15', borderColor: color }]}>
+        <Ionicons name={iconName} size={iconSize} color={color} />
       </View>
     </View>
   );
@@ -45,17 +51,12 @@ const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: BORDER_RADIUS.lg,
   },
   iconBackground: {
-    width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: BORDER_RADIUS.lg,
     borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  emoji: {
-    textAlign: 'center',
   },
 });
