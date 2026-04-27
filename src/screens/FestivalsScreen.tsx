@@ -11,15 +11,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS } from '../constants/theme';
 import { Festival, FESTIVALS } from '../constants/festivals';
 import FestivalIcon from '../components/FestivalIcon';
-import FestivalDetailModal from '../components/FestivalDetailModal';
+import FestivalDetailScreen from './FestivalDetailScreen';
 
 type FilterType = 'all' | 'religious' | 'cultural' | 'national' | 'seasonal';
 
 export default function FestivalsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [modalVisible, setModalVisible] = useState(false);
   const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
+  const [showFestivalDetail, setShowFestivalDetail] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
@@ -57,7 +57,7 @@ export default function FestivalsScreen() {
 
   const handleFestivalPress = (festival: Festival) => {
     setSelectedFestival(festival);
-    setModalVisible(true);
+    setShowFestivalDetail(true);
   };
 
   const renderFestivalItem = ({ item }: { item: Festival }) => (
@@ -121,8 +121,20 @@ export default function FestivalsScreen() {
     </View>
   );
 
+  if (showFestivalDetail && selectedFestival) {
+    return (
+      <FestivalDetailScreen
+        festival={selectedFestival}
+        onBack={() => setShowFestivalDetail(false)}
+        language="bn"
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
+      <View style={styles.headerDecoration} />
+      <View style={styles.headerDecoration2} />
       {renderHeader()}
       {renderFilterTabs()}
 
@@ -140,12 +152,6 @@ export default function FestivalsScreen() {
           </View>
         }
       />
-
-      <FestivalDetailModal
-        festival={selectedFestival}
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-      />
     </View>
   );
 }
@@ -155,6 +161,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  headerDecoration: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: COLORS.primary + '15',
+    marginRight: -80,
+    marginTop: -80,
+  },
+  headerDecoration2: {
+    position: 'absolute',
+    top: 50,
+    left: 0,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: COLORS.secondary + '15',
+    marginLeft: -50,
+  },
   header: {
     padding: SPACING.lg,
     paddingTop: 20,
@@ -163,6 +190,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
+    position: 'relative',
+    overflow: 'hidden',
   },
   headerText: {
     marginLeft: SPACING.md,

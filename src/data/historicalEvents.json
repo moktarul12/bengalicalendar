@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "h1",
     "day": 21,
     "month": 2,
     "year": 1952,
@@ -8,19 +8,11 @@
     "titleEn": "Language Movement Day",
     "type": "historical",
     "color": "#C41E3A",
-    "details": {
-      "descriptionBn": "১৯৫২ সালের ২১ ফেব্রুয়ারি বাংলাদেশের ভাষা আন্দোলনের এক গুরুত্বপূর্ণ দিন। পাকিস্তান সরকার উর্দুকে রাষ্ট্রভাষা ঘোষণা করলে বাঙালিরা এর প্রতিবাদে বের হয়।",
-      "descriptionEn": "February 21, 1952 marks the Language Movement Day in Bangladesh. When Pakistan declared Urdu as the state language, Bengalis protested for their mother tongue rights.",
-      "significanceBn": "এটি বাঙালি জাতির আত্মপরিচয় ও সাংস্কৃতিক অধিকার রক্ষার প্রতীক। এই আন্দোলন থেকেই বাংলাদেশের স্বাধীনতা আন্দোলনের সূত্রপাত ঘটে।",
-      "significanceEn": "This day symbolizes Bengali identity and cultural rights. The movement eventually led to the independence of Bangladesh.",
-      "keyFiguresBn": "আব্দুল জব্বার, আবুল বরকত, রফিকউদ্দিন আহমেদ, আব্দুল লতিফ এবং শফিউর রহমান - এরা সবাই ভাষা শহীদ।",
-      "keyFiguresEn": "Abdul Jabbar, Abul Barkat, Rafiq Uddin Ahmed, Abdul Latif, and Shafiur Rahman - all language martyrs.",
-      "legacyBn": "২১ ফেব্রুয়ারি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে পালিত হয়। শহীদ মিনার বাংলাদেশের জাতীয় প্রতীক।",
-      "legacyEn": "February 21 is now celebrated as International Mother Language Day. The Shaheed Minar is Bangladesh's national symbol."
-    }
+    "descriptionBn": "১৯৫২ সালের ২১ ফেব্রুয়ারি বাংলা ভাষার জন্য আত্মত্যাগের দিন।",
+    "descriptionEn": "February 21, 1952 marks the sacrifice for the Bengali language."
   },
   {
-    "id": "2",
+    "id": "h2",
     "day": 26,
     "month": 3,
     "year": 1971,
@@ -28,55 +20,115 @@
     "titleEn": "Independence Day",
     "type": "historical",
     "color": "#1E3A5F",
-    "details": {
-      "descriptionBn": "১৯৭১ সালের ২৬ মার্চ বাংলাদেশ স্বাধীনতা ঘোষণা করে। বঙ্গবন্ধু শেখ মুজিবুর রহমান স্বাধীনতার ঘোষণা দেন।",
-      "descriptionEn": "On March 26, 1971, Bangladesh declared independence. Bangabandhu Sheikh Mujibur Rahman announced the independence.",
-      "significanceBn": "বাংলাদেশের স্বাধীনতা অর্জনের সূচনা। নয় মাসের মুক্তিযুদ্ধের শুরু।",
-      "significanceEn": "The beginning of Bangladesh's independence. Start of the nine-month liberation war.",
-      "keyFiguresBn": "বঙ্গবন্ধু শেখ মুজিবুর রহমান, তাজউদ্দিন আহমেদ, সৈয়দ নজরুল ইসলাম।",
-      "keyFiguresEn": "Bangabandhu Sheikh Mujibur Rahman, Tajuddin Ahmed, Syed Nazrul Islam.",
-      "legacyBn": "বাংলাদেশের সবচেয়ে গুরুত্বপূর্ণ জাতীয় দিবস। জাতীয় পতাকা উত্তোলিত হয়।",
-      "legacyEn": "Bangladesh's most important national day. The national flag is hoisted."
-    }
+    "descriptionBn": "বাংলাদেশের স্বাধীনতা সংগ্রামের সূচনা দিবস।",
+    "descriptionEn": "The start of Bangladesh's struggle for independence."
   },
   {
-    "id": "3",
+    "id": "h3",
+    "day": 14,
+    "month": 4,
+    "year": 1431,
+    "titleBn": "পহেলা বৈশাখ",
+    "titleEn": "Pohela Boishakh",
+    "type": "cultural",
+    "color": "#D4A017",
+    "descriptionBn": "বাঙালির প্রাণের উৎসব বাংলা নববর্ষ।",
+    "descriptionEn": "Bengali New Year, the biggest cultural festival of Bengalis."
+  },
+  {
+    "id": "h4",
     "day": 16,
     "month": 12,
     "year": 1971,
     "titleBn": "বিজয় দিবস",
     "titleEn": "Victory Day",
     "type": "historical",
-    "color": "#1E3A5F",
-    "details": {
-      "descriptionBn": "১৯৭১ সালের ১৬ ডিসেম্বর বাংলাদেশ মুক্তিযুদ্ধে বিজয় অর্জন করে। পাকিস্তানি বাহিনী আত্মসমর্পণ করে।",
-      "descriptionEn": "On December 16, 1971, Bangladesh won the liberation war. Pakistani forces surrendered.",
-      "significanceBn": "বাংলাদেশের স্বাধীনতা সম্পূর্ণ হয়। নয় মাসের রক্তক্ষয়ী যুদ্ধের সমাপ্তি।",
-      "significanceEn": "Complete independence of Bangladesh. End of nine months of bloody war.",
-      "keyFiguresBn": "জেনারেল এম এ জি ওসমানী, জেনারেল আতাউল গণি ওসমানী, বঙ্গবন্ধু শেখ মুজিবুর রহমান।",
-      "keyFiguresEn": "General M A G Osmani, General Ataul Ghani Osmani, Bangabandhu Sheikh Mujibur Rahman.",
-      "legacyBn": "স্বাধীন সার্বভৌম রাষ্ট্র হিসেবে বাংলাদেশ বিশ্বে আত্মপ্রকাশ করে।",
-      "legacyEn": "Bangladesh emerged as an independent sovereign nation in the world."
-    }
+    "color": "#228B22",
+    "descriptionBn": "নয় মাসের রক্তক্ষয়ী যুদ্ধের পর বিজয়ের দিন।",
+    "descriptionEn": "Victory Day after a nine-month long liberation war."
   },
   {
-    "id": "4",
-    "day": 14,
-    "month": 4,
-    "year": 1971,
-    "titleBn": "পয়লা বৈশাখ",
-    "titleEn": "Pohela Boishakh",
-    "type": "cultural",
+    "id": "h5",
+    "day": 25,
+    "month": 12,
+    "year": 0,
+    "titleBn": "বড়দিন",
+    "titleEn": "Christmas",
+    "type": "religious",
+    "color": "#C41E3A",
+    "descriptionBn": "যিশু খ্রিস্টের জন্মদিন।",
+    "descriptionEn": "The birth of Jesus Christ."
+  },
+  {
+    "id": "h6",
+    "day": 1,
+    "month": 5,
+    "year": 0,
+    "titleBn": "মে দিবস",
+    "titleEn": "May Day",
+    "type": "national",
+    "color": "#C41E3A",
+    "descriptionBn": "আন্তর্জাতিক শ্রমিক দিবস।",
+    "descriptionEn": "International Workers' Day."
+  },
+  {
+    "id": "h7",
+    "day": 8,
+    "month": 5,
+    "year": 1861,
+    "titleBn": "রবীন্দ্রনাথ ঠাকুরের জন্মদিন",
+    "titleEn": "Rabindranath Tagore's Birthday",
+    "type": "person",
     "color": "#D4A017",
-    "details": {
-      "descriptionBn": "বাংলা নববর্ষের প্রথম দিন। এই দিনে ১৯৭১ সালে পাকিস্তানি বাহিনী গণহত্যা চালায়।",
-      "descriptionEn": "First day of Bengali New Year. On this day in 1971, Pakistani forces carried out mass killings.",
-      "significanceBn": "বাঙালি সংস্কৃতির অঙ্গ। একই সাথে উৎসব ও শোকের দিন।",
-      "significanceEn": "Part of Bengali culture. A day of both celebration and mourning.",
-      "keyFiguresBn": "সাধারণ মানুষ, মুক্তিযোদ্ধা, শিল্পী ও সাংস্কৃতিক কর্মী।",
-      "keyFiguresEn": "Common people, freedom fighters, artists, and cultural activists.",
-      "legacyBn": "মঙ্গল শোভাযাত্রা, হালখাতা, পান্তা ভাত - এসব ঐতিহ্য চলে আসছে।",
-      "legacyEn": "Mangal Shobhajatra, Halkhata, Panta Bhat - these traditions continue."
-    }
+    "descriptionBn": "বিশ্বকবি রবীন্দ্রনাথ ঠাকুরের ১৬৩তম জন্মবার্ষিকী। তিনি ছিলেন প্রথম এশীয় নোবেল বিজয়ী সাহিত্যিক।",
+    "descriptionEn": "163rd birth anniversary of Rabindranath Tagore, the first Asian Nobel laureate in Literature."
+  },
+  {
+    "id": "h8",
+    "day": 25,
+    "month": 5,
+    "year": 1899,
+    "titleBn": "কাজী নজরুল ইসলামের জন্মদিন",
+    "titleEn": "Kazi Nazrul Islam's Birthday",
+    "type": "person",
+    "color": "#1E3A5F",
+    "descriptionBn": "বাংলাদেশের জাতীয় কবি ও বিদ্রোহী কবি কাজী নজরুল ইসলামের জন্মবার্ষিকী।",
+    "descriptionEn": "Birth anniversary of Kazi Nazrul Islam, the national poet of Bangladesh and the Rebel Poet."
+  },
+  {
+    "id": "h9",
+    "day": 17,
+    "month": 3,
+    "year": 1920,
+    "titleBn": "বঙ্গবন্ধুর জন্মদিন",
+    "titleEn": "Bangabandhu's Birthday",
+    "type": "person",
+    "color": "#C41E3A",
+    "descriptionBn": "জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের জন্মবার্ষিকী ও জাতীয় শিশু দিবস।",
+    "descriptionEn": "Birth anniversary of Father of the Nation Bangabandhu Sheikh Mujibur Rahman and National Children's Day."
+  },
+  {
+    "id": "h10",
+    "day": 14,
+    "month": 12,
+    "year": 1971,
+    "titleBn": "শহীদ বুদ্ধিজীবী দিবস",
+    "titleEn": "Martyred Intellectuals Day",
+    "type": "historical",
+    "color": "#8B0000",
+    "descriptionBn": "১৯৭১ সালের এই দিনে পাকিস্তানি বাহিনী ও তাদের দোসররা বাংলাদেশের শ্রেষ্ঠ সন্তানদের হত্যা করে।",
+    "descriptionEn": "On this day in 1971, Pakistani forces and their collaborators killed the finest intellectuals of Bangladesh."
+  },
+  {
+    "id": "h11",
+    "day": 10,
+    "month": 1,
+    "year": 1972,
+    "titleBn": "বঙ্গবন্ধুর স্বদেশ প্রত্যাবর্তন দিবস",
+    "titleEn": "Bangabandhu's Homecoming Day",
+    "type": "historical",
+    "color": "#1E3A5F",
+    "descriptionBn": "পাকিস্তানের কারাগার থেকে মুক্তি পেয়ে বঙ্গবন্ধু স্বাধীন বাংলাদেশে ফিরে আসেন।",
+    "descriptionEn": "After being released from prison in Pakistan, Bangabandhu returned to independent Bangladesh."
   }
 ]

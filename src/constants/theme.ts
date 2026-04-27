@@ -21,7 +21,7 @@ export const COLORS = {
   accentLight: '#32CD32',
   accentSoft: '#F0FFF0',
 
-  // ===== BACKGROUND - Old Paper/Cream =====
+  // ===== BACKGROUND - Old Paper/Cream (Parchment) =====
   background: '#FDF5E6',        // Old parchment color
   backgroundAlt: '#FAF0E6',
   surface: '#FFFFFF',

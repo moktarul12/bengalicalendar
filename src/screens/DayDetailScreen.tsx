@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, toBengaliNumeral } from '../constants/theme';
 import { gregorianToBengali } from '../constants/bengaliCalendar';
@@ -20,8 +20,27 @@ interface DayDetailScreenProps {
 
 export default function DayDetailScreen({ visible, day, month, year, onClose, onEventPress }: DayDetailScreenProps) {
   const { language } = useLanguage();
-  const events = getEventsByDate(day, month, year);
+  const [events, setEvents] = useState<DayEvent[]>([]);
+  const [loading, setLoading] = useState(false);
   const bengaliDate = gregorianToBengali(day, month, year);
+
+  useEffect(() => {
+    if (visible) {
+      loadEvents();
+    }
+  }, [visible, day, month, year]);
+
+  const loadEvents = async () => {
+    setLoading(true);
+    try {
+      const eventsData = await getEventsByDate(day, month, year);
+      setEvents(eventsData);
+    } catch (error) {
+      console.error('Error loading events:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEventPress = (event: DayEvent) => {
     onEventPress?.(event);
@@ -67,13 +86,10 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
       onRequestClose={onClose}
     >
       <View style={styles.modalContainer}>
+        <Pressable style={styles.backdrop} onPress={onClose} />
         <View style={styles.modalContent}>
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-              <Ionicons name="close" size={24} color={COLORS.text} />
-            </TouchableOpacity>
-            
             <View style={styles.headerContent}>
               <View style={styles.dateDisplay}>
                 <Text style={styles.dayNumber}>{day}</Text>
@@ -90,11 +106,21 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
                 <Text style={styles.yearText}>{year}</Text>
               </View>
             </View>
+            <TouchableOpacity style={styles.closeButton} onPress={onClose} hitSlop={12}>
+              <Ionicons name="close" size={24} color={COLORS.text} />
+            </TouchableOpacity>
           </View>
 
           {/* Events List */}
           <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
-            {events.length === 0 ? (
+            {loading ? (
+              <View style={styles.loadingState}>
+                <ActivityIndicator size="large" color={COLORS.primary} />
+                <Text style={styles.loadingText}>
+                  {language === 'bn' ? 'লোড হচ্ছে...' : 'Loading...'}
+                </Text>
+              </View>
+            ) : events.length === 0 ? (
               <View style={styles.emptyState}>
                 <Ionicons name="calendar-outline" size={48} color={COLORS.textMuted} />
                 <Text style={styles.emptyText}>
@@ -138,8 +164,11 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
+    flexDirection: 'column',
+  },
+  backdrop: {
+    flex: 1,
     backgroundColor: COLORS.overlay,
-    justifyContent: 'flex-end',
   },
   modalContent: {
     backgroundColor: COLORS.background,
@@ -149,27 +178,27 @@ const styles = StyleSheet.create({
     ...SHADOWS.lg,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: SPACING.lg,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
   },
   closeButton: {
-    position: 'absolute',
-    top: SPACING.md,
-    right: SPACING.md,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: COLORS.surface,
     justifyContent: 'center',
     alignItems: 'center',
     ...SHADOWS.xs,
   },
   headerContent: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: SPACING.sm,
   },
   dateDisplay: {
     flexDirection: 'row',
@@ -219,6 +248,15 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.xxxl,
   },
   emptyText: {
+    fontSize: FONTS.body,
+    color: COLORS.textMuted,
+    marginTop: SPACING.md,
+  },
+  loadingState: {
+    alignItems: 'center',
+    paddingVertical: SPACING.xxxl,
+  },
+  loadingText: {
     fontSize: FONTS.body,
     color: COLORS.textMuted,
     marginTop: SPACING.md,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, SPACING, BORDER_RADIUS } from '../constants/theme';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
 
 interface CalendarTypeToggleProps {
   value: 'gregorian' | 'bengali';
@@ -17,21 +17,16 @@ export default function CalendarTypeToggle({ value, onChange }: CalendarTypeTogg
           value === 'gregorian' && styles.activeTab,
         ]}
         onPress={() => onChange('gregorian')}
-        activeOpacity={0.7}
+        activeOpacity={0.8}
       >
-        {value === 'gregorian' && (
-          <LinearGradient
-            colors={[COLORS.primary, COLORS.secondary]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.gradient}
-          >
-            <Text style={styles.activeText}>English</Text>
-          </LinearGradient>
-        )}
-        {value !== 'gregorian' && (
-          <Text style={styles.inactiveText}>English</Text>
-        )}
+        <View style={styles.tabContent}>
+          <Ionicons
+            name="language"
+            size={14}
+            color={value === 'gregorian' ? COLORS.textInverse : COLORS.textSecondary}
+          />
+          <Text style={value === 'gregorian' ? styles.activeText : styles.inactiveText}>EN</Text>
+        </View>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -40,21 +35,16 @@ export default function CalendarTypeToggle({ value, onChange }: CalendarTypeTogg
           value === 'bengali' && styles.activeTab,
         ]}
         onPress={() => onChange('bengali')}
-        activeOpacity={0.7}
+        activeOpacity={0.8}
       >
-        {value === 'bengali' && (
-          <LinearGradient
-            colors={[COLORS.primary, COLORS.secondary]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.gradient}
-          >
-            <Text style={styles.activeText}>বাংলা</Text>
-          </LinearGradient>
-        )}
-        {value !== 'bengali' && (
-          <Text style={styles.inactiveText}>বাংলা</Text>
-        )}
+        <View style={styles.tabContent}>
+          <Ionicons
+            name="book"
+            size={14}
+            color={value === 'bengali' ? COLORS.textInverse : COLORS.textSecondary}
+          />
+          <Text style={value === 'bengali' ? styles.activeText : styles.inactiveText}>বাংলা</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -63,41 +53,42 @@ export default function CalendarTypeToggle({ value, onChange }: CalendarTypeTogg
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: COLORS.background,
+    backgroundColor: COLORS.surfaceAlt,
     borderRadius: BORDER_RADIUS.round,
     padding: 4,
-    marginHorizontal: SPACING.md,
-    marginVertical: SPACING.sm,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.xs,
   },
   tab: {
     flex: 1,
-    height: 40,
+    height: 38,
     borderRadius: BORDER_RADIUS.round,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
   },
   activeTab: {
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    backgroundColor: COLORS.primary,
+    ...SHADOWS.sm,
   },
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
+  tabContent: {
+    flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
+    gap: 7,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
   },
   activeText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '700',
+    color: COLORS.textInverse,
+    letterSpacing: 0.2,
   },
   inactiveText: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 13,
+    fontWeight: '700',
     color: COLORS.textSecondary,
+    letterSpacing: 0.2,
   },
 });

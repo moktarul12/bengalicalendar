@@ -15,6 +15,7 @@ export interface Festival {
   icon: string;
   color: string;
   isPublicHoliday: boolean;
+  imageUrl?: string;
   details?: {
     longDescription: { bn: string; en: string };
     significance: { bn: string; en: string };
@@ -47,6 +48,7 @@ export const FESTIVALS: Festival[] = festivalsData.festivals.flatMap((festival: 
     icon: festival.icon,
     color: festival.color,
     isPublicHoliday: festival.isPublicHoliday,
+    imageUrl: festival.imageUrl,
     details: festival.details,
   }));
 });

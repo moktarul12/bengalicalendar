@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
-  StyleSheet,
-  StatusBar,
   Text,
-  TouchableOpacity,
+  StyleSheet,
   ScrollView,
+  TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,12 +16,14 @@ import CalendarHeader from '../components/Calendar/CalendarHeader';
 import CalendarGrid from '../components/Calendar/CalendarGrid';
 import CalendarTypeToggle from '../components/CalendarTypeToggle';
 import MonthYearPickerModal from '../components/MonthYearPickerModal';
-import FestivalDetailModal from '../components/FestivalDetailModal';
+import UpcomingFestivals from '../components/UpcomingFestivals';
 import DayDetailScreen from './DayDetailScreen';
+import FestivalDetailScreen from './FestivalDetailScreen';
+import EventDetailScreen from './EventDetailScreen';
 import { CalendarDay } from '../types';
 import { Festival } from '../constants/festivals';
 import { DayEvent } from '../types/events';
-import { hasEventsOnDate, getEventsByDate } from '../utils/eventUtils';
+import { getEventsByDate } from '../utils/eventUtils';
 
 interface CalendarScreenProps {
   onDaySelect?: (day: CalendarDay) => void;
@@ -37,8 +39,10 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isMonthYearPickerVisible, setIsMonthYearPickerVisible] = useState(false);
   const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
-  const [festivalModalVisible, setFestivalModalVisible] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<DayEvent | null>(null);
   const [dayDetailVisible, setDayDetailVisible] = useState(false);
+  const [showFestivalDetail, setShowFestivalDetail] = useState(false);
+  const [showEventDetail, setShowEventDetail] = useState(false);
 
   const bengaliDateToday = gregorianToBengali(today.getDate(), today.getMonth() + 1, today.getFullYear());
   const bengaliMonthNameToday = BENGALI_MONTHS[bengaliDateToday.month]?.name || '';
@@ -106,18 +110,46 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
     setIsMonthYearPickerVisible(false);
   }, []);
 
-  const handleFestivalPress = useCallback((festival: Festival) => {
-    setSelectedFestival(festival);
-    setFestivalModalVisible(true);
-  }, []);
-
   const handleEventPress = useCallback((event: DayEvent) => {
-    setDayDetailVisible(false);
     if (event.type === 'festival') {
       setSelectedFestival(event.data as Festival);
-      setFestivalModalVisible(true);
+      setShowFestivalDetail(true);
+    } else {
+      setSelectedEvent(event);
+      setShowEventDetail(true);
     }
   }, []);
+
+  const handleFestivalDateChange = useCallback((festivalId: string, year: number, month: number, day: number) => {
+    // Update the festival date in the local data
+    // This is a placeholder - you may want to persist this to storage or API
+    console.log('Festival date changed:', festivalId, year, month, day);
+    
+    // Refresh the calendar to show updated date
+    setRefreshKey(prev => prev + 1);
+  }, []);
+
+  if (showFestivalDetail && selectedFestival) {
+    return (
+      <FestivalDetailScreen 
+        festival={selectedFestival} 
+        onBack={() => setShowFestivalDetail(false)}
+        language={calendarType === 'bengali' ? 'bn' : 'en'}
+        onDateChange={handleFestivalDateChange}
+        onFestivalSelect={(festival) => setSelectedFestival(festival)}
+      />
+    );
+  }
+
+  if (showEventDetail && selectedEvent) {
+    return (
+      <EventDetailScreen 
+        event={selectedEvent} 
+        onBack={() => setShowEventDetail(false)}
+        language={calendarType === 'bengali' ? 'bn' : 'en'}
+      />
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -126,14 +158,12 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Header - Bengali Date Display */}
         <View style={styles.header}>
+          <View style={styles.headerBackdrop} />
+          <View style={styles.headerShapeA} />
+          <View style={styles.headerShapeB} />
+          <View style={styles.headerShapeC} />
           <View style={styles.headerTopRow}>
             <Text style={styles.greetingText}>{greeting.bn}</Text>
-            {!isCurrentMonth && (
-              <TouchableOpacity style={styles.todayButtonCenter} onPress={goToToday}>
-                <Ionicons name="today" size={16} color={COLORS.primary} />
-                <Text style={styles.todayButtonText}>Today</Text>
-              </TouchableOpacity>
-            )}
             <CalendarTypeToggle
               value={calendarType}
               onChange={handleCalendarTypeChange}
@@ -148,6 +178,12 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
                 <Text style={styles.bengaliYear}>{toBengaliNumeral(bengaliDateToday.year)} বসর</Text>
               </View>
             </View>
+            {!isCurrentMonth && (
+              <TouchableOpacity style={styles.todayButtonCenter} onPress={goToToday}>
+                <Ionicons name="today" size={16} color={COLORS.primary} />
+                <Text style={styles.todayButtonText}>Today</Text>
+              </TouchableOpacity>
+            )}
             <View style={styles.gregorianDateBlock}>
               <Text style={styles.gregorianDay}>{today.getDate()}</Text>
               <Text style={styles.gregorianMonth}>
@@ -182,47 +218,17 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
           />
         </View>
 
-        {/* Today's Events Section */}
-        <View style={styles.eventsSection}>
-          <View style={styles.sectionHeader}>
-            <Ionicons name="sparkles" size={20} color={COLORS.primary} />
-            <Text style={styles.sectionTitle}>আজকের ইভেন্ট</Text>
-          </View>
-          {hasEventsOnDate(today.getDate(), today.getMonth() + 1, today.getFullYear()) ? (
-            getEventsByDate(today.getDate(), today.getMonth() + 1, today.getFullYear()).slice(0, 3).map((event) => (
-              <TouchableOpacity
-                key={event.id}
-                style={styles.eventCard}
-                onPress={() => handleEventPress(event)}
-                activeOpacity={0.7}
-              >
-                <View style={[styles.eventColorBar, { backgroundColor: event.color }]} />
-                <View style={styles.eventContent}>
-                  <Text style={styles.eventTitleBn}>{event.titleBn}</Text>
-                  <Text style={styles.eventTitleEn}>{event.titleEn}</Text>
-                </View>
-                <Ionicons name="chevron-forward" size={18} color={COLORS.textMuted} />
-              </TouchableOpacity>
-            ))
-          ) : (
-            <View style={styles.noEvents}>
-              <Text style={styles.noEventsText}>
-                আজ কোন বিশেষ ইভেন্ট নেই
-              </Text>
-            </View>
-          )}
-        </View>
+        {/* Upcoming Festivals */}
+        <UpcomingFestivals
+          currentMonth={today.getMonth() + 1}
+          currentDay={today.getDate()}
+          currentYear={today.getFullYear()}
+          onFestivalPress={(festival) => {
+            setSelectedFestival(festival);
+            setShowFestivalDetail(true);
+          }}
+        />
       </ScrollView>
-
-      {/* Day Detail Screen */}
-      <DayDetailScreen
-        visible={dayDetailVisible}
-        day={selectedDay?.gregorian.day || today.getDate()}
-        month={currentMonth}
-        year={currentYear}
-        onClose={() => setDayDetailVisible(false)}
-        onEventPress={handleEventPress}
-      />
 
       {/* Month Year Picker Modal */}
       <MonthYearPickerModal
@@ -233,11 +239,14 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
         onClose={handleMonthYearPickerClose}
       />
 
-      {/* Festival Detail Modal */}
-      <FestivalDetailModal
-        festival={selectedFestival}
-        visible={festivalModalVisible}
-        onClose={() => setFestivalModalVisible(false)}
+      {/* Day Detail Screen */}
+      <DayDetailScreen
+        visible={dayDetailVisible}
+        day={selectedDay?.gregorian.day || today.getDate()}
+        month={currentMonth}
+        year={currentYear}
+        onClose={() => setDayDetailVisible(false)}
+        onEventPress={handleEventPress}
       />
     </SafeAreaView>
   );
@@ -257,6 +266,48 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  headerBackdrop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: COLORS.surfaceAlt,
+  },
+  headerShapeA: {
+    position: 'absolute',
+    top: -40,
+    right: -60,
+    width: 180,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: COLORS.primary + '10',
+    transform: [{ rotate: '18deg' }],
+  },
+  headerShapeB: {
+    position: 'absolute',
+    bottom: -55,
+    left: -70,
+    width: 220,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: COLORS.secondary + '10',
+    transform: [{ rotate: '-14deg' }],
+  },
+  headerShapeC: {
+    position: 'absolute',
+    top: 18,
+    left: 24,
+    width: 140,
+    height: 140,
+    borderRadius: 28,
+    borderWidth: 1,
+    borderColor: COLORS.accent + '12',
+    backgroundColor: '#FFFFFF' + '00',
+    transform: [{ rotate: '10deg' }],
   },
   headerTopRow: {
     flexDirection: 'row',
