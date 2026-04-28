@@ -34,7 +34,9 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
     setLoading(true);
     try {
       const eventsData = await getEventsByDate(day, month, year);
-      setEvents(eventsData);
+      // Filter to only keep festivals
+      const festivalsOnly = eventsData.filter(event => event.type === 'festival');
+      setEvents(festivalsOnly);
     } catch (error) {
       console.error('Error loading events:', error);
     } finally {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
+import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS, toBengaliNumeral } from '../constants/theme';
 
 interface MonthYearPickerModalProps {
   visible: boolean;
@@ -135,7 +135,7 @@ export default function MonthYearPickerModal({
                       year === selectedYear && styles.selectedYearText,
                     ]}
                   >
-                    {year}
+                    {!isGregorian ? toBengaliNumeral(year) : year}
                   </Text>
                 </TouchableOpacity>
               ))}
