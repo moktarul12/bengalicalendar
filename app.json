@@ -21,7 +21,7 @@
       }
     },
     "android": {
-      "package": "com.bengalienglishcalendar",
+      "package": "com.dromominds.bengalienglishcalendar",
       "versionCode": 101,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

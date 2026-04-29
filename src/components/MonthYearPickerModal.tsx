@@ -113,38 +113,47 @@ export default function MonthYearPickerModal({
 
           {/* Year Selector */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Year</Text>
+            <Text style={styles.sectionTitle}>
+              {isGregorian ? 'Year' : 'বছর'}
+            </Text>
             <ScrollView
               ref={yearScrollViewRef}
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.yearScroll}
             >
-              {years.map((year) => (
-                <TouchableOpacity
-                  key={year}
-                  style={[
-                    styles.yearItem,
-                    year === selectedYear && styles.selectedYearItem,
-                  ]}
-                  onPress={() => setSelectedYear(year)}
-                >
-                  <Text
+              {years.map((year) => {
+                // For Bengali, we need to show the corresponding Bengali year
+                // Simplified: Gregorian Year - 593 approximately for Bengali year
+                const displayYear = isGregorian ? year : year - 593;
+                return (
+                  <TouchableOpacity
+                    key={year}
                     style={[
-                      styles.yearText,
-                      year === selectedYear && styles.selectedYearText,
+                      styles.yearItem,
+                      year === selectedYear && styles.selectedYearItem,
                     ]}
+                    onPress={() => setSelectedYear(year)}
                   >
-                    {!isGregorian ? toBengaliNumeral(year) : year}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      style={[
+                        styles.yearText,
+                        year === selectedYear && styles.selectedYearText,
+                      ]}
+                    >
+                      {!isGregorian ? toBengaliNumeral(displayYear) : year}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
             </ScrollView>
           </View>
 
           {/* Month Selector */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Month</Text>
+            <Text style={styles.sectionTitle}>
+              {isGregorian ? 'Month' : 'মাস'}
+            </Text>
             <View style={styles.monthGrid}>
               {(isGregorian ? MONTHS : BENGALI_MONTHS).map((month, index) => (
                 <TouchableOpacity

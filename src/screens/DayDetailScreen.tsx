@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, toBengaliNumeral } from '../constants/theme';
-import { gregorianToBengali } from '../constants/bengaliCalendar';
+import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
 import { getEventsByDate } from '../utils/eventUtils';
 import { DayEvent, HistoricalEvent, FamousPerson } from '../types/events';
 import { Festival } from '../constants/festivals';
@@ -16,10 +16,10 @@ interface DayDetailScreenProps {
   year: number;
   onClose: () => void;
   onEventPress?: (event: DayEvent) => void;
+  language: 'bn' | 'en';
 }
 
-export default function DayDetailScreen({ visible, day, month, year, onClose, onEventPress }: DayDetailScreenProps) {
-  const { language } = useLanguage();
+export default function DayDetailScreen({ visible, day, month, year, onClose, onEventPress, language }: DayDetailScreenProps) {
   const [events, setEvents] = useState<DayEvent[]>([]);
   const [loading, setLoading] = useState(false);
   const bengaliDate = gregorianToBengali(day, month, year);
@@ -98,14 +98,19 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
                 <View style={styles.dateSeparator} />
                 <View style={styles.bengaliDateSection}>
                   <Text style={styles.bengaliDay}>{toBengaliNumeral(bengaliDate.day)}</Text>
-                  <Text style={styles.bengaliMonth}>{bengaliDate.month}</Text>
+                  <Text style={styles.bengaliMonth}>{BENGALI_MONTHS[bengaliDate.month]?.name || ''}</Text>
                 </View>
               </View>
               <View style={styles.yearSection}>
                 <Text style={styles.monthName}>
-                  {new Date(year, month - 1).toLocaleDateString('en-US', { month: 'long' })}
+                  {language === 'bn' 
+                    ? BENGALI_MONTHS[bengaliDate.month]?.name || ''
+                    : new Date(year, month - 1).toLocaleDateString('en-US', { month: 'long' })
+                  }
                 </Text>
-                <Text style={styles.yearText}>{year}</Text>
+                <Text style={styles.yearText}>
+                  {language === 'bn' ? toBengaliNumeral(bengaliDate.year) : year}
+                </Text>
               </View>
             </View>
             <TouchableOpacity style={styles.closeButton} onPress={onClose} hitSlop={12}>
