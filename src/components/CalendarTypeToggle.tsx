@@ -54,17 +54,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: COLORS.surfaceAlt,
-    borderRadius: BORDER_RADIUS.round,
+    borderRadius: BORDER_RADIUS.full,
     padding: 4,
     borderWidth: 1,
     borderColor: COLORS.border,
     ...SHADOWS.xs,
-    width: '170px'
+    alignSelf: 'flex-end', // Align to right side
   },
   tab: {
-    flex: 1,
+    width: 70, // Fixed width for each tab
     height: 38,
-    borderRadius: BORDER_RADIUS.round,
+    borderRadius: BORDER_RADIUS.full,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
