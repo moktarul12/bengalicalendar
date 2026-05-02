@@ -155,7 +155,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
 
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
