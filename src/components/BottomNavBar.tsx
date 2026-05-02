@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
-    paddingBottom: 70,
+    paddingBottom: 8, // Reduced from 70 to prevent excessive spacing
     ...SHADOWS.md,
   },
   tab: {
