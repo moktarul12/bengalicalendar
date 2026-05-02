@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
-    borderTopWidth: 1,
-    borderTopColor: COLORS.border,
+    // borderTopWidth: 1, // Removed top border
+    // borderTopColor: COLORS.border, // Removed top border
     paddingBottom: 8, // Reduced from 70 to prevent excessive spacing
-    ...SHADOWS.md,
+    marginBottom: 30,
+    // ...SHADOWS.md, // Removed shadow
   },
   tab: {
     flex: 1,
