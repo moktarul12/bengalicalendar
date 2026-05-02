@@ -35,7 +35,7 @@ export default function FestivalDetailScreen({ festival, onBack, language, onFes
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <StatusBar barStyle="dark-content" />
       
       {/* 2nd Header with Back */}

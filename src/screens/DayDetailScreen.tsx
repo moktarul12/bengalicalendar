@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, toBengaliNumeral } from '../constants/theme';
 import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
@@ -90,8 +91,9 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
       <View style={styles.modalContainer}>
         <Pressable style={styles.backdrop} onPress={onClose} />
         <View style={styles.modalContent}>
-          {/* Header */}
-          <View style={styles.header}>
+          <SafeAreaView edges={['bottom']} style={styles.safeArea}>
+            {/* Header */}
+            <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.dateDisplay}>
                 <Text style={styles.dayNumber}>{day}</Text>
@@ -162,6 +164,7 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
               ))
             )}
           </ScrollView>
+          </SafeAreaView>
         </View>
       </View>
     </Modal>
@@ -183,6 +186,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: BORDER_RADIUS.xl,
     maxHeight: '80%',
     ...SHADOWS.lg,
+  },
+  safeArea: {
+    width: '100%',
   },
   header: {
     flexDirection: 'row',

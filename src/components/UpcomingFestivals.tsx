@@ -63,7 +63,8 @@ export default function UpcomingFestivals({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.surface,
-    paddingVertical: SPACING.md,
+    paddingTop: SPACING.md,
+    paddingBottom: SPACING.xl, // Keep some padding but avoid large empty space
   },
   header: {
     flexDirection: 'row',

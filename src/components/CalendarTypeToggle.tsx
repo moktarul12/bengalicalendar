@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.border,
     ...SHADOWS.xs,
+    width: '170px'
   },
   tab: {
     flex: 1,

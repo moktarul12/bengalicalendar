@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
-    paddingBottom: 0,
+    paddingBottom: 70,
     ...SHADOWS.md,
   },
   tab: {

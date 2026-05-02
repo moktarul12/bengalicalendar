@@ -87,8 +87,11 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   }, []);
 
   const handleDayPress = useCallback((day: CalendarDay) => {
-    setSelectedDay(day);
-    setDayDetailVisible(true);
+    // Only show the detail modal if there are festivals on that day
+    if (day.festivals && day.festivals.length > 0) {
+      setSelectedDay(day);
+      setDayDetailVisible(true);
+    }
     onDaySelect?.(day);
   }, [onDaySelect]);
 
@@ -152,7 +155,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
 
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
