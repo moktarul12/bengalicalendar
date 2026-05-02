@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     // borderTopWidth: 1, // Removed top border
     // borderTopColor: COLORS.border, // Removed top border
     // paddingBottom: 8, // Removed to eliminate spacing
-    // marginBottom: 30, // Removed to eliminate black space above navigation
+     marginBottom: 30, // Removed to eliminate black space above navigation
     // ...SHADOWS.md, // Removed shadow
   },
   tab: {
