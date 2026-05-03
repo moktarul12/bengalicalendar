@@ -76,6 +76,8 @@ export default function SettingsScreen() {
     bengaliDefault: false,
     showPanchang: true,
     showHolidays: true,
+    calendarStyle: 'traditional', // 'modern' | 'traditional'
+    calendarType: 'gregorian', // 'gregorian' | 'bengali'
   });
 
   const toggleSetting = (key: keyof typeof settings) => {
@@ -144,6 +146,49 @@ export default function SettingsScreen() {
         </View>
       </View>
 
+      {/* Calendar Settings */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Calendar / ক্যালেন্ডার</Text>
+        <View style={styles.settingsGroup}>
+          <SettingItem
+            icon="grid"
+            iconColor="#3F51B5"
+            title={settings.calendarStyle === 'traditional' ? 'Traditional Style' : 'Modern Style'}
+            titleBn={settings.calendarStyle === 'traditional' ? 'ঐতিহ্যবাহী স্টাইল' : 'আধুনিক স্টাইল'}
+            value={settings.calendarStyle === 'traditional' ? 'Traditional' : 'Modern'}
+            onPress={() => {
+              Alert.alert(
+                'Calendar Style',
+                'Choose your preferred calendar style',
+                [
+                  { text: 'Modern', onPress: () => setSettings(prev => ({ ...prev, calendarStyle: 'modern' })) },
+                  { text: 'Traditional', onPress: () => setSettings(prev => ({ ...prev, calendarStyle: 'traditional' })) },
+                  { text: 'Cancel', style: 'cancel' },
+                ]
+              );
+            }}
+          />
+          <SettingItem
+            icon="calendar"
+            iconColor="#4CAF50"
+            title={settings.calendarType === 'gregorian' ? 'English Calendar' : 'Bengali Calendar'}
+            titleBn={settings.calendarType === 'gregorian' ? 'ইংরেজি ক্যালেন্ডার' : 'বাংলা ক্যালেন্ডার'}
+            value={settings.calendarType === 'gregorian' ? 'English' : 'Bengali'}
+            onPress={() => {
+              Alert.alert(
+                'Default Calendar',
+                'Choose your default calendar',
+                [
+                  { text: 'English', onPress: () => setSettings(prev => ({ ...prev, calendarType: 'gregorian' })) },
+                  { text: 'Bengali', onPress: () => setSettings(prev => ({ ...prev, calendarType: 'bengali' })) },
+                  { text: 'Cancel', style: 'cancel' },
+                ]
+              );
+            }}
+          />
+        </View>
+      </View>
+
       {/* Display Settings */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Display / প্রদর্শন</Text>
@@ -158,16 +203,7 @@ export default function SettingsScreen() {
             onSwitchChange={() => toggleSetting('darkMode')}
           />
           <SettingItem
-            icon="language"
-            iconColor="#4CAF50"
-            title="Bengali as Default"
-            titleBn="বাংলা ডিফল্ট"
-            hasSwitch
-            switchValue={settings.bengaliDefault}
-            onSwitchChange={() => toggleSetting('bengaliDefault')}
-          />
-          <SettingItem
-            icon="calendar"
+            icon="calendar-clear"
             iconColor="#FF9800"
             title="Show Panchang"
             titleBn="পঞ্জিকা দেখুন"

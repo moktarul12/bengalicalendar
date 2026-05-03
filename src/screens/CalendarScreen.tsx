@@ -14,6 +14,8 @@ import { generateCalendarGrid, getMonthName } from '../utils/calendarUtils';
 import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
 import CalendarHeader from '../components/Calendar/CalendarHeader';
 import CalendarGrid from '../components/Calendar/CalendarGrid';
+import TraditionalCalendarHeader from '../components/Calendar/TraditionalCalendarHeader';
+import TraditionalCalendarGrid from '../components/Calendar/TraditionalCalendarGrid';
 import CalendarTypeToggle from '../components/CalendarTypeToggle';
 import MonthYearPickerModal from '../components/MonthYearPickerModal';
 import UpcomingFestivals from '../components/UpcomingFestivals';
@@ -33,7 +35,8 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('bengali');
+  const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('gregorian');
+  const [calendarStyle, setCalendarStyle] = useState<'modern' | 'traditional'>('traditional');
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -97,6 +100,10 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
 
   const handleCalendarTypeChange = useCallback((type: 'gregorian' | 'bengali') => {
     setCalendarType(type);
+  }, []);
+
+  const handleCalendarStyleChange = useCallback((style: 'modern' | 'traditional') => {
+    setCalendarStyle(style);
   }, []);
 
   const handleMonthYearPress = useCallback(() => {
@@ -198,27 +205,53 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
 
         {/* Calendar Section - Always Visible */}
         <View style={styles.calendarSection}>
-          {/* Calendar Header */}
-          <CalendarHeader
-            year={currentYear}
-            month={currentMonth}
-            monthName={getMonthName(currentMonth)}
-            bengaliYear={bengaliDateForDisplayedMonth.year}
-            bengaliMonth={bengaliDateForDisplayedMonth.month}
-            calendarType={calendarType}
-            onPrevMonth={goToPrevMonth}
-            onNextMonth={goToNextMonth}
-            onToday={goToToday}
-            isCurrentMonth={isCurrentMonth}
-            onMonthYearPress={handleMonthYearPress}
-          />
+          {/* Calendar Header - Modern or Traditional */}
+          {calendarStyle === 'traditional' ? (
+            <TraditionalCalendarHeader
+              year={currentYear}
+              month={currentMonth}
+              monthName={getMonthName(currentMonth)}
+              bengaliYear={bengaliDateForDisplayedMonth.year}
+              bengaliMonth={bengaliDateForDisplayedMonth.month}
+              calendarType={calendarType}
+              onPrevMonth={goToPrevMonth}
+              onNextMonth={goToNextMonth}
+              onToday={goToToday}
+              isCurrentMonth={isCurrentMonth}
+              onMonthYearPress={handleMonthYearPress}
+              language={calendarType === 'bengali' ? 'bn' : 'en'}
+            />
+          ) : (
+            <CalendarHeader
+              year={currentYear}
+              month={currentMonth}
+              monthName={getMonthName(currentMonth)}
+              bengaliYear={bengaliDateForDisplayedMonth.year}
+              bengaliMonth={bengaliDateForDisplayedMonth.month}
+              calendarType={calendarType}
+              onPrevMonth={goToPrevMonth}
+              onNextMonth={goToNextMonth}
+              onToday={goToToday}
+              isCurrentMonth={isCurrentMonth}
+              onMonthYearPress={handleMonthYearPress}
+            />
+          )}
 
-          {/* Calendar Grid */}
-          <CalendarGrid
-            days={calendarDays}
-            calendarType={calendarType}
-            onDayPress={handleDayPress}
-          />
+          {/* Calendar Grid - Modern or Traditional */}
+          {calendarStyle === 'traditional' ? (
+            <TraditionalCalendarGrid
+              days={calendarDays}
+              calendarType={calendarType}
+              onDayPress={handleDayPress}
+              language={calendarType === 'bengali' ? 'bn' : 'en'}
+            />
+          ) : (
+            <CalendarGrid
+              days={calendarDays}
+              calendarType={calendarType}
+              onDayPress={handleDayPress}
+            />
+          )}
         </View>
 
         {/* Upcoming Festivals */}
