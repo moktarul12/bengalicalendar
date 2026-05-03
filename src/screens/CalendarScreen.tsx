@@ -249,8 +249,7 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
         month={currentMonth}
         year={currentYear}
         onClose={() => setDayDetailVisible(false)}
-        onEventPress={handleEventPress}
-      />
+        onEventPress={handleEventPress} language={'bn'}      />
     </SafeAreaView>
   );
 }

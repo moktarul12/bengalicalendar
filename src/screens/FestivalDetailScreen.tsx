@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, StatusBar, TextInput, Alert } from 'react-native';
+import React, { useMemo, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, BORDER_RADIUS, SPACING, SHADOWS, FONTS } from '../constants/theme';
@@ -14,6 +14,15 @@ interface FestivalDetailScreenProps {
 }
 
 export default function FestivalDetailScreen({ festival, onBack, language, onFestivalSelect }: FestivalDetailScreenProps) {
+  // Handle device back button to return to home page
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      onBack();
+      return true; // Prevent default back behavior
+    });
+    return () => backHandler.remove();
+  }, [onBack]);
+
   if (!festival) return null;
 
   // Get all occurrences of THIS festival for different years
@@ -27,11 +36,6 @@ export default function FestivalDetailScreen({ festival, onBack, language, onFes
     if (!text) return '';
     if (typeof text === 'string') return text;
     return text[language];
-  };
-
-  // Use imageUrl from festival data or fallback to default
-  const getFestivalImage = (festival: Festival) => {
-    return festival.imageUrl || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800';
   };
 
   return (
@@ -49,16 +53,6 @@ export default function FestivalDetailScreen({ festival, onBack, language, onFes
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        {/* Festival Image */}
-        <View style={styles.imageContainer}>
-          <Image 
-            source={{ uri: getFestivalImage(festival) }} 
-            style={styles.image}
-            resizeMode="cover"
-          />
-          <View style={styles.imageOverlay} />
-        </View>
-
         {/* Festival Title Card */}
         <View style={styles.titleCard}>
           <View style={styles.titleHeader}>
@@ -184,23 +178,10 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: SPACING.xxl,
   },
-  imageContainer: {
-    width: '100%',
-    height: 250,
-    position: 'relative',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  imageOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
   titleCard: {
     backgroundColor: COLORS.surface,
     marginHorizontal: SPACING.md,
-    marginTop: -40,
+    marginTop: SPACING.md,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     ...SHADOWS.md,

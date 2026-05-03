@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, toBengaliNumeral } from '../constants/theme';
@@ -24,6 +24,17 @@ export default function DayDetailScreen({ visible, day, month, year, onClose, on
   const [events, setEvents] = useState<DayEvent[]>([]);
   const [loading, setLoading] = useState(false);
   const bengaliDate = gregorianToBengali(day, month, year);
+
+  // Handle device back button to return to home page
+  useEffect(() => {
+    if (visible) {
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+        onClose();
+        return true; // Prevent default back behavior
+      });
+      return () => backHandler.remove();
+    }
+  }, [visible, onClose]);
 
   useEffect(() => {
     if (visible) {

@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, StatusBar, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, BORDER_RADIUS, SPACING, SHADOWS, FONTS, toBengaliNumeral } from '../constants/theme';
@@ -12,6 +12,15 @@ interface EventDetailScreenProps {
 }
 
 export default function EventDetailScreen({ event, onBack, language }: EventDetailScreenProps) {
+  // Handle device back button to return to home page
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      onBack();
+      return true; // Prevent default back behavior
+    });
+    return () => backHandler.remove();
+  }, [onBack]);
+
   if (!event) return null;
 
   const getEventImage = (type: string, color: string) => {
