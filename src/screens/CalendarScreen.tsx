@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, getGreeting, toBengaliNumeral } from '../constants/theme';
 
 const SETTINGS_KEY = '@app_settings';
-import { generateCalendarGrid, getMonthName } from '../utils/calendarUtils';
+import { generateCalendarGrid, generateBengaliCalendarGrid, getMonthName } from '../utils/calendarUtils';
 import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
 import CalendarHeader from '../components/Calendar/CalendarHeader';
 import CalendarGrid from '../components/Calendar/CalendarGrid';
@@ -36,8 +36,13 @@ interface CalendarScreenProps {
 
 export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const today = new Date();
+  const todayBengaliDate = gregorianToBengali(today.getDate(), today.getMonth() + 1, today.getFullYear());
+  
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const [currentBengaliMonth, setCurrentBengaliMonth] = useState(todayBengaliDate.month);
+  const [currentBengaliYear, setCurrentBengaliYear] = useState(todayBengaliDate.year);
+  
   const [calendarType, setCalendarType] = useState<'gregorian' | 'bengali'>('gregorian');
   const [calendarStyle, setCalendarStyle] = useState<'modern' | 'traditional'>('traditional');
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
@@ -54,7 +59,9 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const bengaliMonthNameToday = BENGALI_MONTHS[bengaliDateToday.month]?.name || '';
   const bengaliDateForDisplayedMonth = gregorianToBengali(15, currentMonth, currentYear);
   const greeting = getGreeting(currentTime.getHours());
-  const isCurrentMonth = currentMonth === today.getMonth() + 1 && currentYear === today.getFullYear();
+  const isCurrentMonth = calendarType === 'bengali' 
+    ? (currentBengaliMonth === bengaliDateToday.month && currentBengaliYear === bengaliDateToday.year)
+    : (currentMonth === today.getMonth() + 1 && currentYear === today.getFullYear());
 
   // Load settings from storage on mount
   useEffect(() => {
@@ -78,9 +85,14 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   }, []);
 
   useEffect(() => {
-    const days = generateCalendarGrid(currentYear, currentMonth);
-    setCalendarDays(days);
-  }, [currentYear, currentMonth]);
+    if (calendarType === 'bengali') {
+      const days = generateBengaliCalendarGrid(currentBengaliYear, currentBengaliMonth);
+      setCalendarDays(days);
+    } else {
+      const days = generateCalendarGrid(currentYear, currentMonth);
+      setCalendarDays(days);
+    }
+  }, [calendarType, currentYear, currentMonth, currentBengaliYear, currentBengaliMonth]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -90,27 +102,48 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   }, []);
 
   const goToPrevMonth = useCallback(() => {
-    if (currentMonth === 1) {
-      setCurrentMonth(12);
-      setCurrentYear((prev) => prev - 1);
+    if (calendarType === 'bengali') {
+      if (currentBengaliMonth === 0) {
+        setCurrentBengaliMonth(11);
+        setCurrentBengaliYear((prev) => prev - 1);
+      } else {
+        setCurrentBengaliMonth((prev) => prev - 1);
+      }
     } else {
-      setCurrentMonth((prev) => prev - 1);
+      if (currentMonth === 1) {
+        setCurrentMonth(12);
+        setCurrentYear((prev) => prev - 1);
+      } else {
+        setCurrentMonth((prev) => prev - 1);
+      }
     }
-  }, [currentMonth]);
+  }, [calendarType, currentMonth, currentBengaliMonth]);
 
   const goToNextMonth = useCallback(() => {
-    if (currentMonth === 12) {
-      setCurrentMonth(1);
-      setCurrentYear((prev) => prev + 1);
+    if (calendarType === 'bengali') {
+      if (currentBengaliMonth === 11) {
+        setCurrentBengaliMonth(0);
+        setCurrentBengaliYear((prev) => prev + 1);
+      } else {
+        setCurrentBengaliMonth((prev) => prev + 1);
+      }
     } else {
-      setCurrentMonth((prev) => prev + 1);
+      if (currentMonth === 12) {
+        setCurrentMonth(1);
+        setCurrentYear((prev) => prev + 1);
+      } else {
+        setCurrentMonth((prev) => prev + 1);
+      }
     }
-  }, [currentMonth]);
+  }, [calendarType, currentMonth, currentBengaliMonth]);
 
   const goToToday = useCallback(() => {
     const now = new Date();
+    const bengaliToday = gregorianToBengali(now.getDate(), now.getMonth() + 1, now.getFullYear());
     setCurrentMonth(now.getMonth() + 1);
     setCurrentYear(now.getFullYear());
+    setCurrentBengaliMonth(bengaliToday.month);
+    setCurrentBengaliYear(bengaliToday.year);
   }, []);
 
   const handleDayPress = useCallback((day: CalendarDay) => {
@@ -232,11 +265,11 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
           {/* Calendar Header - Modern or Traditional */}
           {calendarStyle === 'traditional' ? (
             <TraditionalCalendarHeader
-              year={currentYear}
-              month={currentMonth}
-              monthName={getMonthName(currentMonth)}
-              bengaliYear={bengaliDateForDisplayedMonth.year}
-              bengaliMonth={bengaliDateForDisplayedMonth.month}
+              year={calendarType === 'bengali' ? currentBengaliYear : currentYear}
+              month={calendarType === 'bengali' ? currentBengaliMonth + 1 : currentMonth}
+              monthName={calendarType === 'bengali' ? BENGALI_MONTHS[currentBengaliMonth]?.name : getMonthName(currentMonth)}
+              bengaliYear={calendarType === 'bengali' ? currentBengaliYear : bengaliDateForDisplayedMonth.year}
+              bengaliMonth={calendarType === 'bengali' ? currentBengaliMonth : bengaliDateForDisplayedMonth.month}
               calendarType={calendarType}
               onPrevMonth={goToPrevMonth}
               onNextMonth={goToNextMonth}
@@ -247,11 +280,11 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
             />
           ) : (
             <CalendarHeader
-              year={currentYear}
-              month={currentMonth}
-              monthName={getMonthName(currentMonth)}
-              bengaliYear={bengaliDateForDisplayedMonth.year}
-              bengaliMonth={bengaliDateForDisplayedMonth.month}
+              year={calendarType === 'bengali' ? currentBengaliYear : currentYear}
+              month={calendarType === 'bengali' ? currentBengaliMonth + 1 : currentMonth}
+              monthName={calendarType === 'bengali' ? BENGALI_MONTHS[currentBengaliMonth]?.name : getMonthName(currentMonth)}
+              bengaliYear={calendarType === 'bengali' ? currentBengaliYear : bengaliDateForDisplayedMonth.year}
+              bengaliMonth={calendarType === 'bengali' ? currentBengaliMonth : bengaliDateForDisplayedMonth.month}
               calendarType={calendarType}
               onPrevMonth={goToPrevMonth}
               onNextMonth={goToNextMonth}

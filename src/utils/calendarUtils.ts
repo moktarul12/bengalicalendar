@@ -88,13 +88,114 @@ export function generateCalendarGrid(year: number, month: number): CalendarDay[]
   return days;
 }
 
+// Convert Bengali date to Gregorian date
+function bengaliToGregorian(
+  bengaliDay: number,
+  bengaliMonth: number,
+  bengaliYear: number
+): { day: number; month: number; year: number } {
+  // Bengali year starts from Pohela Boishakh (April 14/15)
+  const BENGALI_YEAR_START_DAY = 14; // April 14 typically
+  const BENGALI_YEAR_START_MONTH = 4; // April
+
+  // Calculate approximate Gregorian year
+  let gregorianYear = bengaliYear + 593;
+
+  // Calculate days from start of Bengali year
+  let daysFromBengaliStart = 0;
+  for (let i = 0; i < bengaliMonth; i++) {
+    daysFromBengaliStart += BENGALI_MONTHS[i].days;
+  }
+  daysFromBengaliStart += bengaliDay - 1;
+
+  // Calculate the date
+  let gregorianDay = BENGALI_YEAR_START_DAY + daysFromBengaliStart;
+  let gregorianMonth = BENGALI_YEAR_START_MONTH;
+
+  // Adjust for month overflow
+  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  // Handle leap year for February
+  const isLeap = (gregorianYear % 4 === 0 && gregorianYear % 100 !== 0) || (gregorianYear % 400 === 0);
+  daysInMonth[1] = isLeap ? 29 : 28;
+
+  while (gregorianDay > daysInMonth[gregorianMonth - 1]) {
+    gregorianDay -= daysInMonth[gregorianMonth - 1];
+    gregorianMonth++;
+    if (gregorianMonth > 12) {
+      gregorianMonth = 1;
+      gregorianYear++;
+    }
+  }
+
+  return { day: gregorianDay, month: gregorianMonth, year: gregorianYear };
+}
+
 // Get Bengali month calendar grid
 export function generateBengaliCalendarGrid(bengaliYear: number, bengaliMonth: number): CalendarDay[] {
-  // Convert Bengali month start to Gregorian
-  // This is a simplified version - in production, use accurate algorithms
   const days: CalendarDay[] = [];
   
-  // For now, return empty - this would need proper Bengali to Gregorian conversion
+  // Get first day of Bengali month in Gregorian
+  const firstGregorianDate = bengaliToGregorian(1, bengaliMonth, bengaliYear);
+  const firstDayOfWeek = getDayOfWeek(firstGregorianDate.year, firstGregorianDate.month, firstGregorianDate.day);
+  
+  // Get number of days in this Bengali month
+  const daysInBengaliMonth = BENGALI_MONTHS[bengaliMonth].days;
+  
+  const today = new Date();
+  const todayDate = today.getDate();
+  const todayMonth = today.getMonth() + 1;
+  const todayYear = today.getFullYear();
+  
+  // Add empty cells for days before the first day of the month
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    days.push({} as CalendarDay);
+  }
+  
+  // Add days of the Bengali month
+  for (let bengaliDay = 1; bengaliDay <= daysInBengaliMonth; bengaliDay++) {
+    // Convert this Bengali day to Gregorian
+    const gregorianDate = bengaliToGregorian(bengaliDay, bengaliMonth, bengaliYear);
+    const dayOfWeek = getDayOfWeek(gregorianDate.year, gregorianDate.month, gregorianDate.day);
+    
+    // Get festivals for this Gregorian date
+    const festivals = getFestivalsByDate(gregorianDate.month, gregorianDate.day);
+    
+    const isToday = gregorianDate.day === todayDate && 
+                     gregorianDate.month === todayMonth && 
+                     gregorianDate.year === todayYear;
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const isHoliday = festivals.some(f => f.isPublicHoliday);
+    
+    const gregorian: GregorianDate = {
+      year: gregorianDate.year,
+      month: gregorianDate.month,
+      day: gregorianDate.day,
+      dayOfWeek,
+      monthName: getMonthName(gregorianDate.month),
+      dayName: getDayName(dayOfWeek),
+    };
+    
+    const bengali: BengaliDate = {
+      year: bengaliYear,
+      month: bengaliMonth,
+      day: bengaliDay,
+      monthName: BENGALI_MONTHS[bengaliMonth]?.name || '',
+      monthNameEn: BENGALI_MONTHS[bengaliMonth]?.nameEn || '',
+      dayName: BENGALI_DAYS[dayOfWeek]?.name || '',
+      dayNameEn: BENGALI_DAYS[dayOfWeek]?.nameEn || '',
+    };
+    
+    days.push({
+      gregorian,
+      bengali,
+      festivals,
+      isToday,
+      isSelected: false,
+      isHoliday,
+      isWeekend,
+    });
+  }
+  
   return days;
 }
 
