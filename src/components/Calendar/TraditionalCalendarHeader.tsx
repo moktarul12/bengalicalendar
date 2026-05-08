@@ -28,24 +28,26 @@ export default function TraditionalCalendarHeader({
   calendarType,
   onPrevMonth,
   onNextMonth,
+  onToday,
   isCurrentMonth,
+  onMonthYearPress,
   language,
 }: TraditionalCalendarHeaderProps) {
   const bengaliMonthData = BENGALI_MONTHS[bengaliMonth];
 
   return (
     <View style={styles.container}>
-      {/* Traditional Blue Header */}
+      {/* Traditional Indian Calendar Header */}
       <View style={styles.headerRow}>
         <TouchableOpacity
           style={styles.navButton}
           onPress={onPrevMonth}
           hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
         >
-          <Ionicons name="chevron-back" size={24} color="#FFFFFF" />
+          <Ionicons name="chevron-back" size={24} color="#424242" />
         </TouchableOpacity>
 
-        <View style={styles.titleContainer}>
+        <TouchableOpacity style={styles.titleContainer} onPress={onMonthYearPress}>
           {/* Main Title - Large and Bold */}
           <Text style={styles.mainTitle}>
             {calendarType === 'gregorian' ? (
@@ -64,27 +66,27 @@ export default function TraditionalCalendarHeader({
             )}
           </Text>
 
-          {/* Optional: Extra info line */}
-          <Text style={styles.infoLine}>
-            {language === 'bn' ? 'বাংলা বর্ষপঞ্জি' : 'Bengali Calendar'}
-          </Text>
-        </View>
+        
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.navButton}
           onPress={onNextMonth}
           hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
         >
-          <Ionicons name="chevron-forward" size={24} color="#FFFFFF" />
+          <Ionicons name="chevron-forward" size={24} color="#424242" />
         </TouchableOpacity>
       </View>
 
       {/* Today indicator bar */}
       {!isCurrentMonth && (
-        <TouchableOpacity style={styles.todayBar} onPress={() => {}}>
-          <Text style={styles.todayBarText}>
-            {language === 'bn' ? 'আজকের দিনে যান' : 'Go to Today'}
-          </Text>
+        <TouchableOpacity style={styles.todayBar} onPress={onToday} activeOpacity={0.8}>
+          <View style={styles.todayBarContent}>
+            <Ionicons name="calendar" size={16} color="#C62828" />
+            <Text style={styles.todayBarText}>
+              {language === 'bn' ? 'আজকের দিনে যান' : 'Go to Today'}
+            </Text>
+          </View>
         </TouchableOpacity>
       )}
     </View>
@@ -93,7 +95,9 @@ export default function TraditionalCalendarHeader({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1a237e', // Traditional dark blue
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 3,
+    borderBottomColor: '#E0E0E0',
   },
   headerRow: {
     flexDirection: 'row',
@@ -103,43 +107,57 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.md,
   },
   navButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#F5F5F5',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
   titleContainer: {
     alignItems: 'center',
     flex: 1,
   },
   mainTitle: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: '#C62828', // Red for month name like traditional calendars
     textTransform: 'uppercase',
-    letterSpacing: 1,
+    letterSpacing: 2,
   },
   secondaryTitle: {
-    fontSize: 14,
-    color: 'rgba(255,255,255,0.8)',
+    fontSize: 18,
+    color: '#1A237E', // Blue for secondary
     marginTop: 2,
     fontWeight: '600',
+    fontFamily: 'serif',
   },
   infoLine: {
-    fontSize: 11,
-    color: 'rgba(255,255,255,0.6)',
-    marginTop: 2,
+    fontSize: 12,
+    color: '#757575',
+    marginTop: 4,
+    fontWeight: '500',
   },
   todayBar: {
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    paddingVertical: 4,
     alignItems: 'center',
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#F5F5F5',
+  },
+  todayBarContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF8E1',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    gap: 8,
   },
   todayBarText: {
-    fontSize: 12,
-    color: '#FFFFFF',
+    fontSize: 14,
+    color: '#C62828',
     fontWeight: '600',
   },
 });

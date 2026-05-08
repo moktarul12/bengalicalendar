@@ -48,3 +48,12 @@ google-services.json
 
 # EAS
 .easignore
+
+# Development/Temp files
+*.db
+*.html
+*-events.js
+add-*.js
+expand-*.js
+migrate-*.js
+server.js

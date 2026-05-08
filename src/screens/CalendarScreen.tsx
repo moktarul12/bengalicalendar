@@ -7,9 +7,12 @@ import {
   TouchableOpacity,
   StatusBar,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONTS, getGreeting, toBengaliNumeral } from '../constants/theme';
+
+const SETTINGS_KEY = '@app_settings';
 import { generateCalendarGrid, getMonthName } from '../utils/calendarUtils';
 import { BENGALI_MONTHS, gregorianToBengali } from '../constants/bengaliCalendar';
 import CalendarHeader from '../components/Calendar/CalendarHeader';
@@ -52,6 +55,27 @@ export default function CalendarScreen({ onDaySelect }: CalendarScreenProps) {
   const bengaliDateForDisplayedMonth = gregorianToBengali(15, currentMonth, currentYear);
   const greeting = getGreeting(currentTime.getHours());
   const isCurrentMonth = currentMonth === today.getMonth() + 1 && currentYear === today.getFullYear();
+
+  // Load settings from storage on mount
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const savedSettings = await AsyncStorage.getItem(SETTINGS_KEY);
+        if (savedSettings) {
+          const settings = JSON.parse(savedSettings);
+          if (settings.calendarStyle) {
+            setCalendarStyle(settings.calendarStyle);
+          }
+          if (settings.calendarType) {
+            setCalendarType(settings.calendarType);
+          }
+        }
+      } catch (error) {
+        console.log('Error loading settings:', error);
+      }
+    };
+    loadSettings();
+  }, []);
 
   useEffect(() => {
     const days = generateCalendarGrid(currentYear, currentMonth);

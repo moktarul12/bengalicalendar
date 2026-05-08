@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,9 +9,12 @@ import {
   Alert,
   Linking,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SPACING, BORDER_RADIUS, SHADOWS } from '../constants/theme';
+
+const SETTINGS_KEY = '@app_settings';
 
 interface SettingItemProps {
   icon: string;
@@ -79,6 +82,33 @@ export default function SettingsScreen() {
     calendarStyle: 'traditional', // 'modern' | 'traditional'
     calendarType: 'gregorian', // 'gregorian' | 'bengali'
   });
+
+  // Load settings from storage on mount
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const savedSettings = await AsyncStorage.getItem(SETTINGS_KEY);
+        if (savedSettings) {
+          setSettings(JSON.parse(savedSettings));
+        }
+      } catch (error) {
+        console.log('Error loading settings:', error);
+      }
+    };
+    loadSettings();
+  }, []);
+
+  // Save settings to storage whenever they change
+  useEffect(() => {
+    const saveSettings = async () => {
+      try {
+        await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      } catch (error) {
+        console.log('Error saving settings:', error);
+      }
+    };
+    saveSettings();
+  }, [settings]);
 
   const toggleSetting = (key: keyof typeof settings) => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] }));

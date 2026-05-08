@@ -2,7 +2,7 @@
   "expo": {
     "name": "Bengali Calendar",
     "slug": "bengali-english-calendar",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.dromominds.bengalienglishcalendar",
-      "versionCode": 101,
+      "versionCode": 102,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#E63946"

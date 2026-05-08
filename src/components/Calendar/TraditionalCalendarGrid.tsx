@@ -104,9 +104,6 @@ function TraditionalCalendarDay({
   const mainDay = calendarType === 'bengali' ? bengali.day : gregorian.day;
   const secondaryDay = calendarType === 'bengali' ? gregorian.day : bengali.day;
 
-  // Get tithi info (simplified - you can expand this)
-  const tithiText = language === 'bn' ? `${toBengaliNumber(bengali.day)}` : `${bengali.day}`;
-
   return (
     <TouchableOpacity
       style={[
@@ -134,11 +131,6 @@ function TraditionalCalendarDay({
         {calendarType === 'bengali' ? secondaryDay : toBengaliNumber(secondaryDay)}
       </Text>
 
-      {/* Tithi/Nakshatra info */}
-      <Text style={styles.tithiText} numberOfLines={1}>
-        {tithiText}
-      </Text>
-
       {/* Festival/Holiday indicator */}
       {(festivals.length > 0 || isHoliday) && (
         <View style={styles.indicatorContainer}>
@@ -148,6 +140,13 @@ function TraditionalCalendarDay({
           {isHoliday && <View style={styles.holidayIndicator} />}
         </View>
       )}
+
+      {/* Festival name text */}
+      {festivals.length > 0 && (
+        <Text style={styles.festivalName} numberOfLines={1}>
+          {language === 'bn' ? festivals[0].nameBn : festivals[0].nameEn}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }
@@ -155,13 +154,16 @@ function TraditionalCalendarDay({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#1a237e', // Dark blue border like traditional calendars
+    marginHorizontal: SPACING.xs,
+    borderRadius: BORDER_RADIUS.sm,
+    overflow: 'hidden',
   },
   weekHeader: {
     flexDirection: 'row',
-    backgroundColor: '#1a237e', // Dark blue header
-    paddingVertical: SPACING.xs,
+    backgroundColor: '#F5F5F5', // Light gray header
+    paddingVertical: SPACING.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0', // Gray border
   },
   weekHeaderCell: {
     flex: 1,
@@ -169,13 +171,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekHeaderText: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: '#1A237E', // Blue for weekdays
     textTransform: 'uppercase',
   },
   weekendHeaderText: {
-    color: '#ff6b6b', // Red for weekend headers
+    color: '#C62828', // Red for Sunday headers
+    fontWeight: '800',
   },
   grid: {
     backgroundColor: '#FFFFFF',
@@ -196,57 +199,62 @@ const styles = StyleSheet.create({
     padding: 2,
     backgroundColor: '#FFFFFF',
     borderRightWidth: 1,
-    borderRightColor: '#e0e0e0',
+    borderRightColor: '#E8E8E8',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E8E8E8',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 4,
+    paddingTop: 3,
   },
   todayCell: {
-    backgroundColor: '#fff3e0',
+    backgroundColor: '#FFECB3', // Warm amber highlight for today
+    borderRadius: 4,
   },
   holidayCell: {
     backgroundColor: '#ffebee',
   },
   mainDate: {
-    fontSize: 20,
+    fontSize: 26,
     fontWeight: '700',
-    color: '#1a237e', // Blue for regular days
+    color: '#1A237E', // Blue for regular days
   },
   weekendDate: {
-    color: '#d32f2f', // Red for weekends
+    color: '#C62828', // Red for weekends - matching header
   },
   holidayDate: {
-    color: '#d32f2f', // Red for holidays
+    color: '#C62828', // Red for holidays
   },
   todayDate: {
-    color: '#e65100',
-    textDecorationLine: 'underline',
+    color: '#E65100', // Deep orange for today
+    fontWeight: '800',
   },
   secondaryDate: {
-    fontSize: 10,
-    color: '#757575',
-    marginTop: 1,
-  },
-  tithiText: {
-    fontSize: 8,
-    color: '#9e9e9e',
+    fontSize: 15,
+    color: '#9E9E9E',
     marginTop: 2,
-    textAlign: 'center',
+    fontWeight: '500',
   },
   indicatorContainer: {
     flexDirection: 'row',
-    marginTop: 2,
-    gap: 2,
+    marginTop: 4,
+    gap: 3,
   },
   festivalDot: {
-    width: 5,
-    height: 5,
-    borderRadius: 2.5,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
   },
   holidayIndicator: {
-    width: 5,
-    height: 5,
-    borderRadius: 2.5,
-    backgroundColor: '#d32f2f',
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#C62828',
+  },
+  festivalName: {
+    fontSize: 8,
+    color: '#757575',
+    marginTop: 2,
+    textAlign: 'center',
+    fontWeight: '400',
   },
 });
